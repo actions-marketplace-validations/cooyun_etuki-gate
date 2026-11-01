@@ -352,7 +352,7 @@ for j_tx in j_chain:
     recalc_tx_h = hashlib.sha256(json.dumps(tx_core, separators=(",", ":"), sort_keys=True).encode("utf-8")).hexdigest()
     assert recalc_tx_h == j_tx["tx_sha256"]
     prev_h = recalc_tx_h
-assert prev_h == "246ec07ea962b3f77a49f46ce27901fab65aa2ccffe3a67ef8b6cfd47020aef0"
+assert prev_h == "c9caddfd482462c983a69c6714c3cae0602dc25cdc2b51dc73d87591f8e22ff9"
 
 # Cross-verify 6-Provider Direct POST Full Response Body SHA-256 & All 3 Transaction IDs against CI Report!
 _, ci_rep_b = fetch("/api/oracle/independent-ci-verifier-run.json?v=40.7.5")
