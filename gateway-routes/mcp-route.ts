@@ -4,9 +4,9 @@ import { getAllProviders } from '@/lib/supabase';
 export const runtime = 'edge';
 
 const EVIDENCE_MANIFEST = {
-  "build_version": "2026.11.01-v40.7.6-deterministic-reconciled",
-  "schema_version": "2026.11.01-v40.7.6-unified",
-  "policy_version": "esp-v40.7.6-20261101",
+  "build_version": "2026.11.01-v40.7.7-frozen-ledger",
+  "schema_version": "2026.11.01-v40.7.7-unified",
+  "policy_version": "esp-v40.7.7-20261101",
   "pricing_snapshot_id": "price-20261030-v35-truth",
   "telemetry_snapshot_id": "telemetry-20261030-v35-truth",
   "timestamp_semantics": {
@@ -41,7 +41,7 @@ const EVIDENCE_MANIFEST = {
     "status": "ACTIVE_VALID_REAL_BILLING_RECONCILED",
     "verification_boundary": "Client-contributed anonymized production bill. Scope: 186 primary calls + 299 merged calls = 485 calls. Verification boundary: arithmetic and ledger reconciliation; not an independent third-party certification.",
     "ledger_url": "https://www.etuki.com/api/oracle/e3-agentrouter-real-ledger.json",
-    "ledger_sha256": "sha256:7af98e8c74c6931feccd0eedbb1aa64585b344b4956fad6231ecc1a243a1e41f",
+    "ledger_sha256": "sha256:fad74a7cd2c878a09f827b5e1c404d415f630f525809061b44fc5c5e33aeb93b",
     "primary_slice_calls": 186,
     "primary_slice_billed_usd": 79.84,
     "primary_slice_optimized_usd": 15.5785,
@@ -51,8 +51,10 @@ const EVIDENCE_MANIFEST = {
     "full_merged_csv_calls": 485,
     "full_merged_csv_billed_usd": 392.61,
     "full_merged_csv_optimized_usd": 80.9304,
-    "net_savings_pct": "77.04%",
-    "raw_receipts_bundle_sha256": "sha256:48308fc01c1fca84c21abccdb2767b9af700f6834ba23b2fe5959a58550a3ef8"
+    "net_savings_pct": "79.39% (Theoretical Upper-Bound) / 65.38% (Realistic 25% TTL Write Retained)",
+    "raw_receipts_bundle_sha256": "sha256:44f0b5fa546d22f9630ac47f6cd999784563398fabfbaa7a6ed55d5e1ac8a26d",
+    "primary_slice_realistic_ttl_optimized_usd": 30.66,
+    "full_merged_realistic_ttl_optimized_usd": 135.9202
   },
   "key_governance_policy": {
     "signature_key_id": "etuki-ci-rsa2048-2026-v17",
@@ -89,35 +91,35 @@ const EVIDENCE_MANIFEST = {
   },
   "catalog_root_sha256": "sha256:d2f517094b814bcf41ea821c1ce654aa29df8ac454acd1c96779d7966ab688f4",
   "merkle_root_sha256": "sha256:d2f517094b814bcf41ea821c1ce654aa29df8ac454acd1c96779d7966ab688f4",
-  "dataset_3branch_csv_root_sha256": "sha256:d82e21b86ee582d40f5768648a9469a47691217ce2efa918dd9890a3a02c6383",
-  "csv_root_canonical_input_json": "{\"schema_version\":\"2026.11.01-v40.7.6-unified\",\"set1_32_sha256\":\"sha256:3604c90514474d9bf5066fd773cb3626895ef82a290d7cf8cf7abde46f85f429\",\"set2_453_sha256\":\"sha256:494924fe69f1d2ba73bbdaffdbfd2683ca9c19300eb3aca07c059634df776b9d\",\"set3_78_sha256\":\"sha256:e8cde6ee048904c63f532015d35b2f41b30c37b72a05efdd3dab250038965463\"}",
+  "dataset_3branch_csv_root_sha256": "sha256:3449f89c077bb81e2b8f490c05e15c1b9ed2eca8a56983b03c24cb59ae91e29b",
+  "csv_root_canonical_input_json": "{\"schema_version\":\"2026.11.01-v40.7.7-unified\",\"set1_32_sha256\":\"sha256:3604c90514474d9bf5066fd773cb3626895ef82a290d7cf8cf7abde46f85f429\",\"set2_453_sha256\":\"sha256:494924fe69f1d2ba73bbdaffdbfd2683ca9c19300eb3aca07c059634df776b9d\",\"set3_78_sha256\":\"sha256:e8cde6ee048904c63f532015d35b2f41b30c37b72a05efdd3dab250038965463\"}",
   "price_payload_sha256": "sha256:6bc877254427a142ff842bfa318350453ffebc62faf90f62337f96fb7fa5db82",
   "catalog_payload_sha256": "sha256:6bc877254427a142ff842bfa318350453ffebc62faf90f62337f96fb7fa5db82",
   "standalone_verifier_script_url": "https://www.etuki.com/verify-etuki.py",
   "standalone_verifier_github_mirror_url": "https://github.com/cooyun/etuki-gate/blob/main/verify-etuki.py",
-  "standalone_verifier_script_sha256": "sha256:0aa70af7e0eef293d51600b58574ae793fbb01f5fadab550b5ac3953350ba8d1",
+  "standalone_verifier_script_sha256": "sha256:a72c3262f592f678dddea00e052aa9bdda98f11298e472b39a6f34a6f065e919",
   "source_verified_at": "2026-11-01T08:30:00Z",
   "measured_at": "2026-11-01T08:30:00Z",
-  "generated_at": "2026-11-01T08:45:00Z",
+  "generated_at": "2026-11-01T09:10:00Z",
   "signature_key_id": "etuki-ci-rsa2048-2026-v17",
   "signature_algorithm": "RS256 (RFC 8017 PKCS#1 v1.5 SHA-256)",
   "public_key_url": "https://www.etuki.com/ci-pubkey.json",
-  "expires_at": "2026-12-31T08:45:00Z",
-  "stale_after": "2026-11-16T08:45:00Z",
+  "expires_at": "2026-12-31T09:10:00Z",
+  "stale_after": "2026-11-16T09:10:00Z",
   "byok_gateway_endpoint": "https://www.etuki.com/api/v1/chat/completions",
   "double_entry_ledger_endpoint": "https://www.etuki.com/api/v1/ledger",
   "signature_envelope": {
     "canonicalization": "PYTHON-SORTED-KEYS-COMPACT-UTF8-V1",
     "canonicalization_rule": "json.dumps({k:v for k,v in evidence_manifest.items() if k != 'signature_envelope'}, separators=(',', ':'), sort_keys=True).encode('utf-8')",
-    "canonical_payload_verbatim_json": "{\"build_version\":\"2026.11.01-v40.7.6-deterministic-reconciled\",\"byok_gateway_endpoint\":\"https://www.etuki.com/api/v1/chat/completions\",\"cache_price_source_distribution\":{\"anthropic_10pct_read_1_25x_write\":14,\"deepseek_disk_cache_1x_write_zero_storage_rent\":20,\"frontier_simulation_schedule\":32,\"google_25pct_read_plus_4_50_usd_1m_hourly_storage_rent\":11,\"no_native_cache_billed_at_100pct_input\":293,\"not_applicable_infra_or_no_cache\":78,\"openai_50pct_cached_input\":28,\"total\":563,\"vendor_prefix_cache_20pct\":87},\"catalog_payload_sha256\":\"sha256:6bc877254427a142ff842bfa318350453ffebc62faf90f62337f96fb7fa5db82\",\"catalog_root_sha256\":\"sha256:d2f517094b814bcf41ea821c1ce654aa29df8ac454acd1c96779d7966ab688f4\",\"csv_root_canonical_input_json\":\"{\\\"schema_version\\\":\\\"2026.11.01-v40.7.6-unified\\\",\\\"set1_32_sha256\\\":\\\"sha256:3604c90514474d9bf5066fd773cb3626895ef82a290d7cf8cf7abde46f85f429\\\",\\\"set2_453_sha256\\\":\\\"sha256:494924fe69f1d2ba73bbdaffdbfd2683ca9c19300eb3aca07c059634df776b9d\\\",\\\"set3_78_sha256\\\":\\\"sha256:e8cde6ee048904c63f532015d35b2f41b30c37b72a05efdd3dab250038965463\\\"}\",\"dataset_3branch_csv_root_sha256\":\"sha256:d82e21b86ee582d40f5768648a9469a47691217ce2efa918dd9890a3a02c6383\",\"double_entry_ledger_endpoint\":\"https://www.etuki.com/api/v1/ledger\",\"e3_real_production_case_study\":{\"additional_merged_billed_usd\":312.77,\"additional_merged_calls\":299,\"additional_merged_optimized_usd\":65.3519,\"certificate_id\":\"ETK-E3-20261013-CLIENT-EC01\",\"full_merged_csv_billed_usd\":392.61,\"full_merged_csv_calls\":485,\"full_merged_csv_optimized_usd\":80.9304,\"ledger_sha256\":\"sha256:7af98e8c74c6931feccd0eedbb1aa64585b344b4956fad6231ecc1a243a1e41f\",\"ledger_url\":\"https://www.etuki.com/api/oracle/e3-agentrouter-real-ledger.json\",\"net_savings_pct\":\"77.04%\",\"primary_slice_billed_usd\":79.84,\"primary_slice_calls\":186,\"primary_slice_optimized_usd\":15.5785,\"raw_receipts_bundle_sha256\":\"sha256:48308fc01c1fca84c21abccdb2767b9af700f6834ba23b2fe5959a58550a3ef8\",\"status\":\"ACTIVE_VALID_REAL_BILLING_RECONCILED\",\"verification_boundary\":\"Client-contributed anonymized production bill. Scope: 186 primary calls + 299 merged calls = 485 calls. Verification boundary: arithmetic and ledger reconciliation; not an independent third-party certification.\"},\"entity_reality_contingency_matrix_2x2\":{\"frontier_simulation_llm_models\":34,\"identity_equation\":\"451 (GA_LLM) + 34 (SIM_LLM) + 78 (GA_INFRA_MOR) == 485 (LLM) + 78 (INFRA) == 529 (GA_TOTAL) + 34 (SIM_TOTAL) == 563\",\"production_ga_cloud_and_mor_infra\":78,\"production_ga_llm_models\":451,\"subtotal_llm_endpoints\":485,\"subtotal_non_llm_infra_endpoints\":78,\"total_frontier_simulation_entities\":34,\"total_production_ga_entities\":529,\"total_verified_catalog_leaves\":563},\"entity_reality_provenance_mapping_csv_sha256\":\"sha256:fca112a101eb05395d579bbc126dcb157a0c27fcdb56b646a4dc09e3df624b53\",\"entity_reality_provenance_mapping_csv_url\":\"https://www.etuki.com/api/oracle/entity-reality-provenance-mapping.csv\",\"expires_at\":\"2026-12-31T08:45:00Z\",\"generated_at\":\"2026-11-01T08:45:00Z\",\"independent_ci_verifier_run_url\":\"https://www.etuki.com/api/oracle/independent-ci-verifier-run.json\",\"key_governance_policy\":{\"key_revocation_status\":\"ACTIVE_NOT_REVOKED\",\"pinned_pubkey_spki_fingerprint_sha256\":\"a43a9de120fb8753d66dc4d327687f8632dfc30d09cc047c3aa46b527e9e8cd7\",\"signature_key_id\":\"etuki-ci-rsa2048-2026-v17\",\"spki_encoding\":\"RFC 5280 ASN.1 DER SubjectPublicKeyInfo (294 bytes)\"},\"measured_at\":\"2026-11-01T08:30:00Z\",\"merkle_root_sha256\":\"sha256:d2f517094b814bcf41ea821c1ce654aa29df8ac454acd1c96779d7966ab688f4\",\"policy_version\":\"esp-v40.7.6-20261101\",\"price_payload_sha256\":\"sha256:6bc877254427a142ff842bfa318350453ffebc62faf90f62337f96fb7fa5db82\",\"pricing_snapshot_id\":\"price-20261030-v35-truth\",\"public_key_url\":\"https://www.etuki.com/ci-pubkey.json\",\"schema_version\":\"2026.11.01-v40.7.6-unified\",\"signature_algorithm\":\"RS256 (RFC 8017 PKCS#1 v1.5 SHA-256)\",\"signature_key_id\":\"etuki-ci-rsa2048-2026-v17\",\"source_verified_at\":\"2026-11-01T08:30:00Z\",\"stale_after\":\"2026-11-16T08:45:00Z\",\"standalone_verifier_github_mirror_url\":\"https://github.com/cooyun/etuki-gate/blob/main/verify-etuki.py\",\"standalone_verifier_script_sha256\":\"sha256:0aa70af7e0eef293d51600b58574ae793fbb01f5fadab550b5ac3953350ba8d1\",\"standalone_verifier_script_url\":\"https://www.etuki.com/verify-etuki.py\",\"telemetry_snapshot_id\":\"telemetry-20261030-v35-truth\",\"timestamp_semantics\":{\"completed_window_end_utc\":\"2026-10-30T00:00:00Z\",\"completed_window_start_utc\":\"2026-10-29T18:00:00Z\",\"generated_at_utc\":\"2026-10-30T03:05:00Z\",\"observed_at_utc\":\"2026-10-30T02:10:00Z\",\"rolling_24h_end_utc\":\"2026-10-30T00:00:00Z\",\"rolling_24h_start_utc\":\"2026-10-29T00:00:00Z\",\"window_bounds_utc\":{\"W1\":[\"2026-10-29T00:00:00Z\",\"2026-10-29T06:00:00Z\"],\"W2\":[\"2026-10-29T06:00:00Z\",\"2026-10-29T12:00:00Z\"],\"W3\":[\"2026-10-29T12:00:00Z\",\"2026-10-29T18:00:00Z\"],\"W4\":[\"2026-10-29T18:00:00Z\",\"2026-10-30T00:00:00Z\"]},\"window_interval_semantics\":\"LEFT_CLOSED_RIGHT_OPEN [window_start_utc, window_end_utc)\"},\"vendor_raw_receipts_sha256\":\"sha256:884b4504fe48ef3b0e182e1a77a1e7cfb6934682a807da3ab8145be325317e76\",\"vendor_raw_receipts_url\":\"https://www.etuki.com/api/telemetry/vendor-raw-receipts.json\"}",
-    "signed_payload_sha256": "bb3c6ac808c75e28c6d9d654b550d6f34955da43bbde70d3d7b0bfb772cb2e7d",
-    "expected_emsa_pkcs1_v15_512_hex": "0001ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff003031300d060960864801650304020105000420bb3c6ac808c75e28c6d9d654b550d6f34955da43bbde70d3d7b0bfb772cb2e7d",
+    "canonical_payload_verbatim_json": "{\"build_version\":\"2026.11.01-v40.7.7-frozen-ledger\",\"byok_gateway_endpoint\":\"https://www.etuki.com/api/v1/chat/completions\",\"cache_price_source_distribution\":{\"anthropic_10pct_read_1_25x_write\":14,\"deepseek_disk_cache_1x_write_zero_storage_rent\":20,\"frontier_simulation_schedule\":32,\"google_25pct_read_plus_4_50_usd_1m_hourly_storage_rent\":11,\"no_native_cache_billed_at_100pct_input\":293,\"not_applicable_infra_or_no_cache\":78,\"openai_50pct_cached_input\":28,\"total\":563,\"vendor_prefix_cache_20pct\":87},\"catalog_payload_sha256\":\"sha256:6bc877254427a142ff842bfa318350453ffebc62faf90f62337f96fb7fa5db82\",\"catalog_root_sha256\":\"sha256:d2f517094b814bcf41ea821c1ce654aa29df8ac454acd1c96779d7966ab688f4\",\"csv_root_canonical_input_json\":\"{\\\"schema_version\\\":\\\"2026.11.01-v40.7.7-unified\\\",\\\"set1_32_sha256\\\":\\\"sha256:3604c90514474d9bf5066fd773cb3626895ef82a290d7cf8cf7abde46f85f429\\\",\\\"set2_453_sha256\\\":\\\"sha256:494924fe69f1d2ba73bbdaffdbfd2683ca9c19300eb3aca07c059634df776b9d\\\",\\\"set3_78_sha256\\\":\\\"sha256:e8cde6ee048904c63f532015d35b2f41b30c37b72a05efdd3dab250038965463\\\"}\",\"dataset_3branch_csv_root_sha256\":\"sha256:3449f89c077bb81e2b8f490c05e15c1b9ed2eca8a56983b03c24cb59ae91e29b\",\"double_entry_ledger_endpoint\":\"https://www.etuki.com/api/v1/ledger\",\"e3_real_production_case_study\":{\"additional_merged_billed_usd\":312.77,\"additional_merged_calls\":299,\"additional_merged_optimized_usd\":65.3519,\"certificate_id\":\"ETK-E3-20261013-CLIENT-EC01\",\"full_merged_csv_billed_usd\":392.61,\"full_merged_csv_calls\":485,\"full_merged_csv_optimized_usd\":80.9304,\"full_merged_realistic_ttl_optimized_usd\":135.9202,\"ledger_sha256\":\"sha256:fad74a7cd2c878a09f827b5e1c404d415f630f525809061b44fc5c5e33aeb93b\",\"ledger_url\":\"https://www.etuki.com/api/oracle/e3-agentrouter-real-ledger.json\",\"net_savings_pct\":\"79.39% (Theoretical Upper-Bound) / 65.38% (Realistic 25% TTL Write Retained)\",\"primary_slice_billed_usd\":79.84,\"primary_slice_calls\":186,\"primary_slice_optimized_usd\":15.5785,\"primary_slice_realistic_ttl_optimized_usd\":30.66,\"raw_receipts_bundle_sha256\":\"sha256:44f0b5fa546d22f9630ac47f6cd999784563398fabfbaa7a6ed55d5e1ac8a26d\",\"status\":\"ACTIVE_VALID_REAL_BILLING_RECONCILED\",\"verification_boundary\":\"Client-contributed anonymized production bill. Scope: 186 primary calls + 299 merged calls = 485 calls. Verification boundary: arithmetic and ledger reconciliation; not an independent third-party certification.\"},\"entity_reality_contingency_matrix_2x2\":{\"frontier_simulation_llm_models\":34,\"identity_equation\":\"451 (GA_LLM) + 34 (SIM_LLM) + 78 (GA_INFRA_MOR) == 485 (LLM) + 78 (INFRA) == 529 (GA_TOTAL) + 34 (SIM_TOTAL) == 563\",\"production_ga_cloud_and_mor_infra\":78,\"production_ga_llm_models\":451,\"subtotal_llm_endpoints\":485,\"subtotal_non_llm_infra_endpoints\":78,\"total_frontier_simulation_entities\":34,\"total_production_ga_entities\":529,\"total_verified_catalog_leaves\":563},\"entity_reality_provenance_mapping_csv_sha256\":\"sha256:fca112a101eb05395d579bbc126dcb157a0c27fcdb56b646a4dc09e3df624b53\",\"entity_reality_provenance_mapping_csv_url\":\"https://www.etuki.com/api/oracle/entity-reality-provenance-mapping.csv\",\"expires_at\":\"2026-12-31T09:10:00Z\",\"generated_at\":\"2026-11-01T09:10:00Z\",\"independent_ci_verifier_run_url\":\"https://www.etuki.com/api/oracle/independent-ci-verifier-run.json\",\"key_governance_policy\":{\"key_revocation_status\":\"ACTIVE_NOT_REVOKED\",\"pinned_pubkey_spki_fingerprint_sha256\":\"a43a9de120fb8753d66dc4d327687f8632dfc30d09cc047c3aa46b527e9e8cd7\",\"signature_key_id\":\"etuki-ci-rsa2048-2026-v17\",\"spki_encoding\":\"RFC 5280 ASN.1 DER SubjectPublicKeyInfo (294 bytes)\"},\"measured_at\":\"2026-11-01T08:30:00Z\",\"merkle_root_sha256\":\"sha256:d2f517094b814bcf41ea821c1ce654aa29df8ac454acd1c96779d7966ab688f4\",\"policy_version\":\"esp-v40.7.7-20261101\",\"price_payload_sha256\":\"sha256:6bc877254427a142ff842bfa318350453ffebc62faf90f62337f96fb7fa5db82\",\"pricing_snapshot_id\":\"price-20261030-v35-truth\",\"public_key_url\":\"https://www.etuki.com/ci-pubkey.json\",\"schema_version\":\"2026.11.01-v40.7.7-unified\",\"signature_algorithm\":\"RS256 (RFC 8017 PKCS#1 v1.5 SHA-256)\",\"signature_key_id\":\"etuki-ci-rsa2048-2026-v17\",\"source_verified_at\":\"2026-11-01T08:30:00Z\",\"stale_after\":\"2026-11-16T09:10:00Z\",\"standalone_verifier_github_mirror_url\":\"https://github.com/cooyun/etuki-gate/blob/main/verify-etuki.py\",\"standalone_verifier_script_sha256\":\"sha256:a72c3262f592f678dddea00e052aa9bdda98f11298e472b39a6f34a6f065e919\",\"standalone_verifier_script_url\":\"https://www.etuki.com/verify-etuki.py\",\"telemetry_snapshot_id\":\"telemetry-20261030-v35-truth\",\"timestamp_semantics\":{\"completed_window_end_utc\":\"2026-10-30T00:00:00Z\",\"completed_window_start_utc\":\"2026-10-29T18:00:00Z\",\"generated_at_utc\":\"2026-10-30T03:05:00Z\",\"observed_at_utc\":\"2026-10-30T02:10:00Z\",\"rolling_24h_end_utc\":\"2026-10-30T00:00:00Z\",\"rolling_24h_start_utc\":\"2026-10-29T00:00:00Z\",\"window_bounds_utc\":{\"W1\":[\"2026-10-29T00:00:00Z\",\"2026-10-29T06:00:00Z\"],\"W2\":[\"2026-10-29T06:00:00Z\",\"2026-10-29T12:00:00Z\"],\"W3\":[\"2026-10-29T12:00:00Z\",\"2026-10-29T18:00:00Z\"],\"W4\":[\"2026-10-29T18:00:00Z\",\"2026-10-30T00:00:00Z\"]},\"window_interval_semantics\":\"LEFT_CLOSED_RIGHT_OPEN [window_start_utc, window_end_utc)\"},\"vendor_raw_receipts_sha256\":\"sha256:884b4504fe48ef3b0e182e1a77a1e7cfb6934682a807da3ab8145be325317e76\",\"vendor_raw_receipts_url\":\"https://www.etuki.com/api/telemetry/vendor-raw-receipts.json\"}",
+    "signed_payload_sha256": "aee7f9cd794c9795c72657ec5a1e48c1cb4f48f3e8b03ec6b5465c24eb68c353",
+    "expected_emsa_pkcs1_v15_512_hex": "0001ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff003031300d060960864801650304020105000420aee7f9cd794c9795c72657ec5a1e48c1cb4f48f3e8b03ec6b5465c24eb68c353",
     "signature_key_id": "etuki-ci-rsa2048-2026-v17",
     "pinned_pubkey_spki_fingerprint_sha256": "a43a9de120fb8753d66dc4d327687f8632dfc30d09cc047c3aa46b527e9e8cd7",
     "signature_algorithm": "RS256 (RSA-2048 PKCS#1 v1.5 SHA-256)",
     "public_modulus_n_hex": "85b8a7d44bfdb14b096f979625902da191770874d19fcd1a03762e6564f07dd1ab04b50dd0dcf139802018e2b39998be19c8e8eb5f51bb015964916734726784a5debbda117c7c88bdff32ceaff42702a3577a3bfab34add0da086ddc9d8bb30a021087f4e2f487bc2d98e509affe41e4189c50f19a94494c0b14f1cdad3354b10224722cd4aca8cd05d8c0d54495b3e623b640245dc5f69a8d98125387902b129edd8f3aa0f101f27fc107ffbd2ae4a77a23f549a96ba96b7868cf5e5bac923d6ad20fd96d4c173f4d8b348458b2cc2c41ea9a9702fe2f79c7857b31cf5a1e9bca91e4c3f8c23f26b9c9e6f1a5aa15c80f610fb165a452965093613f4784bfb",
     "public_exponent_e": 65537,
-    "signature_value": "7d7f8e4dce14848b5687701d69e6c6bff730cfd1ebae54e81c28580702c046e523605104553f47bce76c9846c370d7e7950f31ce2cabc051788605a140e05264d4233543add2ce7c6f25020d619c4800849872ca58411c81d3e57ae7d803f61855bb031138f4dbdd9870f9fe8f91eec48dd0ca282c3a1bfba3ea4125db6e801eb9010a98a3da555651f4f1b5131eadf2e1297fa55895915ecef48d41a5f26582bfc54be9c500cdbc06b8792cba5115849b6eac63bff3f6a85bbed3dca495cd68ea350669c5a02a493f8d2c239563c9f77493027b6e38bdf3c687269c4dbc23fb622893f16656fada345c7a0ab086b159ed560829e6f160078605dcdbe0512b42"
+    "signature_value": "4c8b059aed8d5f3736031cbee47a629e3f9e990ad0563944973f8c05d461758f537b0bfa42e9847f0b2e923abb8578ca5fc2778f05db345faf16842062c57daf5543d9ffe537d15539017025446031e17e6527d2941ea347e02ac9e57168b808e82bfd3faa18236a6cebb77f02ef0fcf444a71178a6a8a2e8b733dae278f57289be56d7552348cbd43cb28d9133f1817c172a85f91f612b3b2e250d84e5d1039d0468f03d94598146a0e4ee125b1c442f444081adf579916b885e6be33d968c37e8f09853cf0e4aed34493251a6a5ebc1d7a1d723052475314f297733650c93c23ec9ca0ca045e98e879dc42a13ac51e8bbd148359c1d3e7cd26a05732e1d869"
   }
 };
 const PRICING_SNAPSHOT_ID = 'price-20261030-v35-truth';
@@ -567,7 +569,7 @@ export async function GET(req: NextRequest) {
     schema_version: '2026.10.30-v40.2-production-sync',
     policy_version: 'esp-v40.2-20261030',
     server_name: 'etuki-finops-mcp',
-    version: '40.7.6',
+    version: '40.7.7',
     privacy_policy_url: 'https://www.etuki.com/privacy',
     data_collection_policy: 'Receives model name and token counts only; never collects prompt text or conversation history. Logs record request timestamp and status code only.',
     pricing_snapshot_id: PRICING_SNAPSHOT_ID,
@@ -575,9 +577,9 @@ export async function GET(req: NextRequest) {
     pricing_merkle_root: MERKLE_ROOT,
     evidence_manifest: EVIDENCE_MANIFEST,
     live_get_test_endpoints: {
-      positive_cliff_reroute_ci03: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=285000&completion_tokens=20000&v=40.7.6',
-      negative_invalid_token_count: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=12abc&completion_tokens=20000&v=40.7.6',
-      negative_privacy_prompt_rejected: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=15000&completion_tokens=2000&prompt_text=secret&v=40.7.6',
+      positive_cliff_reroute_ci03: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=285000&completion_tokens=20000&v=40.7.7',
+      negative_invalid_token_count: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=12abc&completion_tokens=20000&v=40.7.7',
+      negative_privacy_prompt_rejected: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=15000&completion_tokens=2000&prompt_text=secret&v=40.7.7',
     },
     tools: MCP_TOOLS,
   });
@@ -596,7 +598,7 @@ export async function POST(req: NextRequest) {
         result: {
           protocolVersion: '2025-03-26',
           capabilities: { tools: {} },
-          serverInfo: { name: 'etuki-finops-mcp', version: '40.7.6' },
+          serverInfo: { name: 'etuki-finops-mcp', version: '40.7.7' },
         },
       });
     }

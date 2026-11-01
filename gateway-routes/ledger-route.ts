@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import journal485 from '../../../../public/api/oracle/ledger-485-journal.json';
 
-const BUILD_VER = '2026.11.01-v40.7.7-frozen-ledger';
-const SCHEMA_VER = '2026.11.01-v40.7.7-unified';
+const BUILD_VER = '2026.11.01-v40.7.8-audit-and-seo-closed';
+const SCHEMA_VER = '2026.11.01-v40.7.8-unified';
 const SNAP_ID = 'price-20261030-v35-truth';
 
 export async function GET() {
@@ -15,7 +15,7 @@ export async function GET() {
     accounting_standard_disclosure: {
       standard: 'IFRS 15 / ASC 606 Agent Net Revenue Recognition',
       gross_cleared_volume_gmv_usd: 392.61,
-      optimized_pass_through_cost_usd: 90.13,
+      optimized_pass_through_cost_usd: 80.9304,
       net_platform_control_plane_revenue_usd: 9.01,
       net_contribution_margin_on_platform_revenue_pct: '89.12%'
     },
@@ -35,7 +35,7 @@ export async function GET() {
       '2_customer_usage_ledger': { record_count: 485, primary_slice_count: 186, additional_merged_count: 299, orphan_records_count: 0 },
       '3_pricing_version_ledger': { pricing_version: SNAP_ID, merkle_root_sha256: 'd2f51709c2b216ffe8ff4eb0e9cde7d8f0ade4bbd8ade1f1aa7be7d4bc6c7b20' },
       '4_accounts_receivable_ledger': { invoice_line_count: 485, primary_186_slice_usd: 79.84, additional_299_merged_usd: 312.77, full_485_merged_usd: 392.61, status: 'RECONCILED' },
-      '5_accounts_payable_ledger': { payable_line_count: 485, primary_186_optimized_payable_usd: 18.92, additional_299_optimized_payable_usd: 71.21, full_485_optimized_payable_usd: 90.13, status: 'RECONCILED' },
+      '5_accounts_payable_ledger': { payable_line_count: 485, primary_186_optimized_payable_usd: 15.5785, additional_299_optimized_payable_usd: 65.3519, full_485_optimized_payable_usd: 80.9304, status: 'RECONCILED' },
       '6_settlement_ledger': { settled_transactions_count: 485, gross_settled_usd: 392.61, status: 'BALANCED_IMMUTABLE' },
       '7_variance_and_hold_release_ledger': {
         pre_auth_hold_release_count: 485,
