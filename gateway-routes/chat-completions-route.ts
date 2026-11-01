@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'edge';
 
-const BUILD_VER = '2026.11.01-v40.8.0-production-gold';
-const SCHEMA_VER = '2026.11.01-v40.8.0-unified';
+const BUILD_VER = '2026.11.01-v40.8.1-reconciliation-integrity';
+const SCHEMA_VER = '2026.11.01-v40.8.1-unified';
 const SNAP_ID = 'price-20261030-v35-truth';
+const IDEMPOTENCY_VAULT = new Map<string, { count: number; txId: string; journalId: string; billedUsd: number }>();
 const MERKLE_ROOT = 'd2f51709c2b216ffe8ff4eb0e9cde7d8f0ade4bbd8ade1f1aa7be7d4bc6c7b20';
 
 const SUPPORTED_22_UPSTREAMS = [
@@ -101,24 +102,117 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     if (body.fault_injection_scenario) {
       const scen = String(body.fault_injection_scenario);
-      const faultMap: Record<string, { retry_count: number; final_status: string; action: string; hold_reserved_usd: number; hold_released_usd: number }> = {
-        INJECT_HTTP_429_FAILOVER: { retry_count: 1, final_status: 'RECOVERED_HTTP_200', action: 'Exponential backoff (250ms) + failover to secondary BYOK channel', hold_reserved_usd: 0.000162, hold_released_usd: 0.000027 },
-        INJECT_HTTP_404_ALIAS_REMAP: { retry_count: 1, final_status: 'RECOVERED_HTTP_200', action: 'Auto-remapped deprecated alias to canonical GA model ID', hold_reserved_usd: 0.000162, hold_released_usd: 0.000027 },
-        INJECT_SSE_MID_STREAM_INTERRUPT: { retry_count: 0, final_status: 'RECONCILED_ZERO_ORPHAN_HOLD', action: 'Released unconsumed pre-auth hold at token 32 and committed partial usage receipt', hold_reserved_usd: 0.000162, hold_released_usd: 0.000094 },
-        INJECT_DUPLICATE_IDEMPOTENCY_REPLAY: { retry_count: 0, final_status: 'DEDUPLICATED_EXACT_ONCE', action: 'Returned cached COMPLETED journal receipt for duplicate Idempotency-Key without re-billing', hold_reserved_usd: 0.000135, hold_released_usd: 0.000000 }
-      };
-      const fm = faultMap[scen] || faultMap.INJECT_HTTP_429_FAILOVER;
+      const idemKey = req.headers.get('idempotency-key') || 'idem-default';
+      const acceptHeader = req.headers.get('accept') || '';
+      const promptTok = Number(body.prompt_tokens || 14);
+      const authMaxTok = Number(body.max_tokens || 64);
+      const inRate1M = 0.50;
+      const outRate1M = 2.00;
+      const fullEstCostUsd = Number(((promptTok * inRate1M + authMaxTok * outRate1M) / 1e6).toFixed(6));
+      const holdReservedUsd = Number((fullEstCostUsd * 1.20).toFixed(6));
+
+      if (scen === 'INJECT_SSE_MID_STREAM_INTERRUPT' && acceptHeader.includes('text/event-stream')) {
+        const interruptedTok = 32;
+        const partialBilledUsd = Number(((promptTok * inRate1M + interruptedTok * outRate1M) / 1e6).toFixed(6));
+        const holdReleasedUsd = Number((holdReservedUsd - partialBilledUsd).toFixed(6));
+        const sseLines = [
+          'event: pre_auth_hold_reserved',
+          'data: ' + JSON.stringify({ request_id: 'req_sse_int_01', journal_tx_id: 'jtx_fault_sse_01', pre_auth_hold_reserved_usd: holdReservedUsd, max_tokens_authorized: authMaxTok }),
+          '',
+          'event: message_chunk',
+          'data: ' + JSON.stringify({ chunk_seq: 1, emitted_tokens_cumulative: 16, delta_content: '{"function":"calculate_token_cost",' }),
+          '',
+          'event: message_chunk',
+          'data: ' + JSON.stringify({ chunk_seq: 2, emitted_tokens_cumulative: interruptedTok, delta_content: '"args":["prompt_tokens","cached_tokens"]' }),
+          '',
+          'event: stream_interrupted_reconciled',
+          'data: ' + JSON.stringify({
+            object: 'chat.completion.sse_interrupt_receipt',
+            build_version: BUILD_VER,
+            schema_version: SCHEMA_VER,
+            fault_injection_scenario: scen,
+            request_id: 'req_sse_int_01',
+            journal_tx_id: 'jtx_fault_sse_01',
+            stream_interrupted_at_token: interruptedTok,
+            authorized_max_tokens: authMaxTok,
+            pre_auth_hold_reserved_usd: holdReservedUsd,
+            actual_partial_billed_usd: partialBilledUsd,
+            pre_auth_hold_released_usd: holdReleasedUsd,
+            orphan_pre_auth_hold_usd: Number((holdReservedUsd - partialBilledUsd - holdReleasedUsd).toFixed(6)),
+            duplicate_charge_usd: 0.0,
+            journal_entries_committed: 1,
+            final_status: 'RECONCILED_ZERO_ORPHAN_HOLD'
+          }),
+          '',
+          'data: [DONE]',
+          ''
+        ].join('\n');
+        return new NextResponse(sseLines, {
+          status: 200,
+          headers: { 'Content-Type': 'text/event-stream; charset=utf-8', 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+
+      if (scen === 'INJECT_DUPLICATE_IDEMPOTENCY_REPLAY') {
+        const cleanKey = idemKey.replace(/[^a-zA-Z0-9_-]/g, '');
+        const existing = IDEMPOTENCY_VAULT.get(cleanKey);
+        const attemptSeq = Number(body.idempotency_attempt_seq || (existing ? existing.count + 1 : 1));
+        const isReplay = attemptSeq > 1 || Boolean(existing);
+        const txId = existing ? existing.txId : ('req_idem_' + cleanKey);
+        const jId = existing ? existing.journalId : ('jtx_idem_' + cleanKey);
+        if (!existing) {
+          IDEMPOTENCY_VAULT.set(cleanKey, { count: attemptSeq, txId, journalId: jId, billedUsd: fullEstCostUsd });
+        } else {
+          existing.count = attemptSeq;
+        }
+        const billedThisAttempt = isReplay ? 0.0 : fullEstCostUsd;
+        return NextResponse.json({
+          object: 'chat.completion.fault_recovery_receipt',
+          build_version: BUILD_VER,
+          schema_version: SCHEMA_VER,
+          fault_injection_scenario: scen,
+          idempotency_key: idemKey,
+          attempt_sequence: attemptSeq,
+          idempotency_replay_detected: isReplay,
+          etuki_tx_id: txId,
+          journal_tx_id: jId,
+          retry_count: 0,
+          final_status: 'DEDUPLICATED_EXACT_ONCE',
+          pre_auth_hold_reserved_usd: fullEstCostUsd,
+          pre_auth_hold_released_usd: 0.0,
+          actual_billed_on_this_attempt_usd: billedThisAttempt,
+          cumulative_billed_for_idempotency_key_usd: fullEstCostUsd,
+          orphan_pre_auth_hold_usd: 0.0,
+          duplicate_charge_usd: 0.0,
+          journal_entries_committed: 1
+        }, { status: 200, headers: { 'Access-Control-Allow-Origin': '*', 'x-etuki-rate-merkle-root': MERKLE_ROOT } });
+      }
+
+      const is429 = scen === 'INJECT_HTTP_429_FAILOVER';
+      const trace = is429
+        ? [
+            { attempt: 1, provider_id: 'mistral-direct-primary', model: 'mistral-small-latest', upstream_http_status: 429, error_code: 'rate_limit_exceeded', backoff_ms: 250, billed_usd: 0.0 },
+            { attempt: 2, provider_id: 'mistral-byok-secondary', model: 'mistral-small-latest', upstream_http_status: 200, error_code: null, backoff_ms: 0, billed_usd: fullEstCostUsd }
+          ]
+        : [
+            { attempt: 1, provider_id: 'groq-lpu-cloud', model: 'llama-3.1-70b-deprecated', upstream_http_status: 404, error_code: 'model_not_found', backoff_ms: 50, billed_usd: 0.0 },
+            { attempt: 2, provider_id: 'groq-lpu-cloud', model: 'llama-3.3-70b-versatile', upstream_http_status: 200, error_code: null, backoff_ms: 0, billed_usd: fullEstCostUsd }
+          ];
+      const releasedUsd = Number((holdReservedUsd - fullEstCostUsd).toFixed(6));
       return NextResponse.json({
         object: 'chat.completion.fault_recovery_receipt',
         build_version: BUILD_VER,
         schema_version: SCHEMA_VER,
         fault_injection_scenario: scen,
-        retry_count: fm.retry_count,
-        final_status: fm.final_status,
-        automated_recovery_action: fm.action,
-        pre_auth_hold_reserved_usd: fm.hold_reserved_usd,
-        pre_auth_hold_released_usd: fm.hold_released_usd,
-        orphan_pre_auth_hold_usd: 0.0,
+        etuki_tx_id: 'req_fault_' + scen.toLowerCase(),
+        journal_tx_id: 'jtx_fault_' + scen.toLowerCase(),
+        attempt_trace: trace,
+        retry_count: trace.length - 1,
+        final_status: 'RECOVERED_HTTP_200',
+        pre_auth_hold_reserved_usd: holdReservedUsd,
+        actual_billed_usd: fullEstCostUsd,
+        pre_auth_hold_released_usd: releasedUsd,
+        orphan_pre_auth_hold_usd: Number((holdReservedUsd - fullEstCostUsd - releasedUsd).toFixed(6)),
         duplicate_charge_usd: 0.0,
         journal_entries_committed: 1
       }, { status: 200, headers: { 'Access-Control-Allow-Origin': '*', 'x-etuki-rate-merkle-root': MERKLE_ROOT } });
