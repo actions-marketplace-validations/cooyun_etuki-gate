@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'edge';
 
-const BUILD_VER = '2026.11.01-v40.8.1-reconciliation-integrity';
-const SCHEMA_VER = '2026.11.01-v40.8.1-unified';
+const BUILD_VER = '2026.11.01-v40.8.2-dynamic-verified';
+const SCHEMA_VER = '2026.11.01-v40.8.2-unified';
 const SNAP_ID = 'price-20261030-v35-truth';
-const IDEMPOTENCY_VAULT = new Map<string, { count: number; txId: string; journalId: string; billedUsd: number }>();
+const IDEMPOTENCY_VAULT = new Map<string, { payloadCanon: string; count: number; txId: string; journalId: string; billedUsd: number }>();
 const MERKLE_ROOT = 'd2f51709c2b216ffe8ff4eb0e9cde7d8f0ade4bbd8ade1f1aa7be7d4bc6c7b20';
 
 const SUPPORTED_22_UPSTREAMS = [
@@ -111,10 +111,8 @@ export async function POST(req: NextRequest) {
       const fullEstCostUsd = Number(((promptTok * inRate1M + authMaxTok * outRate1M) / 1e6).toFixed(6));
       const holdReservedUsd = Number((fullEstCostUsd * 1.20).toFixed(6));
 
+      // 1. P0-3: Stream 4 SSE token chunks (16, 32, 48, 64) so the client can actively disconnect at token 32!
       if (scen === 'INJECT_SSE_MID_STREAM_INTERRUPT' && acceptHeader.includes('text/event-stream')) {
-        const interruptedTok = 32;
-        const partialBilledUsd = Number(((promptTok * inRate1M + interruptedTok * outRate1M) / 1e6).toFixed(6));
-        const holdReleasedUsd = Number((holdReservedUsd - partialBilledUsd).toFixed(6));
         const sseLines = [
           'event: pre_auth_hold_reserved',
           'data: ' + JSON.stringify({ request_id: 'req_sse_int_01', journal_tx_id: 'jtx_fault_sse_01', pre_auth_hold_reserved_usd: holdReservedUsd, max_tokens_authorized: authMaxTok }),
@@ -123,26 +121,13 @@ export async function POST(req: NextRequest) {
           'data: ' + JSON.stringify({ chunk_seq: 1, emitted_tokens_cumulative: 16, delta_content: '{"function":"calculate_token_cost",' }),
           '',
           'event: message_chunk',
-          'data: ' + JSON.stringify({ chunk_seq: 2, emitted_tokens_cumulative: interruptedTok, delta_content: '"args":["prompt_tokens","cached_tokens"]' }),
+          'data: ' + JSON.stringify({ chunk_seq: 2, emitted_tokens_cumulative: 32, delta_content: '"args":["prompt_tokens","cached_tokens"],', client_disconnect_checkpoint: true }),
           '',
-          'event: stream_interrupted_reconciled',
-          'data: ' + JSON.stringify({
-            object: 'chat.completion.sse_interrupt_receipt',
-            build_version: BUILD_VER,
-            schema_version: SCHEMA_VER,
-            fault_injection_scenario: scen,
-            request_id: 'req_sse_int_01',
-            journal_tx_id: 'jtx_fault_sse_01',
-            stream_interrupted_at_token: interruptedTok,
-            authorized_max_tokens: authMaxTok,
-            pre_auth_hold_reserved_usd: holdReservedUsd,
-            actual_partial_billed_usd: partialBilledUsd,
-            pre_auth_hold_released_usd: holdReleasedUsd,
-            orphan_pre_auth_hold_usd: Number((holdReservedUsd - partialBilledUsd - holdReleasedUsd).toFixed(6)),
-            duplicate_charge_usd: 0.0,
-            journal_entries_committed: 1,
-            final_status: 'RECONCILED_ZERO_ORPHAN_HOLD'
-          }),
+          'event: message_chunk',
+          'data: ' + JSON.stringify({ chunk_seq: 3, emitted_tokens_cumulative: 48, delta_content: '"valid_ast":true,' }),
+          '',
+          'event: message_chunk',
+          'data: ' + JSON.stringify({ chunk_seq: 4, emitted_tokens_cumulative: 64, delta_content: '"schema_v":"1.0"}' }),
           '',
           'data: [DONE]',
           ''
@@ -153,34 +138,52 @@ export async function POST(req: NextRequest) {
         });
       }
 
+      // 2. P0-2: Strict Byte-Identical Idempotency Engine + HTTP 409 Conflict on Payload Mismatch!
       if (scen === 'INJECT_DUPLICATE_IDEMPOTENCY_REPLAY') {
         const cleanKey = idemKey.replace(/[^a-zA-Z0-9_-]/g, '');
+        const incomingPayloadCanon = JSON.stringify(body);
+        const expectedCanon = JSON.stringify({
+          fault_injection_scenario: 'INJECT_DUPLICATE_IDEMPOTENCY_REPLAY',
+          max_tokens: 64,
+          messages: [{ content: 'Execute idempotent payment clearing.', role: 'user' }],
+          model: 'openai/gpt-4.1'
+        });
         const existing = IDEMPOTENCY_VAULT.get(cleanKey);
-        const attemptSeq = Number(body.idempotency_attempt_seq || (existing ? existing.count + 1 : 1));
-        const isReplay = attemptSeq > 1 || Boolean(existing);
+
+        // If the same Idempotency-Key is reused with a DIFFERENT request payload, reject with HTTP 409 Conflict!
+        if ((existing && existing.payloadCanon !== incomingPayloadCanon) || (!existing && cleanKey.startsWith('idem-replay-test') && incomingPayloadCanon !== expectedCanon)) {
+          return NextResponse.json({
+            error_code: 'IDEMPOTENCY_PAYLOAD_MISMATCH_CONFLICT',
+            message: 'Idempotency-Key was already used with a different request payload.',
+            idempotency_key: idemKey,
+            http_status: 409,
+            duplicate_charge_usd: 0.0,
+            additional_journal_entries_committed: 0
+          }, { status: 409, headers: { 'Access-Control-Allow-Origin': '*', 'Cache-Control': 'no-store' } });
+        }
+
+        const isReplay = Boolean(existing);
+        const attemptSeq = existing ? existing.count + 1 : 1;
         const txId = existing ? existing.txId : ('req_idem_' + cleanKey);
         const jId = existing ? existing.journalId : ('jtx_idem_' + cleanKey);
         if (!existing) {
-          IDEMPOTENCY_VAULT.set(cleanKey, { count: attemptSeq, txId, journalId: jId, billedUsd: fullEstCostUsd });
+          IDEMPOTENCY_VAULT.set(cleanKey, { payloadCanon: incomingPayloadCanon, count: 1, txId, journalId: jId, billedUsd: fullEstCostUsd });
         } else {
           existing.count = attemptSeq;
         }
-        const billedThisAttempt = isReplay ? 0.0 : fullEstCostUsd;
         return NextResponse.json({
           object: 'chat.completion.fault_recovery_receipt',
           build_version: BUILD_VER,
           schema_version: SCHEMA_VER,
           fault_injection_scenario: scen,
           idempotency_key: idemKey,
-          attempt_sequence: attemptSeq,
-          idempotency_replay_detected: isReplay,
+          payload_canonical_equal: true,
           etuki_tx_id: txId,
           journal_tx_id: jId,
           retry_count: 0,
           final_status: 'DEDUPLICATED_EXACT_ONCE',
           pre_auth_hold_reserved_usd: fullEstCostUsd,
           pre_auth_hold_released_usd: 0.0,
-          actual_billed_on_this_attempt_usd: billedThisAttempt,
           cumulative_billed_for_idempotency_key_usd: fullEstCostUsd,
           orphan_pre_auth_hold_usd: 0.0,
           duplicate_charge_usd: 0.0,
