@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import journal485 from '../../../../public/api/oracle/ledger-485-journal.json';
 
-const BUILD_VER = '2026.11.01-v40.7.8-audit-and-seo-closed';
-const SCHEMA_VER = '2026.11.01-v40.7.8-unified';
+const BUILD_VER = '2026.11.01-v40.8.0-production-gold';
+const SCHEMA_VER = '2026.11.01-v40.8.0-unified';
 const SNAP_ID = 'price-20261030-v35-truth';
 
 export async function GET() {
-  return NextResponse.json({
+  const ledgerPayload = {
     ledger_protocol: 'etuki-immutable-double-entry-clearinghouse-v40.7',
     build_version: BUILD_VER,
     schema_version: SCHEMA_VER,
@@ -48,5 +48,6 @@ export async function GET() {
       }
     },
     immutable_journal_transactions_hash_chain: journal485
-  }, { status: 200, headers: { 'Access-Control-Allow-Origin': '*', 'Cache-Control': 'no-store' } });
+  };
+  return new NextResponse(JSON.stringify(ledgerPayload, null, 2), { status: 200, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*', 'Cache-Control': 'no-store' } });
 }
