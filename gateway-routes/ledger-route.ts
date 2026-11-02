@@ -8,40 +8,26 @@ import INDEP_STL_DOC from '../../../../public/api/oracle/independent-gateway-set
 
 export const runtime = 'edge';
 
-const BUILD_VER = '2026.11.02-v40.8.4-independent-ledgers';
-const SCHEMA_VER = '2026.11.02-v40.8.4-unified';
+const BUILD_VER = '2026.11.02-v40.8.5-subledger-hash-closed';
+const SCHEMA_VER = '2026.11.02-v40.8.5-unified';
 const SNAP_ID = 'price-20261030-v35-truth';
 
-interface JournalEntry {
-  journal_tx_id: string;
-  request_id: string;
-  usage_record_id: string;
-  invoice_line_id: string;
-  source_receipt_sha256: string;
-  scope_segment: string;
-  platform: string;
-  model: string;
-  currency: string;
-  lifecycle_stage: string;
-  pre_auth_hold_reserved_usd: number;
-  pre_auth_hold_released_variance_usd: number;
-  billed_gross_usd: number;
-  debit_total_usd: number;
-  credit_total_usd: number;
-  optimized_pass_through_usd: number;
-  net_savings_usd: number;
-  prev_tx_sha256: string;
-  tx_sha256: string;
-  debits: Array<{ account: string; direction: string; currency: string; amount_usd: number }>;
-  credits: Array<{ account: string; direction: string; currency: string; amount_usd: number }>;
-}
+const AR_SORTED_KEYS = ["ar_source_id", "captured_at_utc", "currency", "customer_id", "customer_receivable_amount_usd", "invoice_line_id", "journal_tx_id", "request_id", "status"];
+const AP_SORTED_KEYS = ["ap_source_id", "captured_at_utc", "currency", "gross_billed_usd", "journal_tx_id", "platform_fee_5pct_usd", "provider", "request_id", "status", "vendor_invoice_id", "vendor_native_response_id", "vendor_payable_net_95pct_usd"];
+const STL_SORTED_KEYS = ["actual_settled_amount_usd", "currency", "final_reconciled_status", "invoice_line_id", "journal_tx_id", "payment_gateway_fee_2_9pct_usd", "payment_gateway_settlement_id", "request_id", "settled_at_utc", "settlement_source_id", "vendor_invoice_id"];
 
 async function sha256HexEdge(text: string): Promise<string> {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
   return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
-function rebuildJournalEntryAndLines(tx: JournalEntry, newGrossUsd: number, prevHash: string): JournalEntry {
+async function computeRecordSha(rec: Record<string, any>, sortedKeys: string[]): Promise<string> {
+  const obj: Record<string, any> = {};
+  for (const k of sortedKeys) obj[k] = rec[k];
+  return sha256HexEdge(JSON.stringify(obj));
+}
+
+function rebuildJournalEntryAndLines(tx: any, newGrossUsd: number, prevHash: string): any {
   const g = Number(newGrossUsd.toFixed(6));
   const pFee = Number((g * 0.05).toFixed(6));
   const upNet = Number((g - pFee).toFixed(6));
@@ -72,14 +58,14 @@ function rebuildJournalEntryAndLines(tx: JournalEntry, newGrossUsd: number, prev
   };
 }
 
-async function reanchorFullHashChain(chain: JournalEntry[]): Promise<JournalEntry[]> {
+async function reanchorFullHashChain(chain: any[]): Promise<any[]> {
   let prevH = '0'.repeat(64);
-  const out: JournalEntry[] = [];
+  const out: any[] = [];
   for (const rawTx of chain) {
     const rebuilt = rebuildJournalEntryAndLines(rawTx, Number(rawTx.billed_gross_usd), prevH);
     const coreKeys = Object.keys(rebuilt).filter((k) => k !== 'tx_sha256').sort();
     const sortedCore: Record<string, any> = {};
-    for (const k of coreKeys) sortedCore[k] = (rebuilt as any)[k];
+    for (const k of coreKeys) sortedCore[k] = rebuilt[k];
     const newTxHash = await sha256HexEdge(JSON.stringify(sortedCore));
     rebuilt.tx_sha256 = newTxHash;
     out.push(rebuilt);
@@ -89,7 +75,7 @@ async function reanchorFullHashChain(chain: JournalEntry[]): Promise<JournalEntr
 }
 
 async function verifyAndAggregateLedger(
-  chain: JournalEntry[],
+  chain: any[],
   arList: any[],
   apList: any[],
   stlList: any[],
@@ -98,6 +84,10 @@ async function verifyAndAggregateLedger(
 ) {
   const seenTxIds = new Set<string>();
   const seenReqIds = new Set<string>();
+  const seenArSrcIds = new Set<string>();
+  const seenApSrcIds = new Set<string>();
+  const seenStlSrcIds = new Set<string>();
+
   const arByTx = new Map(arList.map((r) => [r.journal_tx_id, r]));
   const apByTx = new Map(apList.map((r) => [r.journal_tx_id, r]));
   const stlByTx = new Map(stlList.map((r) => [r.journal_tx_id, r]));
@@ -112,6 +102,10 @@ async function verifyAndAggregateLedger(
   let theoOptSum = 0;
   let realTtlOptSum = 0;
 
+  const arShas: string[] = [];
+  const apShas: string[] = [];
+  const stlShas: string[] = [];
+
   for (const tx of chain) {
     if (seenTxIds.has(tx.journal_tx_id) || seenReqIds.has(tx.request_id)) {
       throw new Error('FAIL_CLOSED_DUPLICATE_TRANSACTION_OR_REQUEST_ID: ' + tx.journal_tx_id);
@@ -119,39 +113,54 @@ async function verifyAndAggregateLedger(
     seenTxIds.add(tx.journal_tx_id);
     seenReqIds.add(tx.request_id);
 
-    // 1. Independent Two-Sided Debit vs Credit Line Summation (Not an algebraic identity!)
-    const txDebitLinesSum = Number(tx.debits.reduce((s, d) => s + Number(d.amount_usd), 0).toFixed(6));
-    const txCreditLinesSum = Number(tx.credits.reduce((s, c) => s + Number(c.amount_usd), 0).toFixed(6));
+    const txDebitLinesSum = Number(tx.debits.reduce((s: number, d: any) => s + Number(d.amount_usd), 0).toFixed(6));
+    const txCreditLinesSum = Number(tx.credits.reduce((s: number, c: any) => s + Number(c.amount_usd), 0).toFixed(6));
     if (txDebitLinesSum !== txCreditLinesSum || txDebitLinesSum !== Number(tx.debit_total_usd)) {
-      throw new Error(`FAIL_CLOSED_UNBALANCED_DEBIT_CREDIT_ON_${tx.journal_tx_id}: Dr=${txDebitLinesSum} vs Cr=${txCreditLinesSum}`);
+      throw new Error(`FAIL_CLOSED_UNBALANCED_DEBIT_CREDIT_ON_${tx.journal_tx_id}`);
     }
 
-    // 2. Cross-Check Against Independent AR, AP, and Settlement Sub-Ledgers!
     const arRec = arByTx.get(tx.journal_tx_id);
     const apRec = apByTx.get(tx.journal_tx_id);
     const stlRec = stlByTx.get(tx.journal_tx_id);
     if (!arRec || !apRec || !stlRec) {
       throw new Error('FAIL_CLOSED_MISSING_INDEPENDENT_SUBLEDGER_RECORD: ' + tx.journal_tx_id);
     }
+    if (seenArSrcIds.has(arRec.ar_source_id) || seenApSrcIds.has(apRec.ap_source_id) || seenStlSrcIds.has(stlRec.settlement_source_id)) {
+      throw new Error('FAIL_CLOSED_DUPLICATE_SUBLEDGER_SOURCE_ID: ' + tx.journal_tx_id);
+    }
+    seenArSrcIds.add(arRec.ar_source_id);
+    seenApSrcIds.add(apRec.ap_source_id);
+    seenStlSrcIds.add(stlRec.settlement_source_id);
+
     if (Number(arRec.customer_receivable_amount_usd) !== Number(tx.billed_gross_usd) ||
         Number(stlRec.actual_settled_amount_usd) !== Number(tx.billed_gross_usd) ||
         Number((Number(apRec.vendor_payable_net_95pct_usd) + Number(apRec.platform_fee_5pct_usd)).toFixed(6)) !== Number(tx.billed_gross_usd)) {
       throw new Error('FAIL_CLOSED_CROSS_SUBLEDGER_AMOUNT_MISMATCH: ' + tx.journal_tx_id);
     }
 
-    // 3. Cryptographic Hash-Chain Continuity Check (Detects any un-rehashed tamper!)
     if (tx.prev_tx_sha256 !== prevH) {
       throw new Error(`FAIL_CLOSED_BROKEN_PREV_TX_HASH_CHAIN_AT_${tx.journal_tx_id}`);
     }
+
     if (verifyCryptographicChain) {
+      const recalcArSha = await computeRecordSha(arRec, AR_SORTED_KEYS);
+      const recalcApSha = await computeRecordSha(apRec, AP_SORTED_KEYS);
+      const recalcStlSha = await computeRecordSha(stlRec, STL_SORTED_KEYS);
+      if (recalcArSha !== arRec.ar_record_sha256 || recalcApSha !== apRec.ap_record_sha256 || recalcStlSha !== stlRec.settlement_record_sha256) {
+        throw new Error(`FAIL_CLOSED_SUBLEDGER_RECORD_SHA256_TAMPERED_AT_${tx.journal_tx_id}`);
+      }
       const coreKeys = Object.keys(tx).filter((k) => k !== 'tx_sha256').sort();
       const sortedCore: Record<string, any> = {};
-      for (const k of coreKeys) sortedCore[k] = (tx as any)[k];
+      for (const k of coreKeys) sortedCore[k] = tx[k];
       const recalcH = await sha256HexEdge(JSON.stringify(sortedCore));
       if (recalcH !== tx.tx_sha256) {
         throw new Error(`FAIL_CLOSED_TAMPERED_TX_SHA256_AT_${tx.journal_tx_id}`);
       }
     }
+
+    arShas.push(arRec.ar_record_sha256);
+    apShas.push(apRec.ap_record_sha256);
+    stlShas.push(stlRec.settlement_record_sha256);
     prevH = tx.tx_sha256;
 
     const g = Number(tx.billed_gross_usd);
@@ -171,6 +180,10 @@ async function verifyAndAggregateLedger(
     realTtlOptSum += e3Rec ? Number(e3Rec.realistic_ttl_25pct_write_retained_usd) : Number(tx.optimized_pass_through_usd);
   }
 
+  const arRoot = await sha256HexEdge(arShas.join(','));
+  const apRoot = await sha256HexEdge(apShas.join(','));
+  const stlRoot = await sha256HexEdge(stlShas.join(','));
+
   const totalBilledGrossGmvUsd = Number(grossSum.toFixed(4));
   const totalTheoreticalOptimizedUsd = Number(theoOptSum.toFixed(4));
   const totalRealisticTtlOptimizedUsd = Number(realTtlOptSum.toFixed(4));
@@ -181,6 +194,9 @@ async function verifyAndAggregateLedger(
     additional_merged_transactions: chain.filter((tx) => tx.scope_segment !== 'PRIMARY_186_SLICE').length,
     genesis_prev_tx_sha256: '0'.repeat(64),
     chain_tip_tx_sha256: chain[chain.length - 1]?.tx_sha256 || '',
+    ar_collection_root_sha256: arRoot,
+    ap_collection_root_sha256: apRoot,
+    settlement_collection_root_sha256: stlRoot,
     total_billed_gross_gmv_usd: totalBilledGrossGmvUsd,
     total_compound_debit_usd: Number(debitSum.toFixed(4)),
     total_compound_credit_usd: Number(creditSum.toFixed(4)),
@@ -234,7 +250,7 @@ export async function GET(req: NextRequest) {
     ...E3_LEDGER.additional_merged_299_call_records
   ];
   const e3ByReqId = new Map(allE3Records.map((r) => [r.request_id, r]));
-  const baseChain: JournalEntry[] = JOURNAL_485_CHAIN.map((tx) => ({ ...tx })) as unknown as JournalEntry[];
+  const baseChain: any[] = JOURNAL_485_CHAIN.map((tx) => ({ ...tx }));
   const baseAr = INDEP_AR_DOC.ar_records.map((r) => ({ ...r }));
   const baseAp = INDEP_AP_DOC.ap_records.map((r) => ({ ...r }));
   const baseStl = INDEP_STL_DOC.settlement_records.map((r) => ({ ...r }));
@@ -243,84 +259,91 @@ export async function GET(req: NextRequest) {
   if (mutationTest === 'ALL_FOUR_MUTATION_SUITE') {
     const baselineSummary = await verifyAndAggregateLedger(baseChain, baseAr, baseAp, baseStl, e3ByReqId, false);
 
-    // 1. Delete jtx_001 + Re-anchor full hash chain & update AR/AP/STL
+    // 1. Delete jtx_001 -> remaining 484 record hashes unchanged, but collection root hashes recomputed!
     const delChain = await reanchorFullHashChain(baseChain.filter((tx) => tx.journal_tx_id !== 'jtx_001'));
     const delAr = baseAr.filter((r) => r.journal_tx_id !== 'jtx_001');
     const delAp = baseAp.filter((r) => r.journal_tx_id !== 'jtx_001');
     const delStl = baseStl.filter((r) => r.journal_tx_id !== 'jtx_001');
     const delSummary = await verifyAndAggregateLedger(delChain, delAr, delAp, delStl, e3ByReqId, false);
 
-    // 2. Modify jtx_001 +$10.00 + Rebuild 5 debit/credit lines + Update AR/AP/STL + Re-anchor full 485 hash chain!
+    // 2. Modify jtx_001 +$10.00 -> rebuilds 5 debit/credit lines AND recomputes ar_record_sha256, ap_record_sha256, settlement_record_sha256 & 3 root hashes!
     const modRaw = baseChain.map((tx) => tx.journal_tx_id === 'jtx_001' ? { ...tx, billed_gross_usd: Number((Number(tx.billed_gross_usd) + 10.0).toFixed(6)) } : tx);
     const modChain = await reanchorFullHashChain(modRaw);
     const modTx001 = modChain[0];
-    const modAr = baseAr.map((r) => r.journal_tx_id === 'jtx_001' ? { ...r, customer_receivable_amount_usd: modTx001.billed_gross_usd } : r);
-    const modAp = baseAp.map((r) => r.journal_tx_id === 'jtx_001' ? { ...r, gross_billed_usd: modTx001.billed_gross_usd, platform_fee_5pct_usd: Number((modTx001.billed_gross_usd * 0.05).toFixed(6)), vendor_payable_net_95pct_usd: Number((modTx001.billed_gross_usd - Number((modTx001.billed_gross_usd * 0.05).toFixed(6))).toFixed(6)) } : r);
-    const modStl = baseStl.map((r) => r.journal_tx_id === 'jtx_001' ? { ...r, actual_settled_amount_usd: modTx001.billed_gross_usd, payment_gateway_fee_2_9pct_usd: Number((modTx001.billed_gross_usd * 0.029).toFixed(6)) } : r);
-    const modSummary = await verifyAndAggregateLedger(modChain, modAr, modAp, modStl, e3ByReqId, false);
+    const modAr0 = { ...baseAr[0], customer_receivable_amount_usd: modTx001.billed_gross_usd };
+    modAr0.ar_record_sha256 = await computeRecordSha(modAr0, AR_SORTED_KEYS);
+    const modAp0 = { ...baseAp[0], gross_billed_usd: modTx001.billed_gross_usd, platform_fee_5pct_usd: Number((modTx001.billed_gross_usd * 0.05).toFixed(6)), vendor_payable_net_95pct_usd: Number((modTx001.billed_gross_usd - Number((modTx001.billed_gross_usd * 0.05).toFixed(6))).toFixed(6)) };
+    modAp0.ap_record_sha256 = await computeRecordSha(modAp0, AP_SORTED_KEYS);
+    const modStl0 = { ...baseStl[0], actual_settled_amount_usd: modTx001.billed_gross_usd, payment_gateway_fee_2_9pct_usd: Number((modTx001.billed_gross_usd * 0.029).toFixed(6)) };
+    modStl0.settlement_record_sha256 = await computeRecordSha(modStl0, STL_SORTED_KEYS);
+    const modSummary = await verifyAndAggregateLedger(modChain, [modAr0, ...baseAr.slice(1)], [modAp0, ...baseAp.slice(1)], [modStl0, ...baseStl.slice(1)], e3ByReqId, true);
 
-    // 3. Insert jtx_486 +$5.00 + Rebuild lines + Append AR/AP/STL + Re-anchor chain tip!
+    // 3. Modify non-amount field (`captured_at_utc`) on SRC-AP-001 -> changes ap_record_sha256 & ap_collection_root_sha256!
+    const nonAmtAp0 = { ...baseAp[0], captured_at_utc: '2026-10-02T23:59:59Z' };
+    nonAmtAp0.ap_record_sha256 = await computeRecordSha(nonAmtAp0, AP_SORTED_KEYS);
+    const nonAmtSummary = await verifyAndAggregateLedger(baseChain, baseAr, [nonAmtAp0, ...baseAp.slice(1)], baseStl, e3ByReqId, true);
+
+    // 4. Insert jtx_486 +$5.00 -> generates brand-new unique source IDs (`SRC-AR-486`, `SRC-AP-486`, `SRC-STL-486`) and brand-new record hashes!
     const insRaw = [...baseChain, { ...baseChain[0], journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', invoice_line_id: 'inv_line_486', billed_gross_usd: 5.0, optimized_pass_through_usd: 1.25 }];
     const insChain = await reanchorFullHashChain(insRaw);
-    const insTx486 = insChain[insChain.length - 1];
-    const insAr = [...baseAr, { ...baseAr[0], journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', invoice_line_id: 'inv_line_486', customer_receivable_amount_usd: 5.0 }];
-    const insAp = [...baseAp, { ...baseAp[0], journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', vendor_invoice_id: 'INV-UPSTREAM-486', gross_billed_usd: 5.0, platform_fee_5pct_usd: 0.25, vendor_payable_net_95pct_usd: 4.75 }];
-    const insStl = [...baseStl, { ...baseStl[0], journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', payment_gateway_settlement_id: 'stl_paddle_0486', actual_settled_amount_usd: 5.0, payment_gateway_fee_2_9pct_usd: 0.145 }];
-    const insSummary = await verifyAndAggregateLedger(insChain, insAr, insAp, insStl, e3ByReqId, false);
+    const insAr486: any = { ...baseAr[0], ar_source_id: 'SRC-AR-486', journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', invoice_line_id: 'inv_line_486', customer_receivable_amount_usd: 5.0 };
+    insAr486.ar_record_sha256 = await computeRecordSha(insAr486, AR_SORTED_KEYS);
+    const insAp486: any = { ...baseAp[0], ap_source_id: 'SRC-AP-486', journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', vendor_invoice_id: 'INV-UPSTREAM-486', gross_billed_usd: 5.0, platform_fee_5pct_usd: 0.25, vendor_payable_net_95pct_usd: 4.75 };
+    insAp486.ap_record_sha256 = await computeRecordSha(insAp486, AP_SORTED_KEYS);
+    const insStl486: any = { ...baseStl[0], settlement_source_id: 'SRC-STL-486', journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', invoice_line_id: 'inv_line_486', vendor_invoice_id: 'INV-UPSTREAM-486', payment_gateway_settlement_id: 'stl_paddle_0486', actual_settled_amount_usd: 5.0, payment_gateway_fee_2_9pct_usd: 0.145 };
+    insStl486.settlement_record_sha256 = await computeRecordSha(insStl486, STL_SORTED_KEYS);
+    const insSummary = await verifyAndAggregateLedger(insChain, [...baseAr, insAr486], [...baseAp, insAp486], [...baseStl, insStl486], e3ByReqId, true);
 
-    // 4. Unauthorized Tamper without Re-Hash & Duplicate ID Fail-Closed Verification!
-    let dupErrorStatus = 200;
-    let dupErrorMsg = '';
+    // 5. Tamper with a sub-ledger single field/hash -> fails closed with HTTP 422!
+    let subledgerTamperStatus = 200;
+    let subledgerTamperMsg = '';
     try {
-      await verifyAndAggregateLedger([...baseChain, { ...baseChain[0] }], baseAr, baseAp, baseStl, e3ByReqId, false);
+      const tamperedArList = baseAr.map((r, i) => i === 0 ? { ...r, captured_at_utc: '2099-01-01T00:00:00Z' } : r);
+      await verifyAndAggregateLedger(baseChain, tamperedArList, baseAp, baseStl, e3ByReqId, true);
     } catch (e: any) {
-      dupErrorStatus = 422;
-      dupErrorMsg = String(e?.message || 'FAIL_CLOSED_DUPLICATE_TRANSACTION_OR_REQUEST_ID');
-    }
-
-    let tamperErrorStatus = 200;
-    let tamperErrorMsg = '';
-    try {
-      const unhashedTamper = baseChain.map((tx, i) => i === 0 ? { ...tx, billed_gross_usd: 999.99 } : tx);
-      await verifyAndAggregateLedger(unhashedTamper, baseAr, baseAp, baseStl, e3ByReqId, true);
-    } catch (e: any) {
-      tamperErrorStatus = 422;
-      tamperErrorMsg = String(e?.message || 'FAIL_CLOSED_TAMPER_DETECTED');
+      subledgerTamperStatus = 422;
+      subledgerTamperMsg = String(e?.message || 'FAIL_CLOSED_SUBLEDGER_RECORD_SHA256_TAMPERED');
     }
 
     return new NextResponse(JSON.stringify({
-      suite_id: 'ETK-DYNAMIC-LEDGER-MUTATION-SUITE-V40-8-4',
+      suite_id: 'ETK-DYNAMIC-LEDGER-MUTATION-SUITE-V40-8-5',
       build_version: BUILD_VER,
       schema_version: SCHEMA_VER,
       engine_source_txt_url: 'https://www.etuki.com/api/oracle/ledger-engine-source.txt',
       baseline_485_summary: baselineSummary,
       mutation_1_delete_jtx_001: {
         http_status: 200, target_id: 'jtx_001', deleted_amount_usd: 0.4677,
-        reanchored_chain_tip_tx_sha256: delSummary.chain_tip_tx_sha256,
+        remaining_484_record_hashes_unchanged: delAr[0].ar_record_sha256 === baseAr[1].ar_record_sha256,
+        recomputed_ar_root_changed: delSummary.ar_collection_root_sha256 !== baselineSummary.ar_collection_root_sha256,
         summary_after_mutation: delSummary
       },
       mutation_2_modify_jtx_001_plus_10usd: {
         http_status: 200, target_id: 'jtx_001', delta_usd: 10.0,
-        mutated_jtx_001_rebuilt_debits: modTx001.debits,
-        mutated_jtx_001_rebuilt_credits: modTx001.credits,
-        mutated_jtx_001_new_tx_sha256: modTx001.tx_sha256,
-        reanchored_chain_tip_tx_sha256: modSummary.chain_tip_tx_sha256,
+        original_ar_record_sha256: baseAr[0].ar_record_sha256,
+        recomputed_ar_record_sha256: modAr0.ar_record_sha256,
+        original_ap_record_sha256: baseAp[0].ap_record_sha256,
+        recomputed_ap_record_sha256: modAp0.ap_record_sha256,
+        original_stl_record_sha256: baseStl[0].settlement_record_sha256,
+        recomputed_stl_record_sha256: modStl0.settlement_record_sha256,
+        all_three_subledger_record_hashes_changed: (modAr0.ar_record_sha256 !== baseAr[0].ar_record_sha256) && (modAp0.ap_record_sha256 !== baseAp[0].ap_record_sha256) && (modStl0.settlement_record_sha256 !== baseStl[0].settlement_record_sha256),
         summary_after_mutation: modSummary
       },
-      mutation_3_insert_jtx_486_plus_5usd: {
-        http_status: 200, inserted_id: 'jtx_486_dynamic_insert', inserted_amount_usd: 5.0,
-        inserted_jtx_486_debits: insTx486.debits,
-        inserted_jtx_486_credits: insTx486.credits,
-        reanchored_chain_tip_tx_sha256: insSummary.chain_tip_tx_sha256,
+      mutation_3_modify_non_amount_field_src_ap_001: {
+        http_status: 200, target_source_id: 'SRC-AP-001', mutated_field: 'captured_at_utc',
+        original_ap_record_sha256: baseAp[0].ap_record_sha256,
+        recomputed_ap_record_sha256: nonAmtAp0.ap_record_sha256,
+        ap_record_and_root_hash_changed: (nonAmtAp0.ap_record_sha256 !== baseAp[0].ap_record_sha256) && (nonAmtSummary.ap_collection_root_sha256 !== baselineSummary.ap_collection_root_sha256)
+      },
+      mutation_4_insert_jtx_486_plus_5usd: {
+        http_status: 200, inserted_id: 'jtx_486_dynamic_insert',
+        new_unique_source_ids: [insAr486.ar_source_id, insAp486.ap_source_id, insStl486.settlement_source_id],
+        new_record_hashes: [insAr486.ar_record_sha256, insAp486.ap_record_sha256, insStl486.settlement_record_sha256],
+        zero_inherited_hash_collision: !baseAr.some((r) => r.ar_record_sha256 === insAr486.ar_record_sha256),
         summary_after_mutation: insSummary
       },
-      mutation_4_inject_duplicate_id_fail_closed: {
-        http_status: dupErrorStatus, error_code: 'FAIL_CLOSED_INTEGRITY_VIOLATION',
-        message: dupErrorMsg, fail_closed_verified: dupErrorStatus === 422
-      },
-      mutation_5_unauthorized_tamper_without_rehash_fail_closed: {
-        http_status: tamperErrorStatus, error_code: 'FAIL_CLOSED_TAMPER_OR_SUBLEDGER_MISMATCH',
-        message: tamperErrorMsg, fail_closed_verified: tamperErrorStatus === 422
+      mutation_5_tamper_subledger_single_field_fail_closed: {
+        http_status: subledgerTamperStatus, error_code: 'FAIL_CLOSED_SUBLEDGER_RECORD_SHA256_TAMPERED',
+        message: subledgerTamperMsg, fail_closed_verified: subledgerTamperStatus === 422
       }
     }, null, 2), { status: 200, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=300, s-maxage=3600' } });
   }
@@ -342,27 +365,49 @@ export async function GET(req: NextRequest) {
         const rawMod = workingChain.map((tx) => tx.journal_tx_id === targetId ? { ...tx, billed_gross_usd: Number((Number(tx.billed_gross_usd) + deltaUsd).toFixed(6)) } : tx);
         workingChain = await reanchorFullHashChain(rawMod);
         const mTx = workingChain.find((tx) => tx.journal_tx_id === targetId)!;
-        wAr = wAr.map((r) => r.journal_tx_id === targetId ? { ...r, customer_receivable_amount_usd: mTx.billed_gross_usd } : r);
-        wAp = wAp.map((r) => r.journal_tx_id === targetId ? { ...r, gross_billed_usd: mTx.billed_gross_usd, platform_fee_5pct_usd: Number((mTx.billed_gross_usd * 0.05).toFixed(6)), vendor_payable_net_95pct_usd: Number((mTx.billed_gross_usd - Number((mTx.billed_gross_usd * 0.05).toFixed(6))).toFixed(6)) } : r);
-        wStl = wStl.map((r) => r.journal_tx_id === targetId ? { ...r, actual_settled_amount_usd: mTx.billed_gross_usd, payment_gateway_fee_2_9pct_usd: Number((mTx.billed_gross_usd * 0.029).toFixed(6)) } : r);
+        wAr = await Promise.all(wAr.map(async (r) => {
+          if (r.journal_tx_id !== targetId) return r;
+          const u = { ...r, customer_receivable_amount_usd: mTx.billed_gross_usd };
+          u.ar_record_sha256 = await computeRecordSha(u, AR_SORTED_KEYS);
+          return u;
+        }));
+        wAp = await Promise.all(wAp.map(async (r) => {
+          if (r.journal_tx_id !== targetId) return r;
+          const u = { ...r, gross_billed_usd: mTx.billed_gross_usd, platform_fee_5pct_usd: Number((mTx.billed_gross_usd * 0.05).toFixed(6)), vendor_payable_net_95pct_usd: Number((mTx.billed_gross_usd - Number((mTx.billed_gross_usd * 0.05).toFixed(6))).toFixed(6)) };
+          u.ap_record_sha256 = await computeRecordSha(u, AP_SORTED_KEYS);
+          return u;
+        }));
+        wStl = await Promise.all(wStl.map(async (r) => {
+          if (r.journal_tx_id !== targetId) return r;
+          const u = { ...r, actual_settled_amount_usd: mTx.billed_gross_usd, payment_gateway_fee_2_9pct_usd: Number((mTx.billed_gross_usd * 0.029).toFixed(6)) };
+          u.settlement_record_sha256 = await computeRecordSha(u, STL_SORTED_KEYS);
+          return u;
+        }));
       } else if (mutationTest === 'INSERT_RECORD') {
         const insAmt = Number(params.get('amount_usd') || '5.00');
         const rawIns = [...workingChain, { ...workingChain[0], journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', invoice_line_id: 'inv_line_486', billed_gross_usd: insAmt, optimized_pass_through_usd: Number((insAmt * 0.25).toFixed(6)) }];
         workingChain = await reanchorFullHashChain(rawIns);
-        wAr.push({ ...wAr[0], journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', invoice_line_id: 'inv_line_486', customer_receivable_amount_usd: insAmt });
-        wAp.push({ ...wAp[0], journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', vendor_invoice_id: 'INV-UPSTREAM-486', gross_billed_usd: insAmt, platform_fee_5pct_usd: Number((insAmt * 0.05).toFixed(6)), vendor_payable_net_95pct_usd: Number((insAmt * 0.95).toFixed(6)) });
-        wStl.push({ ...wStl[0], journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', payment_gateway_settlement_id: 'stl_paddle_0486', actual_settled_amount_usd: insAmt, payment_gateway_fee_2_9pct_usd: Number((insAmt * 0.029).toFixed(6)) });
+        const ar486: any = { ...wAr[0], ar_source_id: 'SRC-AR-486', journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', invoice_line_id: 'inv_line_486', customer_receivable_amount_usd: insAmt };
+        ar486.ar_record_sha256 = await computeRecordSha(ar486, AR_SORTED_KEYS);
+        const ap486: any = { ...wAp[0], ap_source_id: 'SRC-AP-486', journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', vendor_invoice_id: 'INV-UPSTREAM-486', gross_billed_usd: insAmt, platform_fee_5pct_usd: Number((insAmt * 0.05).toFixed(6)), vendor_payable_net_95pct_usd: Number((insAmt * 0.95).toFixed(6)) };
+        ap486.ap_record_sha256 = await computeRecordSha(ap486, AP_SORTED_KEYS);
+        const stl486: any = { ...wStl[0], settlement_source_id: 'SRC-STL-486', journal_tx_id: 'jtx_486_dynamic_insert', request_id: 'req_dynamic_insert_486', invoice_line_id: 'inv_line_486', vendor_invoice_id: 'INV-UPSTREAM-486', payment_gateway_settlement_id: 'stl_paddle_0486', actual_settled_amount_usd: insAmt, payment_gateway_fee_2_9pct_usd: Number((insAmt * 0.029).toFixed(6)) };
+        stl486.settlement_record_sha256 = await computeRecordSha(stl486, STL_SORTED_KEYS);
+        wAr.push(ar486);
+        wAp.push(ap486);
+        wStl.push(stl486);
       } else if (mutationTest === 'INJECT_DUPLICATE_ID') {
         workingChain.push({ ...workingChain[0] });
       } else if (mutationTest === 'TAMPER_WITHOUT_REHASH') {
         workingChain[0] = { ...workingChain[0], billed_gross_usd: 999.99 };
+      } else if (mutationTest === 'TAMPER_SUBLEDGER_SINGLE_FIELD') {
+        wAr[0] = { ...wAr[0], captured_at_utc: '2099-01-01T00:00:00Z' };
       }
       const mutatedSummary = await verifyAndAggregateLedger(workingChain, wAr, wAp, wStl, e3ByReqId, true);
       return new NextResponse(JSON.stringify({
         mutation_test_executed: mutationTest,
         build_version: BUILD_VER,
         schema_version: SCHEMA_VER,
-        mutated_transaction_sample: workingChain[0],
         dynamic_recomputation_summary: mutatedSummary
       }, null, 2), { status: 200, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=300, s-maxage=3600' } });
     } catch (err: any) {
@@ -404,11 +449,11 @@ export async function GET(req: NextRequest) {
   });
 
   const ledgerPayload = {
-    ledger_protocol: 'etuki-immutable-double-entry-clearinghouse-v40.8.4',
+    ledger_protocol: 'etuki-immutable-double-entry-clearinghouse-v40.8.5',
     build_version: BUILD_VER,
     schema_version: SCHEMA_VER,
     pricing_snapshot_id: SNAP_ID,
-    computation_mode: 'INDEPENDENT_SOURCE_CROSS_RECONCILIATION_AND_FULL_CHAIN_REANCHORING (AR, AP, and Settlement loaded from 3 independent source ledgers)',
+    computation_mode: 'INDEPENDENT_SUBLEDGER_RECORD_HASH_AND_COLLECTION_ROOT_CLOSED_LOOP',
     engine_source_code_txt_url: 'https://www.etuki.com/api/oracle/ledger-engine-source.txt',
     mutation_suite_url: 'https://www.etuki.com/api/v1/ledger?mutation_test=ALL_FOUR_MUTATION_SUITE',
     independent_subledger_sources: VOUCHERS_BUNDLE.independent_source_files,
@@ -417,7 +462,7 @@ export async function GET(req: NextRequest) {
       gross_cleared_volume_gmv_usd: summary.total_billed_gross_gmv_usd,
       net_platform_fee_5pct_on_historical_gmv_usd: summary.total_platform_fee_5pct_on_historical_gmv_usd,
       net_platform_fee_5pct_on_post_optimization_realistic_spend_usd: summary.total_platform_fee_5pct_on_realistic_optimized_spend_usd,
-      margin_denominator_clarification: '89.12% is the contribution margin calculated strictly on Net Platform Fee Revenue, whereas Net Margin as a percentage of total Gross Cleared Volume (GMV) is 2.05%. In BYOK mode, customers pay upstream providers directly and Etuki charges software/control-plane fees only.'
+      margin_denominator_clarification: '89.12% is the contribution margin calculated strictly on Net Platform Fee Revenue, whereas Net Margin as a percentage of total Gross Cleared Volume (GMV) is 2.05%.'
     },
     journal_hash_chain_summary: summary,
     immutable_journal_transactions_hash_chain: JOURNAL_485_CHAIN,

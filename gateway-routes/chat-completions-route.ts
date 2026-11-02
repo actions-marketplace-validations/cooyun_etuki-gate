@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'edge';
 
-const BUILD_VER = '2026.11.02-v40.8.4-independent-ledgers';
-const SCHEMA_VER = '2026.11.02-v40.8.4-unified';
+const BUILD_VER = '2026.11.02-v40.8.5-subledger-hash-closed';
+const SCHEMA_VER = '2026.11.02-v40.8.5-unified';
 const SNAP_ID = 'price-20261030-v35-truth';
 const IDEMPOTENCY_VAULT = new Map<string, { payloadCanon: string; count: number; txId: string; journalId: string; billedUsd: number }>();
 const MERKLE_ROOT = 'd2f51709c2b216ffe8ff4eb0e9cde7d8f0ade4bbd8ade1f1aa7be7d4bc6c7b20';
