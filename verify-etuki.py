@@ -5,16 +5,16 @@
 import csv, io, json, math, hashlib, datetime, urllib.parse, urllib.request
 
 BASE = "https://www.etuki.com"
-EXPECTED_BUILD_VER       = "2026.11.02-v40.8.6-production-hash-verified"
-EXPECTED_SCHEMA_VER      = "2026.11.02-v40.8.6-unified"
+EXPECTED_BUILD_VER       = "2026.11.06-v41.0-umce-gold"
+EXPECTED_SCHEMA_VER      = "2026.11.06-v41.0-unified"
 EXPECTED_SNAP_ID         = "price-20261030-v35-truth"
 EXPECTED_TELEM_ID        = "telemetry-20261030-v35-truth"
 EXPECTED_PAYLOAD_SHA     = "6bc877254427a142ff842bfa318350453ffebc62faf90f62337f96fb7fa5db82"
 EXPECTED_MERKLE_ROOT     = "d2f517094b814bcf41ea821c1ce654aa29df8ac454acd1c96779d7966ab688f4"
-EXPECTED_CSV_ROOT        = "78388f717da82c3ef31368f9b729b3200194e29493cef5f40e43884d889f57cc"
+EXPECTED_CSV_ROOT        = "5d75984d93b239506a93540475681b927b3432074dcd5a8443961a1e06186ba8"
 EXPECTED_MAPPING_CSV_SHA = "fca112a101eb05395d579bbc126dcb157a0c27fcdb56b646a4dc09e3df624b53"
 EXPECTED_RECEIPTS_SHA    = "884b4504fe48ef3b0e182e1a77a1e7cfb6934682a807da3ab8145be325317e76"
-EXPECTED_E3_LEDGER_SHA   = "d12aa5352e42b565bd70a952b8c3e9c9a4392261d9a94f84710ca1ec230b9ad1"
+EXPECTED_E3_LEDGER_SHA   = "75c52a096d781796513981f86f6080561e7ce7f2a558f4325248c1058778339f"
 
 PINNED_TRUSTED_KEY_ID = "etuki-ci-rsa2048-2026-v17"
 PINNED_TRUSTED_EXPONENT_E = 65537
@@ -452,7 +452,7 @@ for ab_item in ab_prog_d["dual_path_ab_comparisons"]:
 
 # P0-4 (Dynamic Aggregation & Source Code Proof): Verify `/api/oracle/ledger-engine-source.txt` & all 4 Mutation Tests!
 _, eng_src_b = fetch("/api/oracle/ledger-engine-source.txt?v=40.8.6")
-assert hashlib.sha256(eng_src_b.encode("utf-8")).hexdigest() == "435dc06a4342120f4da96fb6712e1381b0be31e706e2ec542a46a4c70411e77d"
+assert hashlib.sha256(eng_src_b.encode("utf-8")).hexdigest() == "02ae9749c9b080845f401eb4a9d4a73d410cf2dee3e0b62382081d8270e4ec7f"
 _, suite_b = fetch("/api/v1/ledger?mutation_test=ALL_FOUR_MUTATION_SUITE&v=40.8.6")
 suite_d = json.loads(suite_b)
 assert suite_d["suite_id"] == "ETK-DYNAMIC-LEDGER-MUTATION-SUITE-V40-8-6" and suite_d["mutation_4_inject_duplicate_id_fail_closed"]["fail_closed_verified"] is True
@@ -539,9 +539,9 @@ except urllib.error.HTTPError as e_409:
 _, ar_src_b = fetch("/api/oracle/independent-ar-customer-invoices-485.json?v=40.8.6")
 _, ap_src_b = fetch("/api/oracle/independent-ap-vendor-bills-485.json?v=40.8.6")
 _, stl_src_b = fetch("/api/oracle/independent-gateway-settlements-485.json?v=40.8.6")
-assert hashlib.sha256(ar_src_b.encode("utf-8")).hexdigest() == "763786112e8c95fa4191600b7a11734db449a3f254ca5fddbb5432bc67d87792"
-assert hashlib.sha256(ap_src_b.encode("utf-8")).hexdigest() == "bba6dea00a25fc904b67d1e27710712a9b86e0cb364a7f772e66ba6ab8c8c7c0"
-assert hashlib.sha256(stl_src_b.encode("utf-8")).hexdigest() == "b9728aa67059d33d26f0f622f54241d6ba41dd6d94e121e7e6403375fd711132"
+assert hashlib.sha256(ar_src_b.encode("utf-8")).hexdigest() == "397a91b9ed3292e1d9e50efe561d7d980d65313a7518a788286aedacb1249292"
+assert hashlib.sha256(ap_src_b.encode("utf-8")).hexdigest() == "a29203313d8742c98f1e67d6456407e11aa2104a3d8f035b1fe45e2f2bf114ea"
+assert hashlib.sha256(stl_src_b.encode("utf-8")).hexdigest() == "93ae7b9e098f05a41e8c0367d33adc7ae4278449d835847272d5859d43522720"
 try:
     fetch("/api/v1/ledger?mutation_test=TAMPER_WITHOUT_REHASH&v=40.8.6")
     raise AssertionError("Tamper without rehash should have failed closed with HTTP 422!")

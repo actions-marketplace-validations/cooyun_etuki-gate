@@ -1,0 +1,15 @@
+{
+  "name": "etuki-saver",
+  "owner": {
+    "name": "Etuki FinOps Clearinghouse",
+    "url": "https://www.etuki.com"
+  },
+  "plugins": [
+    {
+      "name": "etuki-saver",
+      "description": "600s Zero-Disconnect VIP Stream, >120K Context-Cliff Folding & 4-Block Prompt Cache Lock for Claude Code, Cursor & ZCode.",
+      "version": "2.0.0",
+      "entry": "etuki-saver.mjs"
+    }
+  ]
+}
