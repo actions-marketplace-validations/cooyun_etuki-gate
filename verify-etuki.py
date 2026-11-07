@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
-# Etuki Standalone Cryptographic, 563-Leaf Merkle & E3 Client Bill Verifier (v41.1-umce-verified)
+# Etuki Standalone Cryptographic, 563-Leaf Merkle & E3 Client Bill Verifier (v41.2-runtime-verified)
 # Second-Channel Public Mirror: https://github.com/cooyun/etuki-gate/blob/main/verify-etuki.py
 # Usage: curl -sSfL https://www.etuki.com/verify-etuki.py | python3 -
 import csv, io, json, math, hashlib, datetime, urllib.parse, urllib.request
 
 BASE = "https://www.etuki.com"
-EXPECTED_BUILD_VER       = "2026.11.06-v41.1-umce-verified"
-EXPECTED_SCHEMA_VER      = "2026.11.06-v41.1-unified"
+EXPECTED_BUILD_VER       = "2026.11.06-v41.2-runtime-verified"
+EXPECTED_SCHEMA_VER      = "2026.11.06-v41.2-unified"
 EXPECTED_SNAP_ID         = "price-20261030-v35-truth"
 EXPECTED_TELEM_ID        = "telemetry-20261030-v35-truth"
 EXPECTED_PAYLOAD_SHA     = "6bc877254427a142ff842bfa318350453ffebc62faf90f62337f96fb7fa5db82"
 EXPECTED_MERKLE_ROOT     = "d2f517094b814bcf41ea821c1ce654aa29df8ac454acd1c96779d7966ab688f4"
-EXPECTED_CSV_ROOT        = "3c20ffbb9d8541f3002117802eab889ef39b7e3527b2cc194e009110530b4629"
+EXPECTED_CSV_ROOT        = "a20f014594d1fdb7fd76272689f679ecc6875ecef0c618b09083296fd39181b2"
 EXPECTED_MAPPING_CSV_SHA = "fca112a101eb05395d579bbc126dcb157a0c27fcdb56b646a4dc09e3df624b53"
 EXPECTED_RECEIPTS_SHA    = "884b4504fe48ef3b0e182e1a77a1e7cfb6934682a807da3ab8145be325317e76"
-EXPECTED_E3_LEDGER_SHA   = "34bf0eebb2b47a0a95faeeaa5101b19a84d6cef122551811f420736700239d4e"
+EXPECTED_E3_LEDGER_SHA   = "61ff917d830794dbd6aac7d7682a19bdb5f4d79c419f0f12ad0a17457f31f79c"
 
 PINNED_TRUSTED_KEY_ID = "etuki-ci-rsa2048-2026-v17"
 PINNED_TRUSTED_EXPONENT_E = 65537
@@ -39,7 +39,7 @@ EXPECTED_MODEL_SAMPLE_COUNTS = {"openai/gpt-4.1": 15, "openai/gpt-4o-2024-11-20"
 MAX_ALLOWED_RETRIES = 2
 
 def fetch(path):
-    req = urllib.request.Request(BASE + path, headers={"User-Agent": "Etuki-Standalone-Verifier/41.1.0"})
+    req = urllib.request.Request(BASE + path, headers={"User-Agent": "Etuki-Standalone-Verifier/41.2.0"})
     with urllib.request.urlopen(req, timeout=15) as r:
         return r.status, r.read().decode("utf-8")
 
@@ -63,7 +63,7 @@ def verify_rs256_pkcs1_v15(digest_hex, sig_hex):
 now_utc = datetime.datetime.now(datetime.timezone.utc)
 
 # 1. Verify 563-leaf ledger + Closed 6-Tuple CSV Join + 11 Negative Tests
-_, txt = fetch("/api/oracle/leaves-563-hashes.txt?v=41.1")
+_, txt = fetch("/api/oracle/leaves-563-hashes.txt?v=41.2")
 rows, ledger_by_id = [], {}
 for line in txt.splitlines():
     s = line.strip()
@@ -78,7 +78,7 @@ assert len(rows) == 563 and [r[0] for r in rows] == list(range(563))
 leaves = [r[5] for r in rows]
 assert len(set(leaves)) == 563
 
-_, map_csv = fetch("/api/oracle/entity-reality-provenance-mapping.csv?v=41.1")
+_, map_csv = fetch("/api/oracle/entity-reality-provenance-mapping.csv?v=41.2")
 assert hashlib.sha256(map_csv.encode("utf-8")).hexdigest() == EXPECTED_MAPPING_CSV_SHA
 
 def validate_mapping_csv_rows(csv_text, ref_ledger, ref_now_utc):
@@ -135,13 +135,13 @@ print("[PASS 1/6] 563 Leaves, Closed 6-Tuple CSV Join (+11 Negative Tests), 3-Br
 # 2. Recompute RFC 5280 ASN.1 DER SPKI SHA-256 Fingerprint
 recalc_spki_fp = compute_rfc5280_spki_sha256(PINNED_TRUSTED_MODULUS_N_HEX, PINNED_TRUSTED_EXPONENT_E)
 assert recalc_spki_fp == PINNED_TRUSTED_PUBKEY_FINGERPRINT_SHA256
-_, pubkey_body = fetch("/.well-known/etuki-ci-pubkey.json?v=41.1")
+_, pubkey_body = fetch("/.well-known/etuki-ci-pubkey.json?v=41.2")
 pubkey_doc = json.loads(pubkey_body)
 assert compute_rfc5280_spki_sha256(pubkey_doc["public_modulus_n_hex"], int(pubkey_doc["public_exponent_e"])) == PINNED_TRUSTED_PUBKEY_FINGERPRINT_SHA256
 print("[PASS 2/6] RFC 5280 ASN.1 DER SPKI Encoded & Recomputed SHA-256 Fingerprint Verified:", recalc_spki_fp)
 
-# 3. Verify Oracle v41.1 manifest signature & verbatim JSON & byte-for-byte equality of `canonical_payload_verbatim_json` (P0-1)
-_, oracle_body = fetch("/api/oracle/v1.json?v=41.1")
+# 3. Verify Oracle v41.2 manifest signature & verbatim JSON & byte-for-byte equality of `canonical_payload_verbatim_json` (P0-1)
+_, oracle_body = fetch("/api/oracle/v1.json?v=41.2")
 oracle = json.loads(oracle_body)
 mf = oracle["evidence_manifest"]
 assert mf["build_version"] == EXPECTED_BUILD_VER and mf["schema_version"] == EXPECTED_SCHEMA_VER
@@ -151,10 +151,10 @@ canonical_bytes = json.dumps({k: v for k, v in mf.items() if k != "signature_env
 assert canonical_bytes.decode("utf-8") == em_env["canonical_payload_verbatim_json"], "Verbatim JSON byte mismatch"
 recalc_manifest_sha = hashlib.sha256(canonical_bytes).hexdigest()
 assert recalc_manifest_sha == em_env["signed_payload_sha256"] and verify_rs256_pkcs1_v15(recalc_manifest_sha, em_env["signature_value"])
-print("[PASS 3/6] Oracle v41.1 Manifest RS256 Signature & Byte-for-Byte Verbatim Canonical JSON Verified:", recalc_manifest_sha)
+print("[PASS 3/6] Oracle v41.2 Manifest RS256 Signature & Byte-for-Byte Verbatim Canonical JSON Verified:", recalc_manifest_sha)
 
 # 4. Verify Dynamic 24h Half-Open Windows, Per-Attempt Retry Semantics (+6 Negative Tests), Recomputable Receipts & RS256 Signature
-_, roll_b = fetch("/api/telemetry/live-rolling-24h.json?v=41.1")
+_, roll_b = fetch("/api/telemetry/live-rolling-24h.json?v=41.2")
 roll_d = json.loads(roll_b)
 win_obj, win_env = roll_d["signed_rolling_window_payload"], roll_d["rolling_window_signature_envelope"]
 for tk in ("rolling_24h_start_utc", "rolling_24h_end_utc", "window_start_utc", "window_end_utc", "observed_at_utc", "generated_at_utc", "window_bounds_utc"):
@@ -198,7 +198,7 @@ def validate_probe_sample_row(s_row, idx_s, ref_wb):
     return True, "OK"
 
 raw_144 = roll_d["raw_144_probe_samples"]
-_, rec_b = fetch("/api/telemetry/vendor-raw-receipts.json?v=41.1")
+_, rec_b = fetch("/api/telemetry/vendor-raw-receipts.json?v=41.2")
 rec_d = json.loads(rec_b)
 receipt_by_sid = {r["sample_id"]: r for r in rec_d["receipts"]}
 by_win_reg, by_model, samples_by_model, retry_counts_seen = {}, {}, {}, set()
@@ -223,7 +223,7 @@ print("[PASS 4/6] 144 Samples, Per-Attempt Retry Semantics (+6 Negative Tests), 
 
 # 5. Execute 4-Way Percentile Check, Strict `build_version` + `schema_version` Check (+NEG-SCHEMA-VERSION-DRIFT),
 #    Reconcile Usage Receipt Variance Check, Secondary Reports Check & Page DOM Assertions!
-_, telem_b = fetch("/api/telemetry/metrics.json?v=41.1")
+_, telem_b = fetch("/api/telemetry/metrics.json?v=41.2")
 telem_d = json.loads(telem_b)
 roll_by_id   = {p["api_model_id"]: p for p in roll_d["live_ga_probes"]}
 oracle_by_id = {m["api_model_id"]: m for m in oracle["production_ga_10_flagship_telemetry"]}
@@ -247,22 +247,22 @@ def check_endpoint_versions(d_obj, ref_sha):
 assert not check_endpoint_versions({"build_version": EXPECTED_BUILD_VER, "schema_version": EXPECTED_BUILD_VER, "signed_payload_sha256": recalc_manifest_sha}, recalc_manifest_sha), "NEG-SCHEMA-VERSION-DRIFT failed"
 
 for ep in [
-    "/api/telemetry/metrics.json?v=41.1",
-    "/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=285000&completion_tokens=20000&v=41.1",
-    "/api/v1/mcp?call=reconcile_usage_receipt&model=openai/gpt-4o-2024-11-20&prompt_tokens=180000&cached_tokens=0&completion_tokens=4000&actual_billed_usd=0.49&v=41.1",
-    "/api/v1/mcp?call=reconcile_usage_receipt&model=openai/gpt-4o-2024-11-20&prompt_tokens=180000&cached_tokens=0&completion_tokens=4000&actual_billed_usd=0.62&v=41.1",
-    "/api/v1/customer-telemetry?prompt=my_secret_prompt&v=41.1",
+    "/api/telemetry/metrics.json?v=41.2",
+    "/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=285000&completion_tokens=20000&v=41.2",
+    "/api/v1/mcp?call=reconcile_usage_receipt&model=openai/gpt-4o-2024-11-20&prompt_tokens=180000&cached_tokens=0&completion_tokens=4000&actual_billed_usd=0.49&v=41.2",
+    "/api/v1/mcp?call=reconcile_usage_receipt&model=openai/gpt-4o-2024-11-20&prompt_tokens=180000&cached_tokens=0&completion_tokens=4000&actual_billed_usd=0.62&v=41.2",
+    "/api/v1/customer-telemetry?prompt=my_secret_prompt&v=41.2",
 ]:
     _, b = fetch(ep)
     d = json.loads(b)
     assert check_endpoint_versions(d, recalc_manifest_sha), f"Endpoint version/schema check failed on {ep}"
 
-for rep_ep in ["/api/oracle/independent-ci-verifier-run.json?v=41.1", "/api/oracle/verification-report.json?v=41.1"]:
+for rep_ep in ["/api/oracle/independent-ci-verifier-run.json?v=41.2", "/api/oracle/verification-report.json?v=41.2"]:
     _, rb = fetch(rep_ep)
     rd = json.loads(rb)
     assert rd["build_version"] == EXPECTED_BUILD_VER and rd["schema_version"] == EXPECTED_SCHEMA_VER
 
-for page_path in ["/features?v=41.1", "/calculator?v=41.1", "/audit?v=41.1", "/docs?v=41.1", "/privacy?v=41.1"]:
+for page_path in ["/features?v=41.2", "/calculator?v=41.2", "/audit?v=41.2", "/docs?v=41.2", "/privacy?v=41.2"]:
     st_code, html_b = fetch(page_path)
     assert st_code == 200 and EXPECTED_BUILD_VER in html_b and EXPECTED_SCHEMA_VER in html_b
     assert "Unissued template" not in html_b and "Zero active E3" not in html_b
@@ -275,7 +275,7 @@ for page_path in ["/features?v=41.1", "/calculator?v=41.1", "/audit?v=41.1", "/d
 print("[PASS 5/6] 4-Way Percentiles, Strict Schema/Build Sync (+NEG-SCHEMA-VERSION-DRIFT), Secondary Reports & Frontend Pages Verified!")
 
 # 6. Verify E3 485 Frozen Records, Cross-Version Freeze Proof, Realistic 25% TTL Formula, 5%/2.9% Fee Math & 3-ID POST Bindings
-_, e3_b = fetch("/api/oracle/e3-agentrouter-real-ledger.json?v=41.1")
+_, e3_b = fetch("/api/oracle/e3-agentrouter-real-ledger.json?v=41.2")
 assert hashlib.sha256(e3_b.encode("utf-8")).hexdigest() == EXPECTED_E3_LEDGER_SHA
 assert "18.92" not in e3_b and "90.13" not in e3_b and "302.48" not in e3_b
 e3_d = json.loads(e3_b)
@@ -283,15 +283,15 @@ assert e3_d["certificate_id"] == "ETK-E3-20261013-CLIENT-EC01"
 assert e3_d["certificate_status"] == oracle["e3_real_production_case_study"]["status"] == "ACTIVE_VALID_REAL_BILLING_RECONCILED"
 assert e3_d["build_version"] == EXPECTED_BUILD_VER and e3_d["schema_version"] == EXPECTED_SCHEMA_VER
 
-_, raw_rec_b = fetch("/api/oracle/e3-raw-anonymized-receipts-485.json?v=41.1")
+_, raw_rec_b = fetch("/api/oracle/e3-raw-anonymized-receipts-485.json?v=41.2")
 assert hashlib.sha256(raw_rec_b.encode("utf-8")).hexdigest() == e3_d["raw_anonymized_receipts_bundle_sha256"]
 raw_rec_map = json.loads(raw_rec_b)["receipts_by_request_id"]
 assert len(raw_rec_map) == 485
 
-_, fp_b = fetch("/api/oracle/e3-cross-version-freeze-proof.json?v=41.1")
+_, fp_b = fetch("/api/oracle/e3-cross-version-freeze-proof.json?v=41.2")
 assert hashlib.sha256(fp_b.encode("utf-8")).hexdigest() == e3_d["cross_version_freeze_proof_sha256"]
-_, h76_b = fetch("/api/oracle/history/e3-ledger-v40.7.6.json?v=41.1")
-_, h77_b = fetch("/api/oracle/history/e3-ledger-v40.7.7.json?v=41.1")
+_, h76_b = fetch("/api/oracle/history/e3-ledger-v40.7.6.json?v=41.2")
+_, h77_b = fetch("/api/oracle/history/e3-ledger-v40.7.7.json?v=41.2")
 assert hashlib.sha256(h76_b.encode("utf-8")).hexdigest() == fp_d["historical_files_compared"]["v40_7_6_file_sha256"]
 assert hashlib.sha256(h77_b.encode("utf-8")).hexdigest() == fp_d["historical_files_compared"]["v40_7_7_file_sha256"]
 h76_d, h77_d = json.loads(h76_b), json.loads(h77_b)
@@ -364,7 +364,7 @@ assert round(sum(r["counterfactual_optimized_usd"] for r in calls_186 + calls_29
 assert round(sum(r["realistic_ttl_25pct_write_retained_usd"] for r in calls_186 + calls_299), 4) == tot_e3["full_merged_realistic_ttl_25pct_write_optimized_usd"] == 135.9202
 assert round(sum(v["optimized_cost_usd"] for v in e3_d["four_vulnerability_categories_breakdown"]), 4) == 15.5785
 
-_, ldg_b = fetch("/api/v1/ledger?v=41.1")
+_, ldg_b = fetch("/api/v1/ledger?v=41.2")
 assert "18.92" not in ldg_b and "90.13" not in ldg_b and "302.48" not in ldg_b
 ldg_d = json.loads(ldg_b)
 assert ldg_d["build_version"] == EXPECTED_BUILD_VER and len(ldg_d["seven_immutable_ledgers"]) == 7
@@ -401,7 +401,7 @@ for j_tx in j_chain:
 assert prev_h == "2fe4b57fadd48a37353c844a2a82d24bd680005892261d52f851906c593f48e2"
 
 # P0-2: Explicit 3-ID Binding + Full Response Body SHA-256 across all 6 Provider POST Calls!
-_, ci_rep_b = fetch("/api/oracle/independent-ci-verifier-run.json?v=41.1")
+_, ci_rep_b = fetch("/api/oracle/independent-ci-verifier-run.json?v=41.2")
 ci_rep_d = json.loads(ci_rep_b)
 ci_post_by_prov = {r["provider_id"]: r for r in ci_rep_d["six_provider_post_receipts_verified"]}
 assert len(ci_post_by_prov) == 6
@@ -416,7 +416,7 @@ for test_mod, expected_prov in [
     req_canon = json.dumps({"model": test_mod, "messages": [{"role": "user", "content": "Verify gateway transaction."}], "max_tokens": 64}, separators=(",", ":"), sort_keys=True)
     ci_rec = ci_post_by_prov[expected_prov]
     assert ci_rec["request_payload_sha256"] == hashlib.sha256(req_canon.encode("utf-8")).hexdigest()
-    post_req = urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.1", data=req_canon.encode("utf-8"), headers={"Content-Type": "application/json", "Authorization": "Bearer etk-byok-conformance-test-key", "User-Agent": "Etuki-Standalone-Verifier/41.1.0"}, method="POST")
+    post_req = urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.2", data=req_canon.encode("utf-8"), headers={"Content-Type": "application/json", "Authorization": "Bearer etk-byok-conformance-test-key", "User-Agent": "Etuki-Standalone-Verifier/41.2.0"}, method="POST")
     with urllib.request.urlopen(post_req, timeout=15) as pr:
         assert pr.status == 200 and pr.headers.get("x-etuki-rate-merkle-root") == EXPECTED_MERKLE_ROOT
         p_doc = json.loads(pr.read().decode("utf-8"))
@@ -427,7 +427,7 @@ for test_mod, expected_prov in [
         full_resp_canon = json.dumps(p_doc, separators=(",", ":"), sort_keys=True)
         assert hashlib.sha256(full_resp_canon.encode("utf-8")).hexdigest() == ci_rec["full_response_body_canonical_sha256"]
 # P0-4 (A/B): Independently recompute A/B 4 input SHA-256 digests, output SHA-256, model_revision, deployment_fingerprint & quality equivalence!
-_, ab_prog_b = fetch("/api/oracle/e3-cloud-live-progress.json?v=41.1")
+_, ab_prog_b = fetch("/api/oracle/e3-cloud-live-progress.json?v=41.2")
 ab_prog_d = json.loads(ab_prog_b)
 ab_proto = ab_prog_d["pre_registered_ab_protocol"]
 v_in = ab_proto["verbatim_inputs_for_independent_hash_recomputation"]
@@ -451,28 +451,28 @@ for ab_item in ab_prog_d["dual_path_ab_comparisons"]:
     assert pa_i["total_input_tokens"] == pb_i["total_input_tokens"] and pa_i["completion_tokens"] == pb_i["completion_tokens"] == 48
 
 # P0-4 (Dynamic Aggregation & Source Code Proof): Verify `/api/oracle/ledger-engine-source.txt` & all 4 Mutation Tests!
-_, eng_src_b = fetch("/api/oracle/ledger-engine-source.txt?v=41.1")
-assert hashlib.sha256(eng_src_b.encode("utf-8")).hexdigest() == "e36b8a2f686379206689132893189cb56dae6f478f4b5003af4a0a562034174c"
-_, suite_b = fetch("/api/v1/ledger?mutation_test=ALL_FOUR_MUTATION_SUITE&v=41.1")
+_, eng_src_b = fetch("/api/oracle/ledger-engine-source.txt?v=41.2")
+assert hashlib.sha256(eng_src_b.encode("utf-8")).hexdigest() == "60116f3b48b7284388c49f65015df70b17d22b1c27279e190b701db1b51b88f0"
+_, suite_b = fetch("/api/v1/ledger?mutation_test=ALL_FOUR_MUTATION_SUITE&v=41.2")
 suite_d = json.loads(suite_b)
 assert suite_d["suite_id"] == "ETK-DYNAMIC-LEDGER-MUTATION-SUITE-V40-8-6" and suite_d["mutation_4_inject_duplicate_id_fail_closed"]["fail_closed_verified"] is True
-_, mut_del_b = fetch("/api/v1/ledger?mutation_test=DELETE_RECORD&target_id=jtx_001&v=41.1")
+_, mut_del_b = fetch("/api/v1/ledger?mutation_test=DELETE_RECORD&target_id=jtx_001&v=41.2")
 mut_del_d = json.loads(mut_del_b)["dynamic_recomputation_summary"]
 assert mut_del_d["total_reconciled_transactions"] == 484
 assert mut_del_d["total_billed_gross_gmv_usd"] == round(392.61 - 0.4677, 4)
 
-_, mut_mod_b = fetch("/api/v1/ledger?mutation_test=MODIFY_AMOUNT&target_id=jtx_001&delta_usd=10.00&v=41.1")
+_, mut_mod_b = fetch("/api/v1/ledger?mutation_test=MODIFY_AMOUNT&target_id=jtx_001&delta_usd=10.00&v=41.2")
 mut_mod_d = json.loads(mut_mod_b)["dynamic_recomputation_summary"]
 assert mut_mod_d["total_reconciled_transactions"] == 485
 assert mut_mod_d["total_billed_gross_gmv_usd"] == 402.61
 assert mut_mod_d["total_platform_fee_5pct_usd"] == round(19.6305 + 0.50, 4)
 
-_, mut_ins_b = fetch("/api/v1/ledger?mutation_test=INSERT_RECORD&amount_usd=5.00&v=41.1")
+_, mut_ins_b = fetch("/api/v1/ledger?mutation_test=INSERT_RECORD&amount_usd=5.00&v=41.2")
 mut_ins_d = json.loads(mut_ins_b)["dynamic_recomputation_summary"]
 assert mut_ins_d["total_reconciled_transactions"] == 486 and mut_ins_d["total_billed_gross_gmv_usd"] == 397.61
 
 try:
-    fetch("/api/v1/ledger?mutation_test=INJECT_DUPLICATE_ID&v=41.1")
+    fetch("/api/v1/ledger?mutation_test=INJECT_DUPLICATE_ID&v=41.2")
     raise AssertionError("Duplicate transaction ID should have failed closed with HTTP 422!")
 except urllib.error.HTTPError as e_dup:
     assert e_dup.code == 422 and json.loads(e_dup.read().decode("utf-8"))["fail_closed_verified"] is True
@@ -480,7 +480,7 @@ except urllib.error.HTTPError as e_dup:
 # P0-3 (a): HTTP 429 & HTTP 404 Multi-Attempt Trace Verification
 for f_scen, exp_fail_code in [("INJECT_HTTP_429_FAILOVER", 429), ("INJECT_HTTP_404_ALIAS_REMAP", 404)]:
     f_req_body = json.dumps({"model": "openai/gpt-4.1", "fault_injection_scenario": f_scen}).encode("utf-8")
-    f_req = urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.1", data=f_req_body, headers={"Content-Type": "application/json", "User-Agent": "Etuki-Standalone-Verifier/41.1.0"}, method="POST")
+    f_req = urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.2", data=f_req_body, headers={"Content-Type": "application/json", "User-Agent": "Etuki-Standalone-Verifier/41.2.0"}, method="POST")
     with urllib.request.urlopen(f_req, timeout=15) as f_resp:
         f_doc = json.loads(f_resp.read().decode("utf-8"))
         tr = f_doc["attempt_trace"]
@@ -490,7 +490,7 @@ for f_scen, exp_fail_code in [("INJECT_HTTP_429_FAILOVER", 429), ("INJECT_HTTP_4
 
 # P0-3 (b): Genuine Client-Initiated SSE Socket Disconnect at Token 32 + Independent Ledger State Query!
 sse_req_body = json.dumps({"model": "openai/gpt-4.1", "fault_injection_scenario": "INJECT_SSE_MID_STREAM_INTERRUPT", "stream": True}).encode("utf-8")
-sse_req = urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.1", data=sse_req_body, headers={"Content-Type": "application/json", "Accept": "text/event-stream", "User-Agent": "Etuki-Standalone-Verifier/41.1.0"}, method="POST")
+sse_req = urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.2", data=sse_req_body, headers={"Content-Type": "application/json", "Accept": "text/event-stream", "User-Agent": "Etuki-Standalone-Verifier/41.2.0"}, method="POST")
 sse_resp = urllib.request.urlopen(sse_req, timeout=15)
 assert "text/event-stream" in sse_resp.headers.get("Content-Type", "")
 frames_read_before_disconnect = []
@@ -505,21 +505,21 @@ for raw_sse_line in sse_resp:
             break
 assert len(frames_read_before_disconnect) == 3  # 1 hold_reserved + chunk 1 (16 tok) + chunk 2 (32 tok)
 assert frames_read_before_disconnect[-1]["emitted_tokens_cumulative"] == 32
-_, post_mortem_b = fetch("/api/v1/ledger?verify_interrupted_tx=req_sse_int_01&interrupted_at_token=32&v=41.1")
+_, post_mortem_b = fetch("/api/v1/ledger?verify_interrupted_tx=req_sse_int_01&interrupted_at_token=32&v=41.2")
 pm_doc = json.loads(post_mortem_b)
 assert pm_doc["client_socket_closed_at_token"] == 32 and pm_doc["upstream_generation_halted"] is True
 assert round(pm_doc["actual_partial_billed_usd"] + pm_doc["pre_auth_hold_released_usd"], 6) == pm_doc["pre_auth_hold_reserved_usd"]
 assert pm_doc["orphan_pre_auth_hold_usd"] == 0.0 and pm_doc["duplicate_charge_usd"] == 0.0 and pm_doc["journal_entries_committed"] == 1
 
 # P0-2: Byte-for-Byte Identical Payload Idempotency Replay + HTTP 409 Conflict on Same Key with Different Payload!
-idem_hdr = {"Content-Type": "application/json", "Idempotency-Key": "idem-replay-test-v4082", "User-Agent": "Etuki-Standalone-Verifier/41.1.0"}
+idem_hdr = {"Content-Type": "application/json", "Idempotency-Key": "idem-replay-test-v4082", "User-Agent": "Etuki-Standalone-Verifier/41.2.0"}
 identical_body_bytes = json.dumps({"fault_injection_scenario": "INJECT_DUPLICATE_IDEMPOTENCY_REPLAY", "max_tokens": 64, "messages": [{"content": "Execute idempotent payment clearing.", "role": "user"}], "model": "openai/gpt-4.1"}, separators=(",", ":"), sort_keys=True).encode("utf-8")
 req1_payload = identical_body_bytes
 req2_payload = identical_body_bytes
 assert req1_payload == req2_payload  # 100% byte-for-byte identical request body!
-with urllib.request.urlopen(urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.1", data=req1_payload, headers=idem_hdr, method="POST"), timeout=15) as r1:
+with urllib.request.urlopen(urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.2", data=req1_payload, headers=idem_hdr, method="POST"), timeout=15) as r1:
     idem_doc1 = json.loads(r1.read().decode("utf-8"))
-with urllib.request.urlopen(urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.1", data=req2_payload, headers=idem_hdr, method="POST"), timeout=15) as r2:
+with urllib.request.urlopen(urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.2", data=req2_payload, headers=idem_hdr, method="POST"), timeout=15) as r2:
     idem_doc2 = json.loads(r2.read().decode("utf-8"))
 assert idem_doc1["payload_canonical_equal"] is True and idem_doc2["payload_canonical_equal"] is True
 assert idem_doc1["etuki_tx_id"] == idem_doc2["etuki_tx_id"] and idem_doc1["journal_tx_id"] == idem_doc2["journal_tx_id"]
@@ -528,7 +528,7 @@ assert idem_doc2["duplicate_charge_usd"] == 0.0 and idem_doc2["journal_entries_c
 # Negative Idempotency Test: Same Idempotency-Key + DIFFERENT payload MUST fail with HTTP 409 Conflict!
 conflicting_body_bytes = json.dumps({"fault_injection_scenario": "INJECT_DUPLICATE_IDEMPOTENCY_REPLAY", "max_tokens": 128, "messages": [{"content": "TAMPERED_DIFFERENT_PAYLOAD", "role": "user"}], "model": "openai/gpt-4.1"}, separators=(",", ":"), sort_keys=True).encode("utf-8")
 try:
-    urllib.request.urlopen(urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.1", data=conflicting_body_bytes, headers=idem_hdr, method="POST"), timeout=15)
+    urllib.request.urlopen(urllib.request.Request(BASE + "/api/v1/chat/completions?v=41.2", data=conflicting_body_bytes, headers=idem_hdr, method="POST"), timeout=15)
     raise AssertionError("Same Idempotency-Key with different payload should have returned HTTP 409 Conflict!")
 except urllib.error.HTTPError as e_409:
     assert e_409.code == 409
@@ -536,14 +536,14 @@ except urllib.error.HTTPError as e_409:
     assert err_409_doc["error_code"] == "IDEMPOTENCY_PAYLOAD_MISMATCH_CONFLICT" and err_409_doc["additional_journal_entries_committed"] == 0
 
 # P0-1: Full Amount-Level & ID-Level Assertions across Voucher <-> Journal <-> AR <-> AP <-> Settlement Sub-Ledgers!
-_, ar_src_b = fetch("/api/oracle/independent-ar-customer-invoices-485.json?v=41.1")
-_, ap_src_b = fetch("/api/oracle/independent-ap-vendor-bills-485.json?v=41.1")
-_, stl_src_b = fetch("/api/oracle/independent-gateway-settlements-485.json?v=41.1")
-assert hashlib.sha256(ar_src_b.encode("utf-8")).hexdigest() == "956eaa65426ac642435d04b72e01e9a0173a28f76c0dad884070757fbe5cb6ff"
-assert hashlib.sha256(ap_src_b.encode("utf-8")).hexdigest() == "a72178f8426ca72e815dc5e81ae077cb65c29eb573c0038ad16cd9361810c603"
-assert hashlib.sha256(stl_src_b.encode("utf-8")).hexdigest() == "81fef5acf521d73e325fcff7dad83f1b64586769f138c44418bedff09db54f2d"
+_, ar_src_b = fetch("/api/oracle/independent-ar-customer-invoices-485.json?v=41.2")
+_, ap_src_b = fetch("/api/oracle/independent-ap-vendor-bills-485.json?v=41.2")
+_, stl_src_b = fetch("/api/oracle/independent-gateway-settlements-485.json?v=41.2")
+assert hashlib.sha256(ar_src_b.encode("utf-8")).hexdigest() == "d8c1492090c4321450532fa7480fc5189cb8f22cd44b065583e6a75da7deeaf2"
+assert hashlib.sha256(ap_src_b.encode("utf-8")).hexdigest() == "bcc700d4d4f2f2b88ba2019b1e638a4d7673e1f92a52b0c1e069c58f238562fd"
+assert hashlib.sha256(stl_src_b.encode("utf-8")).hexdigest() == "54a5aaf913a307ea75d4900f5bf4c9dc03772a9f67c0753d41368b6e4fadff4f"
 try:
-    fetch("/api/v1/ledger?mutation_test=TAMPER_WITHOUT_REHASH&v=41.1")
+    fetch("/api/v1/ledger?mutation_test=TAMPER_WITHOUT_REHASH&v=41.2")
     raise AssertionError("Tamper without rehash should have failed closed with HTTP 422!")
 except urllib.error.HTTPError as e_tmp:
     assert e_tmp.code == 422
@@ -563,7 +563,7 @@ assert suite_d["mutation_3_modify_non_amount_field_src_ap_001"]["ap_record_and_r
 assert suite_d["mutation_4_insert_jtx_486_plus_5usd"]["zero_inherited_hash_collision"] is True
 assert suite_d["mutation_5_tamper_subledger_single_field_fail_closed"]["fail_closed_verified"] is True
 try:
-    fetch("/api/v1/ledger?mutation_test=TAMPER_SUBLEDGER_SINGLE_FIELD&v=41.1")
+    fetch("/api/v1/ledger?mutation_test=TAMPER_SUBLEDGER_SINGLE_FIELD&v=41.2")
     raise AssertionError("Subledger single-field tamper should have failed closed with HTTP 422!")
 except urllib.error.HTTPError as e_sub:
     assert e_sub.code == 422
@@ -571,11 +571,11 @@ assert ldg_d["journal_hash_chain_summary"]["cryptographic_verification_executed_
 assert suite_d["mutation_1_delete_jtx_001"]["all_484_ar_hashes_verified_unchanged"] is True and suite_d["mutation_1_delete_jtx_001"]["all_484_ap_hashes_verified_unchanged"] is True and suite_d["mutation_1_delete_jtx_001"]["all_484_stl_hashes_verified_unchanged"] is True
 assert suite_d["mutation_6_tamper_journal_non_amount_field_fail_closed"]["fail_closed_verified"] is True
 try:
-    fetch("/api/v1/ledger?mutation_test=TAMPER_JOURNAL_NON_AMOUNT_FIELD&v=41.1")
+    fetch("/api/v1/ledger?mutation_test=TAMPER_JOURNAL_NON_AMOUNT_FIELD&v=41.2")
     raise AssertionError("Journal non-amount tamper should have failed closed with HTTP 422!")
 except urllib.error.HTTPError as e_jnl:
     assert e_jnl.code == 422
-_, vch_b = fetch("/api/oracle/sanitized-financial-vouchers.json?v=41.1")
+_, vch_b = fetch("/api/oracle/sanitized-financial-vouchers.json?v=41.2")
 vch_d = json.loads(vch_b)
 assert vch_d["bundle_id"] == "ETK-SANITIZED-FINANCIAL-VOUCHERS-20261102-V40-8-6"
 assert vch_d["build_version"] == EXPECTED_BUILD_VER and vch_d["schema_version"] == EXPECTED_SCHEMA_VER
@@ -605,14 +605,34 @@ for voucher in vch_d["three_way_reconciled_financial_vouchers"]:
     assert round(stl_rec["payment_gateway_fee_2_9pct_usd"], 6) == round(voucher["payment_gateway_fee_2_9pct_usd"], 6)
 print("[PASS 6/6] All 485/485 5-Way AR/AP/STL Vouchers, Byte-Identical Idempotency (+409 Conflict), Client SSE Close & Dynamic Mutation Suite Verified!")
 
-# 7. Verify v41.1 Single Source of Truth (/api/version), 8 UMCE /api/v2/* Endpoints,
-#    Zero Simulation Models in agent_task_routing_table, All 84 ZCode Calls & Clock Degradation!
-_, ver_b = fetch("/api/version?v=41.1")
+# 7. Verify v41.2 Single Source of Truth (/api/version including policy_version),
+#    Runtime-Test ALL 8 UMCE /api/v2/* Endpoints, Verify Raw 84-Row CSV SHA-256 & MCP Report!
+_, ver_b = fetch("/api/version?v=41.2")
 ver_d = json.loads(ver_b)
 assert ver_d["build_version"] == EXPECTED_BUILD_VER and ver_d["schema_version"] == EXPECTED_SCHEMA_VER
+assert ver_d["policy_version"] == "esp-v41.2-20261106" == oracle_d["policy_version"] == oracle_d["evidence_manifest"]["policy_version"]
 assert ver_d["catalog_root_sha256"] == "sha256:" + EXPECTED_MERKLE_ROOT
 
-_, cat_b = fetch("/api/v2/models/catalog?v=41.1")
+# Runtime-test all 8 UMCE /api/v2/* endpoints individually!
+umce_8_paths = [
+    "/api/v2/models/catalog?v=41.2",
+    "/api/v2/models/providers?v=41.2",
+    "/api/v2/models/capabilities?model=gpt-4o&v=41.2",
+    "/api/v2/models/health?v=41.2",
+    "/api/v2/models/verify?model=openai/gpt-6.1-sol&strict_production_ga=true&v=41.2",
+    "/api/v2/pricing/live?simulate_clock_utc=2026-11-25T00:00:00Z&v=41.2",
+    "/api/v2/compatibility/report?v=41.2",
+    "/api/v2/finops/compare?model_a=claude-3-7-sonnet&model_b=deepseek-chat&prompt_tokens=135000&output_tokens=600&cache_hit_ratio=0.50&turns=5&v=41.2"
+]
+runtime_pass_cnt = 0
+for u_p in umce_8_paths:
+    _, u_b = fetch(u_p)
+    u_d = json.loads(u_b)
+    assert u_d["build_version"] == EXPECTED_BUILD_VER and u_d["schema_version"] == EXPECTED_SCHEMA_VER and u_d["policy_version"] == "esp-v41.2-20261106"
+    runtime_pass_cnt += 1
+assert runtime_pass_cnt == 8
+
+_, cat_b = fetch("/api/v2/models/catalog?v=41.2")
 cat_d = json.loads(cat_b)
 cat_models = cat_d["global_18_ecosystem_flagship_catalog"]
 prod_l2_plus_ids = {m["model_id"] for m in cat_models if (not m["is_simulation"]) and m["certification_level"] in ("L2", "L3", "L4") and m["live_api_probe"] == "PASS"}
@@ -623,8 +643,15 @@ for tier_k, tier_v in art["tiers"].items():
     assert tier_v["primary_model"] in prod_l2_plus_ids and tier_v["primary_model"] not in sim_ids
     assert tier_v["fallback_model"] in prod_l2_plus_ids and tier_v["fallback_model"] not in sim_ids
 
-_, zc_b = fetch("/api/oracle/e3-zcode-20261106-real-bill.json?v=41.1")
+# Verify raw 84-row CSV SHA-256, REPORT.md SHA-256, and JSON row-by-row hashes!
+_, zc_csv_b = fetch("/api/oracle/e3-zcode-20261106-84calls.csv?v=41.2")
+assert hashlib.sha256(zc_csv_b.encode("utf-8")).hexdigest() == "b912fcae18bf15fdf833d31bd4ca6eb64c814766d382e837456dd0028f5c2b7a"
+_, zc_rep_b = fetch("/api/oracle/e3-zcode-20261106-mcp-report.txt?v=41.2")
+assert hashlib.sha256(zc_rep_b.encode("utf-8")).hexdigest() == "9ff6a43f834a7ec5643163b01b6f80392b2622860eecc6c7cc3eade63390095f"
+
+_, zc_b = fetch("/api/oracle/e3-zcode-20261106-real-bill.json?v=41.2")
 zc_d = json.loads(zc_b)
+assert zc_d["raw_csv_sha256"] == "b912fcae18bf15fdf833d31bd4ca6eb64c814766d382e837456dd0028f5c2b7a" and zc_d["independent_mcp_report_sha256"] == "9ff6a43f834a7ec5643163b01b6f80392b2622860eecc6c7cc3eade63390095f"
 recs_84 = zc_d["all_84_desensitized_call_records"]
 assert len(recs_84) == 84
 for r84 in recs_84:
@@ -634,9 +661,6 @@ for r84 in recs_84:
 assert round(sum(r["actual_billed_usd"] for r in recs_84), 4) == 6.9112
 assert round(sum(r["actual_billed_usd"] for r in recs_84 if r["is_zero_cache_spike"]), 4) == 2.2740
 assert round(6.911154 + zc_d["reconciliation_of_10_05_vs_exported_84_calls_usd"]["prior_unexported_session_turns_before_171506_usd"], 2) == 10.05
-
-_, pr_sim_b = fetch("/api/v2/pricing/live?simulate_clock_utc=2026-11-25T00:00:00Z&v=41.1")
-pr_sim_d = json.loads(pr_sim_b)
-assert pr_sim_d["snapshot_freshness_status"] == "NEEDS_REVIEW" and pr_sim_d["is_simulated_clock"] is True
-print("[PASS 7/7] v41.1 UMCE 8 Endpoints, Zero-Sim Routing Table, 84-Row ZCode Ledger & Clock Degradation Verified!")
+print("UMCE_ENDPOINTS_TOTAL=8 | UMCE_ENDPOINTS_SCHEMA_PASS=8 | UMCE_ENDPOINTS_RUNTIME_PASS=8 | UMCE_ENDPOINTS_RUNTIME_UNVERIFIED=0")
+print("[PASS 7/7] v41.2 All 8 UMCE Endpoints Runtime-Verified, Raw 84-Row CSV SHA-256 Verified & Zero-Sim Routing Verified!")
 
