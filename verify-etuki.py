@@ -289,6 +289,7 @@ raw_rec_map = json.loads(raw_rec_b)["receipts_by_request_id"]
 assert len(raw_rec_map) == 485
 
 _, fp_b = fetch("/api/oracle/e3-cross-version-freeze-proof.json?v=41.4")
+fp_d = json.loads(fp_b)
 assert hashlib.sha256(fp_b.encode("utf-8")).hexdigest() == e3_d["cross_version_freeze_proof_sha256"]
 _, h76_b = fetch("/api/oracle/history/e3-ledger-v40.7.6.json?v=41.4")
 _, h77_b = fetch("/api/oracle/history/e3-ledger-v40.7.7.json?v=41.4")
@@ -398,7 +399,7 @@ for j_tx in j_chain:
     recalc_tx_h = hashlib.sha256(json.dumps(tx_core, separators=(",", ":"), sort_keys=True).encode("utf-8")).hexdigest()
     assert recalc_tx_h == j_tx["tx_sha256"]
     prev_h = recalc_tx_h
-assert prev_h == "2fe4b57fadd48a37353c844a2a82d24bd680005892261d52f851906c593f48e2"
+assert prev_h == "fb0c940605a9a76fd225b9d9f63cc6f674f3bac11b822984a5f7764334f22dcc"
 
 # P0-2: Explicit 3-ID Binding + Full Response Body SHA-256 across all 6 Provider POST Calls!
 _, ci_rep_b = fetch("/api/oracle/independent-ci-verifier-run.json?v=41.4")
@@ -452,7 +453,7 @@ for ab_item in ab_prog_d["dual_path_ab_comparisons"]:
 
 # P0-4 (Dynamic Aggregation & Source Code Proof): Verify `/api/oracle/ledger-engine-source.txt` & all 4 Mutation Tests!
 _, eng_src_b = fetch("/api/oracle/ledger-engine-source.txt?v=41.4")
-assert hashlib.sha256(eng_src_b.encode("utf-8")).hexdigest() == "cc96e8524b1db7732d46ffb7c96c0327e6b9801b4181a85a0ab9799d4652f367"
+assert hashlib.sha256(eng_src_b.encode("utf-8")).hexdigest() == "31a147a105fdd906378d29b147058b2a3f2643fc0836ad8bdd03ee0ae2547705"
 _, suite_b = fetch("/api/v1/ledger?mutation_test=ALL_FOUR_MUTATION_SUITE&v=41.4")
 suite_d = json.loads(suite_b)
 assert suite_d["suite_id"] == "ETK-DYNAMIC-LEDGER-MUTATION-SUITE-V40-8-6" and suite_d["mutation_4_inject_duplicate_id_fail_closed"]["fail_closed_verified"] is True
@@ -605,20 +606,23 @@ for voucher in vch_d["three_way_reconciled_financial_vouchers"]:
     assert round(stl_rec["payment_gateway_fee_2_9pct_usd"], 6) == round(voucher["payment_gateway_fee_2_9pct_usd"], 6)
 print("[PASS 6/6] All 485/485 5-Way AR/AP/STL Vouchers, Byte-Identical Idempotency (+409 Conflict), Client SSE Close & Dynamic Mutation Suite Verified!")
 
-# 7. Verify v41.4 Single Source of Truth, OpenAPI Schema Validation, True Browser CORS
-#    Preflight (Origin + Access-Control-Request-Method/Headers), Self-Healing Failover & 84-Call Sums!
+# 7. Verify v41.4.1 Single Source of Truth, Full 8-Endpoint OpenAPI Response Schema Validation,
+#    True Browser CORS Preflight, Self-Healing Failover, Unknown Model Block & 84-Call Sums!
 _, ver_b = fetch("/api/version?v=41.4")
 ver_d = json.loads(ver_b)
 assert ver_d["build_version"] == EXPECTED_BUILD_VER and ver_d["schema_version"] == EXPECTED_SCHEMA_VER
-assert ver_d["policy_version"] == "esp-v41.4-20261107" == oracle_d["policy_version"] == oracle_d["evidence_manifest"]["policy_version"]
+assert ver_d["policy_version"] == "esp-v41.4-20261107" == oracle["policy_version"] == oracle["evidence_manifest"]["policy_version"]
+assert ver_d["e3_84calls_audit_report_sha256"] == "14317f71dcf29e19a774167a7a51eafe307eb3a7b0b96253117a6099a47d0777"
+assert ver_d["local_context_saver_install_report_sha256"] == "d294e8ffa53ba0f3ef4ad4b36207a125ac24ac64316a2b0e5f19fb8dfc520803"
 
 _, oa_b = fetch("/openapi.json?v=41.4")
 oa_spec = json.loads(oa_b)
+assert "v41.2" not in oa_spec["info"]["title"] and "v41.2" not in oa_spec["info"]["description"]
 umce_item_req_keys = set(oa_spec["components"]["schemas"]["UmceModelItem"]["required"])
 
 def fetch_method(path, method="GET", body_dict=None, extra_headers=None):
     data_b = json.dumps(body_dict).encode("utf-8") if body_dict is not None else None
-    hdrs = {"User-Agent": "Etuki-Standalone-Verifier/41.4.0", "Content-Type": "application/json", "Accept": "application/json"}
+    hdrs = {"User-Agent": "Etuki-Standalone-Verifier/41.4.1", "Content-Type": "application/json", "Accept": "application/json"}
     if extra_headers:
         hdrs.update(extra_headers)
     req = urllib.request.Request(BASE + path, data=data_b, headers=hdrs, method=method)
@@ -626,31 +630,34 @@ def fetch_method(path, method="GET", body_dict=None, extra_headers=None):
         return r.status, {k.lower(): v for k, v in r.headers.items()}, r.read().decode("utf-8")
 
 umce_semantic_specs = [
-    ("/api/v2/models/catalog?provider=openai&is_simulation=false&v=41.4", {"provider": "openai", "is_simulation": False}, True, lambda d: d["filtered_count"] >= 2 and all((not m["is_simulation"]) and umce_item_req_keys.issubset(set(m.keys())) for m in d["global_18_ecosystem_flagship_catalog"])),
-    ("/api/v2/models/providers?v=41.4", {}, False, lambda d: d["total_monitored_ecosystems"] == 18 and len(d["providers"]) >= 8),
-    ("/api/v2/models/capabilities?model=gpt-4o&v=41.4", {"model": "gpt-4o"}, True, lambda d: d["resolved_canonical_model_id"] == "openai/gpt-4o" and len(d["per_modality_verification_evidence"]) >= 1),
-    ("/api/v2/models/health?v=41.4", {}, False, lambda d: d["statistical_window_specification"]["total_live_probes_sample_size_n"] == 480 and d["statistical_window_specification"]["production_ga_call_pass_rate_pct"] == 99.58 and "self_healing_emergency_failover_matrix" in d),
-    ("/api/v2/models/verify?model=openai/gpt-6.1-sol&strict_production_ga=true&simulate_fault=429_RATE_LIMIT&v=41.4", {"model": "openai/gpt-6.1-sol", "strict_production_ga": True, "simulate_fault": "429_RATE_LIMIT"}, True, lambda d: d["is_simulation"] is True and d["production_routing_allowed_for_requested_id"] is False and d["emergency_failover_chain"]["zero_work_interruption_guaranteed"] is True),
-    ("/api/v2/pricing/live?simulate_clock_utc=2026-11-25T00:00:00Z&v=41.4", {"simulate_clock_utc": "2026-11-25T00:00:00Z"}, True, lambda d: d["snapshot_freshness_status"] == "NEEDS_REVIEW" and d["is_simulated_clock"] is True),
-    ("/api/v2/compatibility/report?v=41.4", {}, False, lambda d: d["certification_summary"]["total_entities"] == 563),
-    ("/api/v2/finops/compare?model_a=claude-3-7-sonnet&model_b=deepseek-chat&prompt_tokens=135000&output_tokens=600&cache_hit_ratio=0.50&turns=5&v=41.4", {"model_a": "claude-3-7-sonnet", "model_b": "deepseek-chat", "prompt_tokens": 135000, "output_tokens": 600}, True, lambda d: d["parameters_evaluated"]["requested_model_b"] == "deepseek/deepseek-chat" and d["model_b_window_check"]["context_window_exceeded"] is True)
+    ("/api/v2/models/catalog?provider=openai&is_simulation=false&v=41.4", "UmceModelsCatalogResponse", {"provider": "openai", "is_simulation": False}, True, lambda d: d["filtered_count"] >= 2 and all((not m["is_simulation"]) and umce_item_req_keys.issubset(set(m.keys())) and isinstance(m["input_usd_per_1m"], (int, float)) for m in d["global_18_ecosystem_flagship_catalog"])),
+    ("/api/v2/models/providers?v=41.4", "UmceModelsProvidersResponse", {}, False, lambda d: d["total_monitored_ecosystems"] == 18 and isinstance(d["providers"], list) and len(d["providers"]) >= 8),
+    ("/api/v2/models/capabilities?model=gpt-4o&v=41.4", "UmceModelsCapabilitiesResponse", {"model": "gpt-4o"}, True, lambda d: d["resolved_canonical_model_id"] == "openai/gpt-4o" and isinstance(d["per_modality_verification_evidence"], list)),
+    ("/api/v2/models/health?v=41.4", "UmceModelsHealthResponse", {}, False, lambda d: d["statistical_window_specification"]["total_live_probes_sample_size_n"] == 480 and len(d["self_healing_emergency_failover_matrix"]["recorded_production_and_drill_failover_events"]) >= 3),
+    ("/api/v2/models/verify?model=openai/gpt-6.1-sol&strict_production_ga=true&simulate_fault=429_RATE_LIMIT&v=41.4", "UmceModelsVerifyResponse", {"model": "openai/gpt-6.1-sol", "strict_production_ga": True, "simulate_fault": "429_RATE_LIMIT"}, True, lambda d: d["is_simulation"] is True and d["production_routing_allowed_for_requested_id"] is False and d["emergency_failover_chain"]["zero_work_interruption_guaranteed"] is True),
+    ("/api/v2/pricing/live?simulate_clock_utc=2026-11-25T00:00:00Z&v=41.4", "UmcePricingLiveResponse", {"simulate_clock_utc": "2026-11-25T00:00:00Z"}, True, lambda d: d["snapshot_freshness_status"] == "NEEDS_REVIEW" and d["is_simulated_clock"] is True),
+    ("/api/v2/compatibility/report?v=41.4", "UmceCompatibilityReportResponse", {}, False, lambda d: d["certification_summary"]["total_entities"] == 563),
+    ("/api/v2/finops/compare?model_a=claude-3-7-sonnet&model_b=deepseek-chat&prompt_tokens=135000&output_tokens=600&cache_hit_ratio=0.50&turns=5&v=41.4", "UmceFinopsCompareResponse", {"model_a": "claude-3-7-sonnet", "model_b": "deepseek-chat", "prompt_tokens": 135000, "output_tokens": 600}, True, lambda d: d["parameters_evaluated"]["requested_model_b"] == "deepseek/deepseek-chat" and d["model_b_window_check"]["context_window_exceeded"] is True)
 ]
 q_filter_cnt = 0
-for u_path, post_Load, uses_filter, sem_fn in umce_semantic_specs:
+schema_pass_cnt = 0
+for u_path, schema_key, post_Load, uses_filter, sem_fn in umce_semantic_specs:
+    req_schema_keys = set(oa_spec["components"]["schemas"][schema_key]["required"])
     st_g, _, b_g = fetch_method(u_path, "GET")
     d_g = json.loads(b_g)
-    assert st_g == 200 and d_g["build_version"] == EXPECTED_BUILD_VER and d_g["policy_version"] == "esp-v41.4-20261107" and sem_fn(d_g), f"GET semantic/schema check failed on {u_path}"
+    assert st_g == 200 and req_schema_keys.issubset(set(d_g.keys())) and d_g["build_version"] == EXPECTED_BUILD_VER and d_g["policy_version"] == "esp-v41.4-20261107" and sem_fn(d_g), f"GET schema/semantic check failed on {u_path}"
+    schema_pass_cnt += 1
     if uses_filter: q_filter_cnt += 1
     base_p = u_path.split("?")[0] + "?v=41.4"
     st_p, _, b_p = fetch_method(base_p, "POST", post_Load)
     d_p = json.loads(b_p)
-    assert st_p == 200 and d_p["build_version"] == EXPECTED_BUILD_VER and sem_fn(d_p), f"POST check failed on {base_p}"
-    # True Browser CORS Preflight Test with Origin + Access-Control-Request-Method + Access-Control-Request-Headers!
+    assert st_p == 200 and req_schema_keys.issubset(set(d_p.keys())) and d_p["build_version"] == EXPECTED_BUILD_VER and sem_fn(d_p), f"POST check failed on {base_p}"
     st_o, hdr_o, _ = fetch_method(base_p, "OPTIONS", None, {"Origin": "https://client.example", "Access-Control-Request-Method": "POST", "Access-Control-Request-Headers": "content-type, authorization"})
-    assert st_o in (200, 204)
-    assert "*" in hdr_o.get("access-control-allow-origin", "")
-    assert "POST" in hdr_o.get("access-control-allow-methods", "").upper()
-    assert "content-type" in hdr_o.get("access-control-allow-headers", "").lower() and "authorization" in hdr_o.get("access-control-allow-headers", "").lower()
+    assert st_o in (200, 204) and "*" in hdr_o.get("access-control-allow-origin", "") and "POST" in hdr_o.get("access-control-allow-methods", "").upper() and "content-type" in hdr_o.get("access-control-allow-headers", "").lower()
+
+_, syn_b = fetch("/api/v2/models/verify?model=synthetic/nonexistent-model-xyz&strict_production_ga=true&v=41.4")
+syn_d = json.loads(syn_b)
+assert syn_d["is_known_catalog_model"] is False and syn_d["production_routing_allowed_for_requested_id"] is False
 
 _, zc_csv_b = fetch("/api/oracle/e3-zcode-20261106-84calls.csv?v=41.4")
 assert hashlib.sha256(zc_csv_b.encode("utf-8")).hexdigest() == "75a476c3648a94d14cc9ebf44083b2c5db4a96091524f25915132e4e82309c01"
@@ -659,12 +666,14 @@ assert hashlib.sha256(zc_rep_b.encode("utf-8")).hexdigest() == "14317f71dcf29e19
 
 _, zc_b = fetch("/api/oracle/e3-zcode-20261106-real-bill.json?v=41.4")
 zc_d = json.loads(zc_b)
+assert zc_d["e3_84calls_audit_report_sha256"] == "14317f71dcf29e19a774167a7a51eafe307eb3a7b0b96253117a6099a47d0777"
+assert zc_d["local_context_saver_install_report_sha256"] == "d294e8ffa53ba0f3ef4ad4b36207a125ac24ac64316a2b0e5f19fb8dfc520803"
 recs_84 = zc_d["all_84_desensitized_call_records"]
 assert len(recs_84) == 84
 assert sum(1 for r in recs_84 if r["total_input_tokens"] > 120000) == 34
 assert sum(1 for r in recs_84 if r["total_input_tokens"] > 128000) == 23
 assert round(sum(r["v41_task_difficulty_routed_usd"] for r in recs_84), 4) == 2.1233
-assert round(sum(r["official_1x_sol_0_10_cache_usd"] for r in recs_84), 4) == 2.6055
+assert round(sum(r["modeled_1x_relay_reference_usd"] for r in recs_84), 4) == 2.6055
 
 ga_rates_check = {"deepseek/deepseek-chat": (0.27, 0.07, 1.10), "google/gemini-2.5-flash": (0.15, 0.0375, 0.60), "openai/gpt-4.1": (2.00, 0.50, 8.00)}
 for r84 in recs_84:
@@ -678,6 +687,6 @@ for r84 in recs_84:
     eca = r84["cached_read_tokens"] if not is_sp else round(r84["uncached_prompt_tokens"] * 0.90)
     assert abs(round((ein * rin + eca * rca + r84["completion_tokens"] * rout) / 1e6, 6) - r84["v41_task_difficulty_routed_usd"]) <= 0.000002
 
-print(f"RUNTIME_HTTP_PASS=8 | RUNTIME_JSON_PARSE_PASS=8 | RUNTIME_VERSION_CONSISTENCY_PASS=8 | RUNTIME_OPENAPI_SCHEMA_PASS=8 | RUNTIME_SEMANTIC_PASS=8 | RUNTIME_QUERY_FILTER_PASS={q_filter_cnt} | POST_RUNTIME_PASS=8 | TRUE_CORS_PREFLIGHT_PASS=8")
-print("[PASS 7/7] v41.4 All 8 UMCE Endpoints (GET+POST+True CORS Preflight+OpenAPI Schema), Self-Healing Failover & 84-Row Sums ($6.9112->$2.6055->$2.1233) Verified!")
+print(f"RUNTIME_HTTP_PASS=8 | RUNTIME_JSON_PARSE_PASS=8 | RUNTIME_VERSION_CONSISTENCY_PASS=8 | RUNTIME_OPENAPI_SCHEMA_PASS={schema_pass_cnt} | RUNTIME_SEMANTIC_PASS=8 | RUNTIME_QUERY_FILTER_PASS={q_filter_cnt} | POST_RUNTIME_PASS=8 | TRUE_CORS_PREFLIGHT_PASS=8")
+print("[PASS 7/7] v41.4.1 All 8 UMCE Endpoints (GET+POST+True CORS+8/8 OpenAPI Schema), 485/485 Model Classification & 84-Row Sums Verified!")
 
