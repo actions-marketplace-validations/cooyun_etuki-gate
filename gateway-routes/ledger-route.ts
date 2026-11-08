@@ -8,8 +8,8 @@ import INDEP_STL_DOC from '../../../../public/api/oracle/independent-gateway-set
 
 export const runtime = 'edge';
 
-const BUILD_VER = '2026.11.02-v40.8.6-production-hash-verified';
-const SCHEMA_VER = '2026.11.02-v40.8.6-unified';
+const BUILD_VER = '2026.11.06-v41.0-umce-gold';
+const SCHEMA_VER = '2026.11.06-v41.0-unified';
 const SNAP_ID = 'price-20261030-v35-truth';
 
 const AR_SORTED_KEYS = ["ar_source_id", "captured_at_utc", "currency", "customer_id", "customer_receivable_amount_usd", "invoice_line_id", "journal_tx_id", "request_id", "status"];
