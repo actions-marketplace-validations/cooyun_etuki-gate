@@ -1,0 +1,20 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "name": "etuki-finops-mcp",
+  "version": "1.0.0",
+  "description": "Financial-Grade AI FinOps & Smart Model Router MCP Server powered by Etuki UMCE (563 Merkle-verified entities). Probes free/quota models in your account, locks 0.1x prefix cache breakpoints on your active model, folds >120K context cliffs, and audits API bills with SHA-256 double-entry proofs.",
+  "homepage": "https://www.etuki.com/context-mode",
+  "repository": "https://github.com/cooyun/etuki-gate",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "Etuki FinOps Engineering",
+      "email": "support@etuki.com"
+    }
+  ],
+  "endpoints": {
+    "streamableHttp": "https://www.etuki.com/api/v1/mcp",
+    "umceCatalog": "https://www.etuki.com/api/v2/models/catalog",
+    "sha256Ledger": "https://www.etuki.com/api/v1/ledger"
+  }
+}
