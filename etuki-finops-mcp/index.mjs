@@ -12,124 +12,270 @@ const SERVER_INFO = {
 
 const ALL_9_TOOLS = [
   {
-    name: 'detect_model_downgrade_and_substitution',
-    description: 'Detects when a third-party relay downgrades or stealth-substitutes expensive flagship models (such as gpt-6-astra at $10/$50 or gpt-5.6-sol) and calculates input-only (20.83x) vs full-turn (17.39x) cost ratios and equal-budget endurance turns.',
-    annotations: { title: 'Detect Model Downgrade & Substitution', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-    inputSchema: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        model: { type: 'string', description: 'Model ID to inspect', default: 'openai/gpt-6-astra' },
-        burned_usd: { type: 'number', description: 'Quota burned so far in USD', default: 137.55 },
-        remaining_usd: { type: 'number', description: 'Remaining quota balance in USD', default: 137.45 }
+    "name": "detect_model_downgrade_and_substitution",
+    "description": "Evaluates flagship LLM pricing tiers and optional upstream response headers to estimate relay downgrade risk, input-only (20.83x) vs full-turn (17.39x) cost ratios, and remaining coding turns. Purely read-only, deterministic in-memory calculation against the embedded 563-entity UMCE rate card; performs zero network I/O, mutates zero state, requires no auth, and consumes zero quota. Returns JSON containing three_distinct_ratio_definitions, equal_budget_and_queried_budget_endurance_matrix, and executable_routing_directive. Parameters: model (string, e.g. 'openai/gpt-6-astra'), burned_usd (number >= 0, USD spent), remaining_usd (number >= 0, USD remaining; sums with burned_usd to form total_initial_quota_pool_usd). Use this tool when auditing suspected third-party relay throttling or comparing flagship burn rates; use reconcile_usage_receipt instead when auditing a specific billed invoice line.",
+    "annotations": {
+      "title": "Estimate Relay Downgrade Risk & Endurance Ratios",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Model ID to evaluate (e.g. 'openai/gpt-6-astra' or 'openai/gpt-6.1-sol').",
+          "default": "openai/gpt-6-astra"
+        },
+        "burned_usd": {
+          "type": "number",
+          "description": "Cumulative USD quota spent in the current session (>= 0).",
+          "default": 137.55
+        },
+        "remaining_usd": {
+          "type": "number",
+          "description": "Remaining USD quota balance (>= 0); added to burned_usd to compute total pool.",
+          "default": 137.45
+        }
       }
     }
   },
   {
-    name: 'auto_route_task_by_quality_tier',
-    description: 'Checks for existing custom router configs (mutex lock) and routes tasks across High-IQ 2026 Flagships + AWS/Gemini free credit pools without quality loss.',
-    annotations: { title: 'Auto-Route Task by Quality Tier', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-    inputSchema: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        task_instruction: { type: 'string', description: 'Task prompt to analyze', default: 'Refactor Nextjs edge routes' },
-        has_custom_router_config: { type: 'boolean', description: 'Whether user has an existing custom router', default: true },
-        context_tokens: { type: 'number', description: 'Estimated raw context tokens', default: 160000 },
-        current_model: { type: 'string', description: 'Active model ID', default: 'openai/gpt-6.1-sol' }
+    "name": "auto_route_task_by_quality_tier",
+    "description": "Computes a deterministic 6-turn coding workflow cost projection comparing unrouted flagship execution against tiered routing across free credit pools and warm-cached production GA models. Purely read-only, stateless in-memory calculation; acquires no locks, mutates zero state, and makes zero external network calls. Returns JSON with custom_router_mutex_check (when has_custom_router_config is true, sets mode to SHADOW_ADVISORY_ONLY_PRESERVING_USER_ROUTER without overriding the user's router; when false, returns active routing target), six_turn_cost_breakdown, and net_saved_usd. Parameters: task_instruction (string prompt), has_custom_router_config (boolean), context_tokens (number > 0, tokens per turn), current_model (string model ID). Use this tool when planning multi-turn agent task allocation; use check_context_cliff instead for single-turn context window threshold checks.",
+    "annotations": {
+      "title": "Simulate Quality-Tier Task Routing & Cost Savings",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "task_instruction": {
+          "type": "string",
+          "description": "Coding or analysis task description used to classify complexity tier.",
+          "default": "Refactor Nextjs edge routes"
+        },
+        "has_custom_router_config": {
+          "type": "boolean",
+          "description": "If true, preserves user's existing router and outputs a non-intrusive shadow cost comparison; if false, outputs active routing directives.",
+          "default": true
+        },
+        "context_tokens": {
+          "type": "number",
+          "description": "Estimated prompt token count per turn (e.g. 80000 to 200000).",
+          "default": 160000
+        },
+        "current_model": {
+          "type": "string",
+          "description": "Currently configured primary model ID in the user's IDE.",
+          "default": "openai/gpt-6.1-sol"
+        }
       }
     }
   },
   {
-    name: 'discover_and_probe_account_models',
-    description: 'Probes available models and free credit pools (Google Gemini Tier 1, AWS Bedrock Activate, AgentRouter) in the user environment.',
-    annotations: { title: 'Discover & Probe Account Models', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-    inputSchema: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        current_model: { type: 'string', description: 'Current primary model ID', default: 'openai/gpt-6.1-sol' }
+    "name": "discover_and_probe_account_models",
+    "description": "Returns the catalog of verified production GA models and eligible free/grant credit tiers (Google Cloud Tier 1, AWS Activate Bedrock, OpenRouter :free) from the embedded UMCE registry. Purely read-only, closed-world lookup against local snapshot data; issues zero external network probes, requires no API keys, and consumes zero user quota. Returns JSON listing eligible zero-cost workhorse models, flagship reasoning models, and recommended tier assignments for current_model. Use this tool at session startup to inspect available model tiers before calling auto_route_task_by_quality_tier; use list_supported_models instead when filtering the full 563-entity Merkle registry by vendor name.",
+    "annotations": {
+      "title": "Lookup Eligible Account Model Tiers & Credit Pools",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "current_model": {
+          "type": "string",
+          "description": "Active primary model ID in the IDE used as the baseline reference.",
+          "default": "openai/gpt-6.1-sol"
+        }
       }
     }
   },
   {
-    name: 'compress_and_fold_context',
-    description: 'Losslessly folds repetitive terminal/build logs while preserving 100% of error lines, stack traces, and file paths.',
-    annotations: { title: 'Compress & Fold Context Logs', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-    inputSchema: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        model: { type: 'string', description: 'Model ID for token pricing', default: 'openai/gpt-6.1-sol' },
-        raw_text: { type: 'string', description: 'Raw terminal or build log text to fold' }
+    "name": "compress_and_fold_context",
+    "description": "Compresses verbose terminal or build logs by folding repetitive middle progress lines while preserving 100% of head lines, tail lines, error messages, stack traces, and file paths. Purely read-only, deterministic string transformation in memory; mutates no files or external state. Returns JSON containing line_accounting_reconciliation (raw_total_lines = kept_original_lines_total + omitted_repetitive_lines), byte_and_token_reconciliation, and folded_context_payload. Parameters: raw_text (string log content to fold), model (string model ID used to price saved tokens). Use this tool when tool output or build logs exceed 50 lines before appending to agent context; use pin_single_model_prefix_cache instead when optimizing static system prompt prefixes.",
+    "annotations": {
+      "title": "Fold Repetitive Build Logs with 100% Error Immunity",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Model ID used to calculate USD savings from eliminated tokens.",
+          "default": "openai/gpt-6.1-sol"
+        },
+        "raw_text": {
+          "type": "string",
+          "description": "Raw terminal, test, or build log text to compress losslessly.",
+          "default": ""
+        }
       }
     }
   },
   {
-    name: 'pin_single_model_prefix_cache',
-    description: 'Strips volatile timestamps from system prompts and locks 4 ephemeral cache breakpoints on the active model to achieve 75%-95% warm cache discounts.',
-    annotations: { title: 'Pin Single-Model Prefix Cache', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-    inputSchema: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        model: { type: 'string', description: 'Target model ID', default: 'openai/gpt-6.1-sol' },
-        prompt_tokens: { type: 'number', description: 'Prompt token count', default: 150000 }
+    "name": "pin_single_model_prefix_cache",
+    "description": "Calculates 10-turn prompt caching economics for a single model under Case A (100% static prefix: 1 cold turn + 9 warm cached turns) and Case B (90% static prefix + 10% dynamic tail) and returns provider-specific cache breakpoint configuration templates. Purely read-only, deterministic actuarial calculation; modifies no live prompts or external state. Returns JSON with provider_cache_protocol_mechanism, ten_turn_cost_comparison_on_same_model, and two_vector_actuarial_reference_table. Parameters: model (string model ID), prompt_tokens (number > 0, input tokens per turn). Use this tool when keeping a single model and quantifying prefix cache savings; use optimize_prompt_cache_layout instead when calculating exact token-reordering savings from separating static and dynamic mid-prompt segments.",
+    "annotations": {
+      "title": "Calculate 10-Turn Single-Model Prefix Cache Savings",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Target LLM model ID (e.g. 'openai/gpt-6.1-sol' or 'openai/gpt-4.1').",
+          "default": "openai/gpt-6.1-sol"
+        },
+        "prompt_tokens": {
+          "type": "number",
+          "description": "Input prompt token count per turn (e.g. 150000 or 200000).",
+          "default": 150000
+        }
       }
     }
   },
   {
-    name: 'reconcile_usage_receipt',
-    description: 'Audits an API usage receipt against official 1x rate cards to detect relay markups and cold cache taxes.',
-    annotations: { title: 'Reconcile Usage Receipt', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-    inputSchema: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        model: { type: 'string', description: 'Billed model ID', default: 'openai/gpt-4o-2024-11-20' },
-        prompt_tokens: { type: 'number', description: 'Total prompt tokens', default: 180000 },
-        cached_tokens: { type: 'number', description: 'Cached tokens', default: 0 },
-        completion_tokens: { type: 'number', description: 'Completion tokens', default: 4000 },
-        actual_billed_usd: { type: 'number', description: 'Actual billed USD', default: 0.49 }
+    "name": "reconcile_usage_receipt",
+    "description": "Audits a single API usage receipt against official 1x manufacturer rate cards from the 563-entity UMCE registry to quantify relay multiplier markups and unutilized prefix cache waste. Purely read-only, deterministic mathematical audit; makes zero external network calls. Returns JSON with expected_theoretical_cost_usd, billing_variance_usd, variance_status ('OVERCHARGED_BY_RELAY_OR_MARKUP' when variance > $0.001 else 'EXACT_RATE_CARD_MATCH'), same_model_unutilized_cache_waste_usd, and net_recoverable_savings_usd. Parameters: model (string), prompt_tokens (number >= 0, total input tokens), cached_tokens (number >= 0, warm cached subset of prompt_tokens), completion_tokens (number >= 0), actual_billed_usd (number >= 0, amount charged on invoice). Use this tool when verifying an invoice line item; use detect_model_downgrade_and_substitution instead for session-level budget endurance projections.",
+    "annotations": {
+      "title": "Audit Usage Receipt Against Official 1x Rate Card",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Billed model ID (e.g. 'openai/gpt-4o-2024-11-20' or 'openai/gpt-6.1-sol').",
+          "default": "openai/gpt-4o-2024-11-20"
+        },
+        "prompt_tokens": {
+          "type": "number",
+          "description": "Total input prompt tokens billed (>= cached_tokens).",
+          "default": 180000
+        },
+        "cached_tokens": {
+          "type": "number",
+          "description": "Subset of prompt_tokens billed at warm cache read rate (0 <= cached_tokens <= prompt_tokens).",
+          "default": 0
+        },
+        "completion_tokens": {
+          "type": "number",
+          "description": "Output completion tokens billed (>= 0).",
+          "default": 4000
+        },
+        "actual_billed_usd": {
+          "type": "number",
+          "description": "Actual USD amount deducted by the provider or relay for this call.",
+          "default": 0.49
+        }
       }
     }
   },
   {
-    name: 'optimize_prompt_cache_layout',
-    description: 'Reorders dynamic mid-prompt tokens after static prefix blocks to eliminate 1.25x cold cache rebuilds.',
-    annotations: { title: 'Optimize Prompt Cache Layout', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-    inputSchema: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        static_prefix_tokens: { type: 'number', description: 'Static prefix token count', default: 52695 },
-        dynamic_mid_tokens: { type: 'number', description: 'Dynamic mid-prompt token count', default: 93029 },
-        completion_tokens: { type: 'number', description: 'Completion token count', default: 2696 }
+    "name": "optimize_prompt_cache_layout",
+    "description": "Computes the exact single-call and 10-call USD savings achieved by placing static prefix tokens before dynamic mid-prompt tokens so the static block hits the 0.1x warm cache rate instead of triggering a 1.25x cold cache write rebuild. Purely read-only advisory simulation; does not mutate live prompts or external state. Returns JSON with before_layout_cost_usd (where dynamic_mid_tokens invalidates the cache breakpoint), after_layout_cost_usd (where static_prefix_tokens stays cached), and net_savings_pct. Parameters: static_prefix_tokens (number >= 0), dynamic_mid_tokens (number >= 0), completion_tokens (number >= 0). Use this tool when diagnosing why mid-prompt timestamps or tool outputs break cache breakpoints; use pin_single_model_prefix_cache instead for full 10-turn model rate-card comparisons.",
+    "annotations": {
+      "title": "Simulate Static-Before-Dynamic Cache Layout Savings",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "static_prefix_tokens": {
+          "type": "number",
+          "description": "Token count of invariant system instructions and repository context.",
+          "default": 52695
+        },
+        "dynamic_mid_tokens": {
+          "type": "number",
+          "description": "Token count of volatile per-turn context that previously invalidated the cache.",
+          "default": 93029
+        },
+        "completion_tokens": {
+          "type": "number",
+          "description": "Output completion token count for the turn.",
+          "default": 2696
+        }
       }
     }
   },
   {
-    name: 'check_context_cliff',
-    description: 'Checks whether prompt token volume crosses 128K/200K/272K 2x context cliff thresholds.',
-    annotations: { title: 'Check Context Cliff', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-    inputSchema: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        model: { type: 'string', description: 'Model ID', default: 'openai/gpt-6.1-sol' },
-        prompt_tokens: { type: 'number', description: 'Prompt token count', default: 150000 }
+    "name": "check_context_cliff",
+    "description": "Evaluates whether a prompt token count crosses vendor long-context surcharge thresholds (100K on Claude Haiku 5.5, 128K on GPT-4o, 200K on Gemini 2.5 Pro, or 272K on GPT-6.1 Sol) and returns the surcharge multiplier and recommended flat-context alternative. Purely read-only threshold lookup against the embedded UMCE registry; performs zero network I/O. Returns JSON with crosses_cliff_boolean, active_surcharge_multiplier, and recommended_flat_context_model. Parameters: model (string model ID), prompt_tokens (number >= 0). Use this tool before sending large prompts (>90K tokens) to avoid 2x-5x cliff surcharges; use compress_and_fold_context instead to shrink the prompt below the cliff.",
+    "annotations": {
+      "title": "Check Prompt Token Count Against 2x-5x Context Cliffs",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Model ID to check for context-window pricing cliffs.",
+          "default": "openai/gpt-6.1-sol"
+        },
+        "prompt_tokens": {
+          "type": "number",
+          "description": "Input prompt token count to evaluate against cliff thresholds.",
+          "default": 150000
+        }
       }
     }
   },
   {
-    name: 'list_supported_models',
-    description: 'Lists verified models from the 563-entity UMCE Merkle registry.',
-    annotations: { title: 'List Supported Models', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-    inputSchema: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        provider: { type: 'string', description: 'Optional provider filter', default: 'all' }
+    "name": "list_supported_models",
+    "description": "Queries the 563-entity UMCE Merkle registry (451 Production GA LLMs, 34 Frontier Benchmarks, and 78 Cloud Infrastructure Services) filtered by provider name and returns canonical model IDs, input/output/cache USD rates per 1M tokens, context windows, and Merkle leaf hashes. Purely read-only local catalog query; makes zero external network calls. Parameters: provider (string vendor filter such as 'openai', 'anthropic', 'google', 'deepseek', or 'all'). Use this tool when browsing or filtering the global rate-card catalog by vendor; use discover_and_probe_account_models instead when selecting starter free-credit and flagship routing tiers.",
+    "annotations": {
+      "title": "Query 563-Entity UMCE Rate Card Registry by Provider",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Vendor filter ('all', 'openai', 'anthropic', 'google', 'deepseek', 'qwen', 'moonshotai').",
+          "default": "all"
+        }
       }
     }
   }
