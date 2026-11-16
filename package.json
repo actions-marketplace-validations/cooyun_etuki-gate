@@ -1,26 +1,36 @@
 {
-  "name": "etuki-gate",
-  "version": "1.0.0",
-  "description": "Zero-dependency AI FinOps Context-Cliff & Token Budget CI Gate CLI (by Etuki Intelligence)",
+  "name": "etuki-finops-mcp",
+  "version": "1.0.2",
+  "description": "Model Context Protocol (MCP) Server for LLM API Pricing (563+ models), 0.1x Prompt Cache Pinning, and SHA-256 AI Bill Auditing.",
   "type": "module",
-  "main": "etuki-gate.mjs",
+  "main": "index.mjs",
   "bin": {
-    "etuki-gate": "./etuki-gate.mjs"
+    "etuki-finops-mcp": "./index.mjs"
   },
   "scripts": {
-    "test": "node etuki-gate.mjs --test"
+    "start": "node index.mjs",
+    "inspector": "npx @modelcontextprotocol/inspector node index.mjs"
   },
-  "homepage": "https://www.etuki.com",
   "keywords": [
-    "ai-finops",
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
     "llm-pricing",
-    "context-cliff",
-    "openai",
-    "claude",
-    "deepseek",
-    "github-action",
-    "cost-gate"
+    "ai-finops",
+    "claude-desktop",
+    "cursor"
   ],
-  "author": "Lucas Raines <founder@etuki.com> (https://www.etuki.com)",
-  "license": "MIT"
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Rain Lobet <support@etuki.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cooyun/etuki-gate.git"
+  },
+  "homepage": "https://www.etuki.com"
 }
