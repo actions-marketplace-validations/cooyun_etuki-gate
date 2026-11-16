@@ -1,5 +1,6 @@
 FROM node:22-alpine
 WORKDIR /app
-COPY . .
-EXPOSE 8080
-CMD ["node", "etuki-finops-mcp/index.mjs"]
+COPY package.json index.mjs glama.json server.json ./
+COPY etuki-finops-mcp ./etuki-finops-mcp
+RUN npm install --ignore-scripts || true
+ENTRYPOINT ["node", "index.mjs"]
