@@ -1,34 +1,29 @@
-name: 'Etuki AI FinOps Context-Cliff & Budget CI Gate'
-description: 'Intercept 2x-5x LLM context pricing cliffs (>272K/100K tokens) and enforce per-task token budget gates in Pull Requests.'
-author: 'Etuki Intelligence (https://www.etuki.com)'
-branding:
-  icon: 'shield'
-  color: 'blue'
+name: 'Etuki AI Cost & Context-Cliff Regression Gate'
+description: 'Deterministic 12-vector LLM token cost, prefix-cache & PR cost-regression gate (+10% avg cost / +15% P95 / 90 quality floor)'
+author: 'Etuki Intelligence'
 inputs:
   model:
-    description: 'Target LLM canonical slug (e.g. gpt-6-1-sol, claude-haiku-5-5, claude-opus-5-5)'
+    description: 'Model ID to evaluate'
     required: false
-    default: 'gpt-6-1-sol'
-  prompt-tokens:
-    description: 'Prompt input tokens count'
+    default: 'claude-fable-5-2'
+  in_tokens:
+    description: 'Input tokens'
     required: false
-    default: '15000'
-  completion-tokens:
-    description: 'Completion output tokens count'
+    default: '60000'
+  out_tokens:
+    description: 'Output tokens'
     required: false
-    default: '2000'
-  run-self-test:
-    description: 'Run all 8 deterministic boundary test vectors'
+    default: '4000'
+  req_id:
+    description: 'Unique request identifier'
     required: false
-    default: 'true'
+    default: 'gh-action-gate'
 runs:
   using: 'composite'
   steps:
-    - name: Run Etuki Deterministic FinOps Compiler Gate
+    - name: Run 12 Deterministic Self-Test Vectors
       shell: bash
-      run: |
-        if [ "${{ inputs.run-self-test }}" = "true" ]; then
-          node "${{ github.action_path }}/etuki-gate.mjs" --test
-        else
-          node "${{ github.action_path }}/etuki-gate.mjs" --model "${{ inputs.model }}" --in "${{ inputs.prompt-tokens }}" --out "${{ inputs.completion-tokens }}"
-        fi
+      run: node ${{ github.action_path }}/etuki-gate.mjs --test
+    - name: Evaluate Workload Policy Gate
+      shell: bash
+      run: node ${{ github.action_path }}/etuki-gate.mjs --model "${{ inputs.model }}" --in "${{ inputs.in_tokens }}" --out "${{ inputs.out_tokens }}" --req-id "${{ inputs.req_id }}" --pre-tokenized
