@@ -6716,7 +6716,7 @@ if (!res) {
   process.exit(2);
 }
 
-const budgetUsd = Number(args.budget ?? 0.06);
+const budgetUsd = Number(args.budget ?? 1.00);
 const blocked = res.crossed_context_cliff || res.entered_soft_cliff_zone || res.estimated_cost_usd > budgetUsd;
 console.log(JSON.stringify({
   decision_id: `dec_${reqIdArg}`,
