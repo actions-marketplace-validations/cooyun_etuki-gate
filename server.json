@@ -1,13 +1,13 @@
-﻿{
+{
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
   "name": "io.github.cooyun/etuki-finops-mcp",
-  "description": "AI FinOps, 563-Model Pricing Oracle, Prompt Cache Pinning & Local Bill X-Ray MCP Server.",
+  "description": "Autonomous AI FinOps, Fuzzy 563+ LLM Rate Card Oracle, Prompt Cache Pinning, PR Cost Regression Gate & Local Bill X-Ray MCP Server.",
   "repository": {
     "url": "https://github.com/cooyun/etuki-gate",
     "source": "github"
   },
   "version_detail": {
-    "version": "1.0.0"
+    "version": "1.2.0"
   },
   "remotes": [
     {
