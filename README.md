@@ -1,3 +1,6 @@
+[![AI Cost Audited by Etuki](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fetuki-audited.json&style=flat)](https://www.etuki.com/badges)
+[![Live Claude Fable 5.2 Cost](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fclaude-fable-5-2.json&style=flat)](https://www.etuki.com/provider/claude-fable-5-2)
+
 # Etuki FinOps MCP Server (`etuki-finops-mcp`)
 
 [![MCP Specification](https://img.shields.io/badge/MCP-2025--06--18%20%2F%202026-emerald)](https://modelcontextprotocol.io)
