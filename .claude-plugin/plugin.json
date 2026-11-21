@@ -1,0 +1,26 @@
+{
+  "name": "etuki-finops",
+  "description": "Cross-platform (Windows, macOS, Linux) AI FinOps & Prompt Cache Doctor: detect cache breaks, lock 4-block static prefixes, fold build logs, compare 563+ live LLM rate cards, and prevent PR token cost regressions.",
+  "author": {
+    "name": "Rain Lobet",
+    "email": "support@etuki.com",
+    "url": "https://www.etuki.com"
+  },
+  "homepage": "https://www.etuki.com",
+  "repository": "https://github.com/cooyun/etuki-gate",
+  "license": "MIT",
+  "keywords": [
+    "finops",
+    "prompt-cache",
+    "llm-pricing",
+    "claude-code",
+    "mcp",
+    "cost-optimization"
+  ],
+  "mcpServers": {
+    "etuki-finops": {
+      "type": "http",
+      "url": "https://www.etuki.com/api/v1/mcp"
+    }
+  }
+}

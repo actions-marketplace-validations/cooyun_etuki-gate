@@ -1,15 +1,15 @@
 {
-  "name": "etuki-saver",
+  "name": "etuki-finops-marketplace",
   "owner": {
-    "name": "Etuki FinOps Clearinghouse",
+    "name": "Etuki Intelligence",
+    "email": "support@etuki.com",
     "url": "https://www.etuki.com"
   },
   "plugins": [
     {
-      "name": "etuki-saver",
-      "description": "600s Zero-Disconnect VIP Stream, >120K Context-Cliff Folding & 4-Block Prompt Cache Lock for Claude Code, Cursor & ZCode.",
-      "version": "2.0.0",
-      "entry": "etuki-saver.mjs"
+      "name": "etuki-finops",
+      "source": "./",
+      "description": "Prompt-cache break doctor, 563+ live LLM pricing oracle, browser-local .jsonl & CSV bill auditor, and PR cost-regression gate (Windows, macOS & Linux \u2022 MIT License)."
     }
   ]
 }
