@@ -5,6 +5,9 @@
 > **If your AI agent bill went up and nothing errored, a prompt cache broke.**  
 > Works on **Windows, macOS & Linux** (pure **MIT License**) — 100% browser-local `.jsonl` transcript & CSV bill auditor ([etuki.com/audit](https://www.etuki.com/audit)), live auto-calibrated pricing across 563+ models, pre-flight MCP router, and native Claude Code Plugin (`.claude-plugin/`).
 
+
+![Etuki 10-Second Prompt-Cache Break Audit Demo](./assets/etuki-cache-break-demo.gif)
+
 ### Quick Install as Native Claude Code Plugin
 ```bash
 /plugin marketplace add cooyun/etuki-gate
