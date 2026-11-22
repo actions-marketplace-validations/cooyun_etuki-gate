@@ -1,3 +1,4 @@
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/etuki.etuki-finops?label=VS%20Code%20Marketplace&color=007ACC)](https://marketplace.visualstudio.com/items?itemName=etuki.etuki-finops)
 [![AI Cost Audited by Etuki](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fetuki-audited.json&style=flat)](https://www.etuki.com/badges)
 [![Live Claude Fable 5.2 Cost](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fclaude-fable-5-2.json&style=flat)](https://www.etuki.com/provider/claude-fable-5-2)
 
@@ -7,6 +8,13 @@
 
 
 ![Etuki 10-Second Prompt-Cache Break Audit Demo](./assets/etuki-cache-break-demo.gif)
+
+
+### Install from Official Microsoft VS Code Marketplace (VS Code / Cursor / Windsurf)
+Search **`Etuki AI FinOps`** in your Extensions sidebar, visit [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=etuki.etuki-finops), or run:
+```bash
+code --install-extension etuki.etuki-finops
+```
 
 ### Quick Install as Native Claude Code Plugin
 ```bash
