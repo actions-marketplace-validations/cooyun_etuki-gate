@@ -1,3 +1,10 @@
+# Etuki FinOps MCP Server (`etuki-finops-mcp`)
+
+[![MCP Specification](https://img.shields.io/badge/MCP-2025--06--18%20%2F%202026-emerald)](https://modelcontextprotocol.io)
+[![Glama MCP Server](https://img.shields.io/badge/Glama-MCP%20Server-blue)](https://glama.ai/mcp/servers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![M8ven Trust Index](https://img.shields.io/badge/M8ven_Trust_Index-Verified_MCP-emerald)](https://m8ven.ai/mcp/cooyun/etuki-gate)
+[![SealKeeper Verified](https://img.shields.io/badge/SealKeeper-4%2F4_Tests_OK-cyan)](https://sealkeeper.run/agents/etuki.com/www-etuki-com)
 [![AI Cost Audited by Etuki](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fetuki-audited.json&style=flat)](https://www.etuki.com/badges)
 [![Live Claude Fable 5.2 Cost](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fclaude-fable-5-2.json&style=flat)](https://www.etuki.com/provider/claude-fable-5-2)
 
@@ -13,14 +20,6 @@
 /plugin marketplace add cooyun/etuki-gate
 /plugin install etuki-finops@etuki-finops-marketplace
 ```
-
-# Etuki FinOps MCP Server (`etuki-finops-mcp`)
-
-[![MCP Specification](https://img.shields.io/badge/MCP-2025--06--18%20%2F%202026-emerald)](https://modelcontextprotocol.io)
-[![Glama MCP Server](https://img.shields.io/badge/Glama-MCP%20Server-blue)](https://glama.ai/mcp/servers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![M8ven Trust Index](https://img.shields.io/badge/M8ven_Trust_Index-Verified_MCP-emerald)](https://m8ven.ai/mcp/cooyun/etuki-gate)
-[![SealKeeper Verified](https://img.shields.io/badge/SealKeeper-4%2F4_Tests_OK-cyan)](https://sealkeeper.run/agents/etuki.com/www-etuki-com)
 
 **`etuki-finops-mcp`** is an official **Model Context Protocol (MCP) Server** built on the `@modelcontextprotocol/sdk` standard (supporting both **STDIO** and **Streamable HTTP / SSE** transports at `https://www.etuki.com/api/v1/mcp`).
 
