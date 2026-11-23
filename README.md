@@ -1,3 +1,4 @@
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/etuki.etuki-finops?label=VS%20Code%20Marketplace&color=007ACC)](https://marketplace.visualstudio.com/items?itemName=etuki.etuki-finops)
 [![AI Cost Audited by Etuki](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fetuki-audited.json&style=flat)](https://www.etuki.com/badges)
 [![Live Claude Fable 5.2 Cost](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fclaude-fable-5-2.json&style=flat)](https://www.etuki.com/provider/claude-fable-5-2)
 
@@ -8,19 +9,18 @@
 
 ![Etuki 10-Second Prompt-Cache Break Audit Demo](./assets/etuki-cache-break-demo.gif)
 
+
+### Install from Official Microsoft VS Code Marketplace (VS Code / Cursor / Windsurf)
+Search **`Etuki AI FinOps`** in your Extensions sidebar, visit [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=etuki.etuki-finops), or run:
+```bash
+code --install-extension etuki.etuki-finops
+```
+
 ### Quick Install as Native Claude Code Plugin
 ```bash
 /plugin marketplace add cooyun/etuki-gate
 /plugin install etuki-finops@etuki-finops-marketplace
 ```
-
-# Etuki FinOps MCP Server (`etuki-finops-mcp`)
-
-[![MCP Specification](https://img.shields.io/badge/MCP-2025--06--18%20%2F%202026-emerald)](https://modelcontextprotocol.io)
-[![Glama MCP Server](https://img.shields.io/badge/Glama-MCP%20Server-blue)](https://glama.ai/mcp/servers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![M8ven Trust Index](https://img.shields.io/badge/M8ven_Trust_Index-Verified_MCP-emerald)](https://m8ven.ai/mcp/cooyun/etuki-gate)
-[![SealKeeper Verified](https://img.shields.io/badge/SealKeeper-4%2F4_Tests_OK-cyan)](https://sealkeeper.run/agents/etuki.com/www-etuki-com)
 
 **`etuki-finops-mcp`** is an official **Model Context Protocol (MCP) Server** built on the `@modelcontextprotocol/sdk` standard (supporting both **STDIO** and **Streamable HTTP / SSE** transports at `https://www.etuki.com/api/v1/mcp`).
 

@@ -1,11 +1,11 @@
 {
   "name": "etuki-finops-mcp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Model Context Protocol (MCP) Server for LLM API Pricing (563+ models), 0.1x Prompt Cache Pinning, and SHA-256 AI Bill Auditing.",
   "type": "module",
   "main": "index.mjs",
   "bin": {
-    "etuki-finops-mcp": "./index.mjs"
+    "etuki-finops-mcp": "index.mjs"
   },
   "scripts": {
     "start": "node index.mjs",
@@ -30,7 +30,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cooyun/etuki-gate.git"
+    "url": "git+https://github.com/cooyun/etuki-gate.git"
   },
   "homepage": "https://www.etuki.com"
 }
