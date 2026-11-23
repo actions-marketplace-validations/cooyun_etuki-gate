@@ -1,7 +1,15 @@
+# 🛡️ Etuki AI FinOps (`etuki-gate` & `etuki-finops-mcp`)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/etuki.etuki-finops?label=VS%20Code%20Marketplace&color=007ACC)](https://marketplace.visualstudio.com/items?itemName=etuki.etuki-finops)
+[![Official MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.cooyun%2Fetuki--finops--mcp-8b5cf6)](https://registry.modelcontextprotocol.io/?q=etuki)
+[![Glama Tier A](https://img.shields.io/badge/Glama_MCP-Tier_A_(4.6%2F5.0)-10b981)](https://glama.ai/mcp/connectors/com.etuki/etuki-fin-ops-and-llm-pricing-oracle)
+[![SealKeeper Verified](https://img.shields.io/badge/SealKeeper-4%2F4_Tests_OK-06b6d4)](https://sealkeeper.run/agents/etuki.com/www-etuki-com)
+[![M8ven Trust Index](https://img.shields.io/badge/M8ven_Trust_Index-Verified_MCP-10b981)](https://m8ven.ai/mcp/cooyun/etuki-gate)
+[![npm etuki-finops-mcp](https://img.shields.io/npm/v/etuki-finops-mcp?label=npm&color=cb3837)](https://www.npmjs.com/package/etuki-finops-mcp)
+[![PyPI etuki-cost-gate](https://img.shields.io/pypi/v/etuki-cost-gate?label=PyPI&color=3775A9)](https://pypi.org/project/etuki-cost-gate/)
 [![AI Cost Audited by Etuki](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fetuki-audited.json&style=flat)](https://www.etuki.com/badges)
 [![Live Claude Fable 5.2 Cost](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fclaude-fable-5-2.json&style=flat)](https://www.etuki.com/provider/claude-fable-5-2)
-
 
 > **If your AI agent bill went up and nothing errored, a prompt cache broke.**  
 > Works on **Windows, macOS & Linux** (pure **MIT License**) — 100% browser-local `.jsonl` transcript & CSV bill auditor ([etuki.com/audit](https://www.etuki.com/audit)), live auto-calibrated pricing across 563+ models, pre-flight MCP router, and native Claude Code Plugin (`.claude-plugin/`).
