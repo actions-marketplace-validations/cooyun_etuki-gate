@@ -19,8 +19,7 @@
   ],
   "mcpServers": {
     "etuki-finops": {
-      "type": "http",
-      "url": ""
+      "type": "http"
     }
   }
 }

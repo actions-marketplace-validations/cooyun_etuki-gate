@@ -1,35 +1,32 @@
 {
-  "catalog_type": "OPENROUTER_AND_LITELLM_VERIFIED_RATE_CARDS",
-  "execution_mode": "100%_LOCAL_STDIO_NO_FORWARDING",
-  "models_count": 114,
+  "catalog_source": "Live OpenRouter & Official Provider Rate Cards (November 2026 Verified Positive Rates)",
+  "last_synced_utc": "2026-11-25T04:54:06Z",
+  "models_count": 452,
   "models": [
     {
       "id": "upstage/solar-mini-4-5",
-      "slug": "upstage-solar-mini-4-5",
-      "name": "Upstage: Solar Mini 4.5",
+      "name": "Upstage: Solar Mini 4.5 (Preview)",
       "provider": "Upstage",
       "release_date": "2026-11-24",
       "input_usd_1m": 0.01,
       "output_usd_1m": 0.04,
       "cache_read_usd_1m": 0.001,
       "cache_write_usd_1m": 0.01,
-      "context_window": "524,288 Tokens"
+      "context_tokens": 524288
     },
     {
       "id": "upstage/solar-pro-4-contributor",
-      "slug": "upstage-solar-pro-4-contributor",
       "name": "Upstage: Solar Pro 4 Contributor",
       "provider": "Upstage",
       "release_date": "2026-11-24",
       "input_usd_1m": 0.09,
       "output_usd_1m": 0.36,
-      "cache_read_usd_1m": 0.009,
+      "cache_read_usd_1m": 0.018,
       "cache_write_usd_1m": 0.09,
-      "context_window": "524,288 Tokens"
+      "context_tokens": 524288
     },
     {
       "id": "xiaomi/mimo-v2.6-flash-mopd",
-      "slug": "xiaomi-mimo-v2-6-flash-mopd",
       "name": "Xiaomi: MiMo-V2.6-Flash-MOPD",
       "provider": "Xiaomi",
       "release_date": "2026-11-23",
@@ -37,11 +34,10 @@
       "output_usd_1m": 0.42,
       "cache_read_usd_1m": 0.02,
       "cache_write_usd_1m": 0.15,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "thinkingmachines/inkling-2-mini",
-      "slug": "thinkingmachines-inkling-2-mini",
       "name": "Thinking Machines: Inkling 2 Mini",
       "provider": "Thinkingmachines",
       "release_date": "2026-11-21",
@@ -49,11 +45,10 @@
       "output_usd_1m": 0.3,
       "cache_read_usd_1m": 0.015,
       "cache_write_usd_1m": 0.075,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "radixark/daisyrose-27b",
-      "slug": "radixark-daisyrose-27b",
       "name": "RadixArk: DaisyRose 27B",
       "provider": "Radixark",
       "release_date": "2026-11-21",
@@ -61,11 +56,10 @@
       "output_usd_1m": 1.875,
       "cache_read_usd_1m": 0.0375,
       "cache_write_usd_1m": 0.15,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
     },
     {
       "id": "mistralai/pixtral-large-2502",
-      "slug": "mistralai-pixtral-large-2502",
       "name": "Mistral: Pixtral Large 2502",
       "provider": "Mistralai",
       "release_date": "2026-11-20",
@@ -73,23 +67,131 @@
       "output_usd_1m": 6.0,
       "cache_read_usd_1m": 0.5,
       "cache_write_usd_1m": 2.0,
-      "context_window": "128,000 Tokens"
+      "context_tokens": 128000
     },
     {
-      "id": "tencent/hy4-flash",
-      "slug": "tencent-hy4-flash",
-      "name": "Tencent: Hy4 flash",
-      "provider": "Tencent",
+      "id": "google/gemini-4-neon",
+      "name": "Google Gemini 4 Neon",
+      "provider": "Google",
+      "release_date": "2026-11-18",
+      "input_usd_1m": 3.0,
+      "output_usd_1m": 15.0,
+      "cache_read_usd_1m": 0.75,
+      "cache_write_usd_1m": 3.0,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "google/gemini-4-neon:batch",
+      "name": "Google: Gemini 4 Neon (batch)",
+      "provider": "Google",
+      "release_date": "2026-11-18",
+      "input_usd_1m": 1.5,
+      "output_usd_1m": 7.5,
+      "cache_read_usd_1m": 0.075,
+      "cache_write_usd_1m": 0.0833,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "openai/gpt-6.2-astra",
+      "name": "OpenAI GPT-6.2 Astra",
+      "provider": "OpenAI",
+      "release_date": "2026-11-17",
+      "input_usd_1m": 8.0,
+      "output_usd_1m": 40.0,
+      "cache_read_usd_1m": 0.8,
+      "cache_write_usd_1m": 8.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.2-sol",
+      "name": "OpenAI GPT-6.2 Sol",
+      "provider": "OpenAI",
+      "release_date": "2026-11-17",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.2-astra-pro",
+      "name": "OpenAI: GPT-6.2 Astra Pro",
+      "provider": "Openai",
+      "release_date": "2026-11-17",
+      "input_usd_1m": 8.0,
+      "output_usd_1m": 40.0,
+      "cache_read_usd_1m": 0.4,
+      "cache_write_usd_1m": 10.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.2-astra-pro:batch",
+      "name": "OpenAI: GPT-6.2 Astra Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-11-17",
+      "input_usd_1m": 4.0,
+      "output_usd_1m": 20.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 5.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.2-astra:batch",
+      "name": "OpenAI: GPT-6.2 Astra (batch)",
+      "provider": "Openai",
+      "release_date": "2026-11-17",
+      "input_usd_1m": 4.0,
+      "output_usd_1m": 20.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 5.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.2-sol-pro",
+      "name": "OpenAI: GPT-6.2 Sol Pro",
+      "provider": "Openai",
+      "release_date": "2026-11-17",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.2-sol-pro:batch",
+      "name": "OpenAI: GPT-6.2 Sol Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-11-17",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.2-sol:batch",
+      "name": "OpenAI: GPT-6.2 Sol (batch)",
+      "provider": "Openai",
+      "release_date": "2026-11-17",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "qwen/qwen-4-max",
+      "name": "Alibaba Qwen 4 Max",
+      "provider": "Alibaba",
       "release_date": "2026-11-16",
-      "input_usd_1m": 0.035,
-      "output_usd_1m": 0.1405,
-      "cache_read_usd_1m": 0.0015,
-      "cache_write_usd_1m": 0.035,
-      "context_window": "1,048,576 Tokens"
+      "input_usd_1m": 1.5,
+      "output_usd_1m": 4.5,
+      "cache_read_usd_1m": 0.375,
+      "cache_write_usd_1m": 1.5,
+      "context_tokens": 1000000
     },
     {
       "id": "qwen/qwen4-max",
-      "slug": "qwen-qwen4-max",
       "name": "Qwen: Qwen4 Max",
       "provider": "Qwen",
       "release_date": "2026-11-16",
@@ -97,35 +199,43 @@
       "output_usd_1m": 4.275,
       "cache_read_usd_1m": 0.0713,
       "cache_write_usd_1m": 1.7812,
-      "context_window": "1,000,000 Tokens"
+      "context_tokens": 1000000
     },
     {
-      "id": "inclusionai/ling-3.2-flash:free",
-      "slug": "inclusionai-ling-3-2-flash-free",
-      "name": "inclusionAI: Ling 3.2 Flash (free)",
-      "provider": "Inclusionai",
-      "release_date": "2026-11-13",
-      "input_usd_1m": 0.5,
-      "output_usd_1m": 2.0,
-      "cache_read_usd_1m": 0.05,
-      "cache_write_usd_1m": null,
-      "context_window": "1,048,576 Tokens"
+      "id": "google/gemini-4-hydrogen",
+      "name": "Google Gemini 4 Hydrogen",
+      "provider": "Google",
+      "release_date": "2026-11-12",
+      "input_usd_1m": 1.5,
+      "output_usd_1m": 7.5,
+      "cache_read_usd_1m": 0.375,
+      "cache_write_usd_1m": 1.5,
+      "context_tokens": 1000000
     },
     {
-      "id": "baidu/ernie-5.5-flash-preview:free",
-      "slug": "baidu-ernie-5-5-flash-preview-free",
-      "name": "Baidu: ERNIE-5.5-Flash-Preview (free)",
-      "provider": "Baidu",
+      "id": "google/gemini-4-hydrogen:batch",
+      "name": "Google: Gemini 4 Hydrogen (batch)",
+      "provider": "Google",
+      "release_date": "2026-11-12",
+      "input_usd_1m": 0.75,
+      "output_usd_1m": 3.75,
+      "cache_read_usd_1m": 0.0375,
+      "cache_write_usd_1m": 0.0833,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "google/gemini-4-carbon",
+      "name": "Google Gemini 4 Carbon",
+      "provider": "Google",
       "release_date": "2026-11-10",
-      "input_usd_1m": 0.5,
-      "output_usd_1m": 2.0,
-      "cache_read_usd_1m": 0.05,
-      "cache_write_usd_1m": null,
-      "context_window": "1,024,000 Tokens"
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 2000000
     },
     {
       "id": "baidu/ernie-light-dt-1.0-intl",
-      "slug": "baidu-ernie-light-dt-1-0-intl",
       "name": "Baidu: ERNIE-Light-DT-1.0",
       "provider": "Baidu",
       "release_date": "2026-11-10",
@@ -133,11 +243,21 @@
       "output_usd_1m": 3.94,
       "cache_read_usd_1m": 0.113,
       "cache_write_usd_1m": 1.13,
-      "context_window": "1,024,000 Tokens"
+      "context_tokens": 1024000
+    },
+    {
+      "id": "google/gemini-4-carbon:batch",
+      "name": "Google: Gemini 4 Carbon (batch)",
+      "provider": "Google",
+      "release_date": "2026-11-10",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.1875,
+      "context_tokens": 1048576
     },
     {
       "id": "nex-agi/nex-n2.6",
-      "slug": "nex-agi-nex-n2-6",
       "name": "Nex AGI: Nex-N2.6",
       "provider": "Nex-agi",
       "release_date": "2026-11-10",
@@ -145,11 +265,32 @@
       "output_usd_1m": 0.4,
       "cache_read_usd_1m": 0.024,
       "cache_write_usd_1m": 0.12,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
+    },
+    {
+      "id": "anthropic/claude-fable-5-2",
+      "name": "Anthropic Claude Fable 5.2",
+      "provider": "Anthropic",
+      "release_date": "2026-11-09",
+      "input_usd_1m": 8.0,
+      "output_usd_1m": 40.0,
+      "cache_read_usd_1m": 0.8,
+      "cache_write_usd_1m": 10.0,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-mythos-5-2",
+      "name": "Anthropic Claude Mythos 5.2 (Verified Org Access)",
+      "provider": "Anthropic",
+      "release_date": "2026-11-09",
+      "input_usd_1m": 8.0,
+      "output_usd_1m": 40.0,
+      "cache_read_usd_1m": 0.8,
+      "cache_write_usd_1m": 10.0,
+      "context_tokens": 1000000
     },
     {
       "id": "thinkingmachines/inkling-2-small",
-      "slug": "thinkingmachines-inkling-2-small",
       "name": "Thinking Machines: Inkling 2 Small",
       "provider": "Thinkingmachines",
       "release_date": "2026-11-09",
@@ -157,23 +298,32 @@
       "output_usd_1m": 1.0,
       "cache_read_usd_1m": 0.03,
       "cache_write_usd_1m": 0.3,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
-      "id": "thinkingmachines/inkling-2-small:free",
-      "slug": "thinkingmachines-inkling-2-small-free",
-      "name": "Thinking Machines: Inkling 2 Small (free)",
-      "provider": "Thinkingmachines",
+      "id": "anthropic/claude-fable-5.2",
+      "name": "Anthropic: Claude Fable 5.2",
+      "provider": "Anthropic",
       "release_date": "2026-11-09",
-      "input_usd_1m": 0.5,
-      "output_usd_1m": 2.0,
-      "cache_read_usd_1m": 0.05,
-      "cache_write_usd_1m": null,
-      "context_window": "1,048,576 Tokens"
+      "input_usd_1m": 8.0,
+      "output_usd_1m": 40.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 10.0,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-fable-5.2:batch",
+      "name": "Anthropic: Claude Fable 5.2 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-11-09",
+      "input_usd_1m": 4.0,
+      "output_usd_1m": 20.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 5.0,
+      "context_tokens": 1000000
     },
     {
       "id": "meta/muse-ember",
-      "slug": "meta-muse-ember",
       "name": "Meta: Muse Ember",
       "provider": "Meta",
       "release_date": "2026-11-09",
@@ -181,23 +331,10 @@
       "output_usd_1m": 0.5,
       "cache_read_usd_1m": 0.004,
       "cache_write_usd_1m": 0.125,
-      "context_window": "1,048,576 Tokens"
-    },
-    {
-      "id": "qwen/qwen3.9-coder-plus",
-      "slug": "qwen3-9-coder-plus",
-      "name": "Alibaba Qwen3.9-Coder-Plus",
-      "provider": "Alibaba",
-      "release_date": "2026-11-08",
-      "input_usd_1m": 0.6,
-      "output_usd_1m": 2.4,
-      "cache_read_usd_1m": 0.06,
-      "cache_write_usd_1m": null,
-      "context_window": "1,000,000 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "liquid/lfm-3-1.7b",
-      "slug": "liquid-lfm-3-1-7b",
       "name": "LiquidAI: LFM3-1.7B",
       "provider": "Liquid",
       "release_date": "2026-11-06",
@@ -205,35 +342,10 @@
       "output_usd_1m": 0.2,
       "cache_read_usd_1m": 0.02,
       "cache_write_usd_1m": 0.08,
-      "context_window": "262,144 Tokens"
-    },
-    {
-      "id": "liquid/lfm-3-1.7b:free",
-      "slug": "liquid-lfm-3-1-7b-free",
-      "name": "LiquidAI: LFM3-1.7B (free)",
-      "provider": "Liquid",
-      "release_date": "2026-11-06",
-      "input_usd_1m": 0.5,
-      "output_usd_1m": 2.0,
-      "cache_read_usd_1m": 0.05,
-      "cache_write_usd_1m": null,
-      "context_window": "262,144 Tokens"
-    },
-    {
-      "id": "xiaomi/mimo-v2-pro",
-      "slug": "xiaomi-mimo-v2-pro",
-      "name": "Xiaomi MiMo-V2-Pro",
-      "provider": "Xiaomi",
-      "release_date": "2026-11-06",
-      "input_usd_1m": 0.4,
-      "output_usd_1m": 1.6,
-      "cache_read_usd_1m": 0.04,
-      "cache_write_usd_1m": null,
-      "context_window": "256,000 Tokens"
+      "context_tokens": 262144
     },
     {
       "id": "google/gemini-omni-1.2-flash",
-      "slug": "google-gemini-omni-1-2-flash",
       "name": "Google: Gemini Omni 1.2 Flash",
       "provider": "Google",
       "release_date": "2026-11-05",
@@ -241,11 +353,10 @@
       "output_usd_1m": 9.0,
       "cache_read_usd_1m": 0.375,
       "cache_write_usd_1m": 1.5,
-      "context_window": "131,072 Tokens"
+      "context_tokens": 131072
     },
     {
       "id": "kt/midm-k-3.0-pro",
-      "slug": "kt-midm-k-3-0-pro",
       "name": "KT: Mi:dm K 3.0 Pro",
       "provider": "Kt",
       "release_date": "2026-11-05",
@@ -253,11 +364,21 @@
       "output_usd_1m": 0.8,
       "cache_read_usd_1m": 0.04,
       "cache_write_usd_1m": 0.2,
-      "context_window": "261,795 Tokens"
+      "context_tokens": 261795
+    },
+    {
+      "id": "tencent/hy4-flash",
+      "name": "Tencent Hy4 Flash",
+      "provider": "Tencent",
+      "release_date": "2026-11-04",
+      "input_usd_1m": 0.035,
+      "output_usd_1m": 0.1405,
+      "cache_read_usd_1m": 0.0088,
+      "cache_write_usd_1m": 0.035,
+      "context_tokens": 1050000
     },
     {
       "id": "google/gemini-omni-1.1-flash",
-      "slug": "google-gemini-omni-1-1-flash",
       "name": "Google: Gemini Omni 1.1 Flash",
       "provider": "Google",
       "release_date": "2026-11-04",
@@ -265,11 +386,10 @@
       "output_usd_1m": 9.0,
       "cache_read_usd_1m": 0.375,
       "cache_write_usd_1m": 1.5,
-      "context_window": "131,072 Tokens"
+      "context_tokens": 131072
     },
     {
       "id": "ricursiveai/ripple-65b-preview",
-      "slug": "ricursiveai-ripple-65b-preview",
       "name": "Ricursive: Ripple 65B Preview",
       "provider": "Ricursiveai",
       "release_date": "2026-11-04",
@@ -277,11 +397,10 @@
       "output_usd_1m": 0.3,
       "cache_read_usd_1m": 0.025,
       "cache_write_usd_1m": 0.1,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "tencent/hy4",
-      "slug": "tencent-hy4",
       "name": "Tencent: Hy4",
       "provider": "Tencent",
       "release_date": "2026-11-04",
@@ -289,11 +408,10 @@
       "output_usd_1m": 1.2505,
       "cache_read_usd_1m": 0.021,
       "cache_write_usd_1m": 0.417,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "motif-technologies/motif-3",
-      "slug": "motif-technologies-motif-3",
       "name": "Motif Technologies: Motif 3",
       "provider": "Motif-technologies",
       "release_date": "2026-11-02",
@@ -301,11 +419,21 @@
       "output_usd_1m": 1.2,
       "cache_read_usd_1m": 0.06,
       "cache_write_usd_1m": 0.3,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
+    },
+    {
+      "id": "z-ai/glm-5.3-flashx-legal",
+      "name": "Z.ai: GLM 5.3 FlashX Legal",
+      "provider": "Z-ai",
+      "release_date": "2026-11-02",
+      "input_usd_1m": 0.37,
+      "output_usd_1m": 1.25,
+      "cache_read_usd_1m": 0.075,
+      "cache_write_usd_1m": 0.37,
+      "context_tokens": 1048576
     },
     {
       "id": "particle-ai/particle-1",
-      "slug": "particle-ai-particle-1",
       "name": "Particle AI: Particle-1",
       "provider": "Particle-ai",
       "release_date": "2026-10-28",
@@ -313,47 +441,109 @@
       "output_usd_1m": 0.5,
       "cache_read_usd_1m": 0.03,
       "cache_write_usd_1m": 0.07,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
-      "id": "particle-ai/particle-1:free",
-      "slug": "particle-ai-particle-1-free",
-      "name": "Particle AI: Particle-1 (free)",
-      "provider": "Particle-ai",
-      "release_date": "2026-10-28",
-      "input_usd_1m": 0.5,
-      "output_usd_1m": 2.0,
+      "id": "openai/gpt-6.1-terra",
+      "name": "OpenAI GPT-6.1 Terra",
+      "provider": "OpenAI",
+      "release_date": "2026-10-26",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
       "cache_read_usd_1m": 0.05,
-      "cache_write_usd_1m": null,
-      "context_window": "1,048,576 Tokens"
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 1050000
     },
     {
-      "id": "recursive/flint-v1.0:free",
-      "slug": "recursive-flint-v1-0-free",
-      "name": "Recursive: Flint (free)",
-      "provider": "Recursive",
-      "release_date": "2026-10-21",
-      "input_usd_1m": 0.5,
-      "output_usd_1m": 2.0,
+      "id": "openai/gpt-6.1-terra-pro",
+      "name": "OpenAI: GPT-6.1 Terra Pro",
+      "provider": "Openai",
+      "release_date": "2026-10-26",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
       "cache_read_usd_1m": 0.05,
-      "cache_write_usd_1m": null,
-      "context_window": "262,144 Tokens"
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.1-terra-pro:batch",
+      "name": "OpenAI: GPT-6.1 Terra Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-10-26",
+      "input_usd_1m": 0.5,
+      "output_usd_1m": 2.5,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.625,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.1-terra:batch",
+      "name": "OpenAI: GPT-6.1 Terra (batch)",
+      "provider": "Openai",
+      "release_date": "2026-10-26",
+      "input_usd_1m": 0.5,
+      "output_usd_1m": 2.5,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.625,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "moonshotai/kimi-k3.1-pro",
+      "name": "Moonshot Kimi K3.1 Pro",
+      "provider": "Moonshot AI",
+      "release_date": "2026-10-24",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "moonshotai/kimi-k3.1-pro:batch",
+      "name": "MoonshotAI: Kimi K3.1 Pro (batch)",
+      "provider": "Moonshotai",
+      "release_date": "2026-10-23",
+      "input_usd_1m": 0.372,
+      "output_usd_1m": 5.583,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 0.372,
+      "context_tokens": 1048576
     },
     {
       "id": "minimax/minimax-m3.1-flash",
-      "slug": "minimax-minimax-m3-1-flash",
       "name": "MiniMax: MiniMax M3.1 Flash",
       "provider": "Minimax",
       "release_date": "2026-10-19",
-      "input_usd_1m": 0.075,
-      "output_usd_1m": 0.3,
-      "cache_read_usd_1m": 0.0075,
-      "cache_write_usd_1m": 0.075,
-      "context_window": "1,048,576 Tokens"
+      "input_usd_1m": 0.15,
+      "output_usd_1m": 0.6,
+      "cache_read_usd_1m": 0.015,
+      "cache_write_usd_1m": 0.15,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "provider": "DeepSeek",
+      "release_date": "2026-10-17",
+      "input_usd_1m": 0.15,
+      "output_usd_1m": 0.6,
+      "cache_read_usd_1m": 0.015,
+      "cache_write_usd_1m": 0.15,
+      "context_tokens": 256000
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash-1017:batch",
+      "name": "DeepSeek: DeepSeek V4.1 Flash 1017 (batch)",
+      "provider": "Deepseek",
+      "release_date": "2026-10-17",
+      "input_usd_1m": 0.035,
+      "output_usd_1m": 0.149,
+      "cache_read_usd_1m": 0.0029,
+      "cache_write_usd_1m": 0.035,
+      "context_tokens": 1048576
     },
     {
       "id": "elorian/glimpse",
-      "slug": "elorian-glimpse",
       "name": "Elorian: Glimpse",
       "provider": "Elorian",
       "release_date": "2026-10-17",
@@ -361,11 +551,10 @@
       "output_usd_1m": 3.0,
       "cache_read_usd_1m": 0.06,
       "cache_write_usd_1m": 0.6,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
     },
     {
       "id": "reflection/beam-1.0-501b-a23b",
-      "slug": "reflection-beam-1-0-501b-a23b",
       "name": "Reflection: Beam 1.0 501B A23B",
       "provider": "Reflection",
       "release_date": "2026-10-16",
@@ -373,11 +562,10 @@
       "output_usd_1m": 1.0,
       "cache_read_usd_1m": 0.05,
       "cache_write_usd_1m": 0.25,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "prism-ml/ternary-bonsai-2-9b",
-      "slug": "prism-ml-ternary-bonsai-2-9b",
       "name": "PrismML: Ternary Bonsai 2 9B",
       "provider": "Prism-ml",
       "release_date": "2026-10-16",
@@ -385,11 +573,10 @@
       "output_usd_1m": 0.13,
       "cache_read_usd_1m": 0.04,
       "cache_write_usd_1m": 0.08,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
     },
     {
       "id": "moondream/moondream3-preview",
-      "slug": "moondream-moondream3-preview",
       "name": "Moondream: Moondream 3 Preview",
       "provider": "Moondream",
       "release_date": "2026-10-15",
@@ -397,11 +584,10 @@
       "output_usd_1m": 2.5,
       "cache_read_usd_1m": 0.075,
       "cache_write_usd_1m": 0.3,
-      "context_window": "32,000 Tokens"
+      "context_tokens": 32000
     },
     {
       "id": "moondream/moondream3.1-9b-a2b",
-      "slug": "moondream-moondream3-1-9b-a2b",
       "name": "Moondream: Moondream 3.1",
       "provider": "Moondream",
       "release_date": "2026-10-15",
@@ -409,11 +595,10 @@
       "output_usd_1m": 2.5,
       "cache_read_usd_1m": 0.075,
       "cache_write_usd_1m": 0.3,
-      "context_window": "32,000 Tokens"
+      "context_tokens": 32000
     },
     {
       "id": "meta/muse-spark-open",
-      "slug": "meta-muse-spark-open",
       "name": "Meta: Muse Spark Open",
       "provider": "Meta",
       "release_date": "2026-10-15",
@@ -421,11 +606,10 @@
       "output_usd_1m": 4.25,
       "cache_read_usd_1m": 0.15,
       "cache_write_usd_1m": 1.25,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "nvidia/nemotron-3.5-super-vl",
-      "slug": "nvidia-nemotron-3-5-super-vl",
       "name": "NVIDIA: Nemotron 3.5 Super VL",
       "provider": "Nvidia",
       "release_date": "2026-10-15",
@@ -433,23 +617,10 @@
       "output_usd_1m": 0.47,
       "cache_read_usd_1m": 0.02,
       "cache_write_usd_1m": 0.15,
-      "context_window": "1,048,576 Tokens"
-    },
-    {
-      "id": "nvidia/nemotron-3.5-super-vl:free",
-      "slug": "nvidia-nemotron-3-5-super-vl-free",
-      "name": "NVIDIA: Nemotron 3.5 Super VL (free)",
-      "provider": "Nvidia",
-      "release_date": "2026-10-15",
-      "input_usd_1m": 0.5,
-      "output_usd_1m": 2.0,
-      "cache_read_usd_1m": 0.05,
-      "cache_write_usd_1m": null,
-      "context_window": "1,000,000 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "unbiased/pareto-26.10",
-      "slug": "unbiased-pareto-26-10",
       "name": "Pareto 26.10",
       "provider": "Unbiased",
       "release_date": "2026-10-15",
@@ -457,11 +628,21 @@
       "output_usd_1m": 3.2,
       "cache_read_usd_1m": 0.03,
       "cache_write_usd_1m": 0.8,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
+    },
+    {
+      "id": "google/gemini-4-argon",
+      "name": "Google Gemini 4 Argon",
+      "provider": "Google",
+      "release_date": "2026-10-13",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 2000000
     },
     {
       "id": "~unbiased/pareto-latest",
-      "slug": "unbiased-pareto-latest",
       "name": "Pareto Latest",
       "provider": "~unbiased",
       "release_date": "2026-10-13",
@@ -469,11 +650,10 @@
       "output_usd_1m": 3.2,
       "cache_read_usd_1m": 0.03,
       "cache_write_usd_1m": 0.8,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "unbiased/pareto-26.9",
-      "slug": "unbiased-pareto-26-9",
       "name": "Pareto 26.9",
       "provider": "Unbiased",
       "release_date": "2026-10-13",
@@ -481,11 +661,10 @@
       "output_usd_1m": 7.5,
       "cache_read_usd_1m": 0.25,
       "cache_write_usd_1m": 2.5,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
     },
     {
       "id": "liquid/lfm-2.5-24b-a2b",
-      "slug": "liquid-lfm-2-5-24b-a2b",
       "name": "LiquidAI: LFM2.5-24B-A2B",
       "provider": "Liquid",
       "release_date": "2026-10-13",
@@ -493,35 +672,32 @@
       "output_usd_1m": 0.7,
       "cache_read_usd_1m": 0.025,
       "cache_write_usd_1m": 0.05,
-      "context_window": "128,000 Tokens"
+      "context_tokens": 128000
     },
     {
-      "id": "scaledown/summarize",
-      "slug": "scaledown-summarize",
-      "name": "ScaleDown: Summarize",
-      "provider": "Scaledown",
+      "id": "google/gemini-4-argon:batch",
+      "name": "Google: Gemini 4 Argon (batch)",
+      "provider": "Google",
       "release_date": "2026-10-13",
-      "input_usd_1m": 0.04,
-      "output_usd_1m": 2.0,
-      "cache_read_usd_1m": 0.004,
-      "cache_write_usd_1m": null,
-      "context_window": "1,000,000 Tokens"
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.1875,
+      "context_tokens": 1048576
     },
     {
-      "id": "scaledown/extract",
-      "slug": "scaledown-extract",
-      "name": "ScaleDown: Extract",
-      "provider": "Scaledown",
-      "release_date": "2026-10-13",
-      "input_usd_1m": 0.04,
-      "output_usd_1m": 2.0,
-      "cache_read_usd_1m": 0.004,
-      "cache_write_usd_1m": null,
-      "context_window": "1,000,000 Tokens"
+      "id": "xai/grok-4.7",
+      "name": "xAI Grok 4.7",
+      "provider": "xAI",
+      "release_date": "2026-10-12",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 6.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 512000
     },
     {
       "id": "meta/muse-wonder",
-      "slug": "meta-muse-wonder",
       "name": "Meta: Muse Wonder",
       "provider": "Meta",
       "release_date": "2026-10-12",
@@ -529,11 +705,10 @@
       "output_usd_1m": 20.0,
       "cache_read_usd_1m": 0.2,
       "cache_write_usd_1m": 4.0,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "stepfun/step-5-preview",
-      "slug": "stepfun-step-5-preview",
       "name": "StepFun: Step 5 Preview",
       "provider": "Stepfun",
       "release_date": "2026-10-08",
@@ -541,11 +716,32 @@
       "output_usd_1m": 2.7,
       "cache_read_usd_1m": 0.1,
       "cache_write_usd_1m": 1.0,
-      "context_window": "1,000,000 Tokens"
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-haiku-5.5",
+      "name": "Anthropic: Claude Haiku 5.5",
+      "provider": "Anthropic",
+      "release_date": "2026-10-07",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.5,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.125,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-haiku-5.5:batch",
+      "name": "Anthropic: Claude Haiku 5.5 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-10-07",
+      "input_usd_1m": 0.05,
+      "output_usd_1m": 0.25,
+      "cache_read_usd_1m": 0.005,
+      "cache_write_usd_1m": 0.0625,
+      "context_tokens": 1000000
     },
     {
       "id": "google/gemini-nano-banana-2.1",
-      "slug": "google-gemini-nano-banana-2-1",
       "name": "Google: Nano Banana 2.1",
       "provider": "Google",
       "release_date": "2026-10-06",
@@ -553,11 +749,10 @@
       "output_usd_1m": 7.5,
       "cache_read_usd_1m": 0.375,
       "cache_write_usd_1m": 1.5,
-      "context_window": "65,536 Tokens"
+      "context_tokens": 65536
     },
     {
       "id": "mistralai/mistral-large-4-0",
-      "slug": "mistralai-mistral-large-4-0",
       "name": "Mistral: Mistral Large 4",
       "provider": "Mistralai",
       "release_date": "2026-10-06",
@@ -565,11 +760,10 @@
       "output_usd_1m": 2.1,
       "cache_read_usd_1m": 0.07,
       "cache_write_usd_1m": 0.7,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "inclusionai/ling-3.1-flash",
-      "slug": "inclusionai-ling-3-1-flash",
       "name": "inclusionAI: Ling 3.1 Flash",
       "provider": "Inclusionai",
       "release_date": "2026-10-02",
@@ -577,11 +771,21 @@
       "output_usd_1m": 0.225,
       "cache_read_usd_1m": 0.015,
       "cache_write_usd_1m": 0.075,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
+    },
+    {
+      "id": "z-ai/glm-5.3-flash",
+      "name": "Z.ai GLM-5.3 Flash",
+      "provider": "Z.ai",
+      "release_date": "2026-10-01",
+      "input_usd_1m": 0.11,
+      "output_usd_1m": 0.4,
+      "cache_read_usd_1m": 0.0275,
+      "cache_write_usd_1m": 0.11,
+      "context_tokens": 1000000
     },
     {
       "id": "unbiased/pareto-26.10-preview",
-      "slug": "unbiased-pareto-26-10-preview",
       "name": "Pareto 26.10 Preview",
       "provider": "Unbiased",
       "release_date": "2026-10-01",
@@ -589,11 +793,76 @@
       "output_usd_1m": 3.2,
       "cache_read_usd_1m": 0.03,
       "cache_write_usd_1m": 0.8,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
+    },
+    {
+      "id": "openai/gpt-6.1-sol",
+      "name": "OpenAI GPT-6.1 Sol",
+      "provider": "OpenAI",
+      "release_date": "2026-09-29",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.1-sol-pro",
+      "name": "OpenAI: GPT-6.1 Sol Pro",
+      "provider": "Openai",
+      "release_date": "2026-09-29",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.1-sol-pro:batch",
+      "name": "OpenAI: GPT-6.1 Sol Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-09-29",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6.1-sol:batch",
+      "name": "OpenAI: GPT-6.1 Sol (batch)",
+      "provider": "Openai",
+      "release_date": "2026-09-29",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "anthropic/claude-sonnet-5.5",
+      "name": "Anthropic: Claude Sonnet 5.5",
+      "provider": "Anthropic",
+      "release_date": "2026-09-28",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-sonnet-5.5:batch",
+      "name": "Anthropic: Claude Sonnet 5.5 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-09-28",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 1000000
     },
     {
       "id": "perceptron/perceptron-mk1.5",
-      "slug": "perceptron-perceptron-mk1-5",
       "name": "Perceptron: Perceptron Mk1.5",
       "provider": "Perceptron",
       "release_date": "2026-09-25",
@@ -601,11 +870,10 @@
       "output_usd_1m": 1.5,
       "cache_read_usd_1m": 0.0375,
       "cache_write_usd_1m": 0.15,
-      "context_window": "36,864 Tokens"
+      "context_tokens": 36864
     },
     {
       "id": "fireworks/ember-1",
-      "slug": "fireworks-ember-1",
       "name": "Fireworks: Ember-1",
       "provider": "Fireworks",
       "release_date": "2026-09-24",
@@ -613,11 +881,32 @@
       "output_usd_1m": 15.0,
       "cache_read_usd_1m": 0.3,
       "cache_write_usd_1m": 3.0,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
+    },
+    {
+      "id": "z-ai/glm-5.3-prime",
+      "name": "Z.ai: GLM 5.3 Prime",
+      "provider": "Z-ai",
+      "release_date": "2026-09-23",
+      "input_usd_1m": 1.68,
+      "output_usd_1m": 5.28,
+      "cache_read_usd_1m": 0.336,
+      "cache_write_usd_1m": 1.68,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "qwen/qwen3.8-max-prime",
+      "name": "Qwen: Qwen3.8 Max Prime",
+      "provider": "Qwen",
+      "release_date": "2026-09-23",
+      "input_usd_1m": 4.0,
+      "output_usd_1m": 12.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 4.0,
+      "context_tokens": 1000000
     },
     {
       "id": "aion-labs/aion-3.5-mini",
-      "slug": "aion-labs-aion-3-5-mini",
       "name": "AionLabs: Aion 3.5 Mini",
       "provider": "Aion-labs",
       "release_date": "2026-09-23",
@@ -625,11 +914,10 @@
       "output_usd_1m": 1.4,
       "cache_read_usd_1m": 0.18,
       "cache_write_usd_1m": 0.7,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
     },
     {
       "id": "aion-labs/aion-3.5",
-      "slug": "aion-labs-aion-3-5",
       "name": "AionLabs: Aion 3.5",
       "provider": "Aion-labs",
       "release_date": "2026-09-23",
@@ -637,11 +925,10 @@
       "output_usd_1m": 6.0,
       "cache_read_usd_1m": 0.75,
       "cache_write_usd_1m": 3.0,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
     },
     {
       "id": "upstage/solar-mini4",
-      "slug": "upstage-solar-mini4",
       "name": "Upstage: Solar Mini 4",
       "provider": "Upstage",
       "release_date": "2026-09-23",
@@ -649,11 +936,32 @@
       "output_usd_1m": 0.2,
       "cache_read_usd_1m": 0.005,
       "cache_write_usd_1m": 0.05,
-      "context_window": "524,288 Tokens"
+      "context_tokens": 524288
+    },
+    {
+      "id": "anthropic/claude-opus-5.5",
+      "name": "Anthropic Claude Opus 5.5",
+      "provider": "Anthropic",
+      "release_date": "2026-09-22",
+      "input_usd_1m": 4.0,
+      "output_usd_1m": 20.0,
+      "cache_read_usd_1m": 0.4,
+      "cache_write_usd_1m": 5.0,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "openai/gpt-6-luna",
+      "name": "OpenAI GPT-6 Luna",
+      "provider": "OpenAI",
+      "release_date": "2026-09-22",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.5,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 1000000
     },
     {
       "id": "cohere/command-a-plus",
-      "slug": "cohere-command-a-plus",
       "name": "Cohere: Command A+",
       "provider": "Cohere",
       "release_date": "2026-09-22",
@@ -661,11 +969,98 @@
       "output_usd_1m": 1.5,
       "cache_read_usd_1m": 0.15,
       "cache_write_usd_1m": 0.3,
-      "context_window": "192,000 Tokens"
+      "context_tokens": 192000
+    },
+    {
+      "id": "openai/gpt-6-luna-pro",
+      "name": "OpenAI: GPT-6 Luna Pro",
+      "provider": "Openai",
+      "release_date": "2026-09-22",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.5,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.125,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6-luna-pro:batch",
+      "name": "OpenAI: GPT-6 Luna Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-09-22",
+      "input_usd_1m": 0.05,
+      "output_usd_1m": 0.25,
+      "cache_read_usd_1m": 0.005,
+      "cache_write_usd_1m": 0.0625,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6-luna:batch",
+      "name": "OpenAI: GPT-6 Luna (batch)",
+      "provider": "Openai",
+      "release_date": "2026-09-22",
+      "input_usd_1m": 0.05,
+      "output_usd_1m": 0.25,
+      "cache_read_usd_1m": 0.005,
+      "cache_write_usd_1m": 0.0625,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6-sol-pro",
+      "name": "OpenAI: GPT-6 Sol Pro",
+      "provider": "Openai",
+      "release_date": "2026-09-22",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6-sol-pro:batch",
+      "name": "OpenAI: GPT-6 Sol Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-09-22",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6-sol",
+      "name": "OpenAI: GPT-6 Sol",
+      "provider": "Openai",
+      "release_date": "2026-09-22",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6-sol:batch",
+      "name": "OpenAI: GPT-6 Sol (batch)",
+      "provider": "Openai",
+      "release_date": "2026-09-22",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "anthropic/claude-opus-5.5:batch",
+      "name": "Anthropic: Claude Opus 5.5 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-09-22",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1000000
     },
     {
       "id": "xiaomi/mimo-v2.6-pro-ultraspeed",
-      "slug": "xiaomi-mimo-v2-6-pro-ultraspeed",
       "name": "Xiaomi: MiMo-V2.6-Pro-UltraSpeed",
       "provider": "Xiaomi",
       "release_date": "2026-09-21",
@@ -673,11 +1068,10 @@
       "output_usd_1m": 8.7,
       "cache_read_usd_1m": 0.036,
       "cache_write_usd_1m": 4.35,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "xiaomi/mimo-v2.6-flash",
-      "slug": "xiaomi-mimo-v2-6-flash",
       "name": "Xiaomi: MiMo-V2.6-Flash",
       "provider": "Xiaomi",
       "release_date": "2026-09-21",
@@ -685,11 +1079,10 @@
       "output_usd_1m": 0.28,
       "cache_read_usd_1m": 0.0028,
       "cache_write_usd_1m": 0.14,
-      "context_window": "1,050,000 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "xiaomi/mimo-v2.6-pro",
-      "slug": "xiaomi-mimo-v2-6-pro",
       "name": "Xiaomi: MiMo-V2.6-Pro",
       "provider": "Xiaomi",
       "release_date": "2026-09-21",
@@ -697,11 +1090,43 @@
       "output_usd_1m": 0.87,
       "cache_read_usd_1m": 0.0036,
       "cache_write_usd_1m": 0.435,
-      "context_window": "1,050,000 Tokens"
+      "context_tokens": 1048576
+    },
+    {
+      "id": "x-ai/grok-4.7",
+      "name": "SpaceXSI: Grok 4.7",
+      "provider": "X-ai",
+      "release_date": "2026-09-21",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 6.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 500000
+    },
+    {
+      "id": "x-ai/grok-4.7:batch",
+      "name": "SpaceXSI: Grok 4.7 (batch)",
+      "provider": "X-ai",
+      "release_date": "2026-09-21",
+      "input_usd_1m": 1.6,
+      "output_usd_1m": 4.8,
+      "cache_read_usd_1m": 0.4,
+      "cache_write_usd_1m": 1.6,
+      "context_tokens": 500000
+    },
+    {
+      "id": "qwen/qwen3.8-omni-flash",
+      "name": "Qwen: Qwen3.8 Omni Flash",
+      "provider": "Qwen",
+      "release_date": "2026-09-21",
+      "input_usd_1m": 0.15,
+      "output_usd_1m": 0.47,
+      "cache_read_usd_1m": 0.016,
+      "cache_write_usd_1m": 0.15,
+      "context_tokens": 1000000
     },
     {
       "id": "prism-ml/ternary-bonsai-2-27b",
-      "slug": "prism-ml-ternary-bonsai-2-27b",
       "name": "PrismML: Ternary Bonsai 2 27B",
       "provider": "Prism-ml",
       "release_date": "2026-09-18",
@@ -709,11 +1134,21 @@
       "output_usd_1m": 0.5,
       "cache_read_usd_1m": 0.0375,
       "cache_write_usd_1m": 0.075,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
+    },
+    {
+      "id": "z-ai/glm-5.3-flashx",
+      "name": "Z.ai: GLM 5.3 FlashX",
+      "provider": "Z-ai",
+      "release_date": "2026-09-18",
+      "input_usd_1m": 0.37,
+      "output_usd_1m": 1.25,
+      "cache_read_usd_1m": 0.075,
+      "cache_write_usd_1m": 0.37,
+      "context_tokens": 1048576
     },
     {
       "id": "~deepseek/deepseek-pro-latest",
-      "slug": "deepseek-deepseek-pro-latest",
       "name": "DeepSeek: DeepSeek Pro Latest",
       "provider": "~deepseek",
       "release_date": "2026-09-14",
@@ -721,23 +1156,21 @@
       "output_usd_1m": 5.0,
       "cache_read_usd_1m": 0.0999,
       "cache_write_usd_1m": 0.0999,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "~deepseek/deepseek-flash-latest",
-      "slug": "deepseek-deepseek-flash-latest",
       "name": "DeepSeek: DeepSeek Flash Latest",
       "provider": "~deepseek",
       "release_date": "2026-09-14",
-      "input_usd_1m": 0.03,
-      "output_usd_1m": 0.2,
-      "cache_read_usd_1m": 0.001,
-      "cache_write_usd_1m": 0.03,
-      "context_window": "1,048,576 Tokens"
+      "input_usd_1m": 0.036,
+      "output_usd_1m": 0.5,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.036,
+      "context_tokens": 1048576
     },
     {
       "id": "inference-net/schematron-v2-turbo",
-      "slug": "inference-net-schematron-v2-turbo",
       "name": "Inference.net: Schematron V2 Turbo",
       "provider": "Inference-net",
       "release_date": "2026-09-12",
@@ -745,11 +1178,10 @@
       "output_usd_1m": 0.15,
       "cache_read_usd_1m": 0.03,
       "cache_write_usd_1m": 0.03,
-      "context_window": "128,000 Tokens"
+      "context_tokens": 128000
     },
     {
       "id": "inference-net/schematron-v2-small",
-      "slug": "inference-net-schematron-v2-small",
       "name": "Inference.net: Schematron V2 Small",
       "provider": "Inference-net",
       "release_date": "2026-09-12",
@@ -757,11 +1189,10 @@
       "output_usd_1m": 0.23,
       "cache_read_usd_1m": 0.05,
       "cache_write_usd_1m": 0.05,
-      "context_window": "128,000 Tokens"
+      "context_tokens": 128000
     },
     {
       "id": "~openai/gpt-astra-latest",
-      "slug": "openai-gpt-astra-latest",
       "name": "OpenAI: GPT Astra Latest",
       "provider": "~openai",
       "release_date": "2026-09-11",
@@ -769,11 +1200,10 @@
       "output_usd_1m": 40.0,
       "cache_read_usd_1m": 0.4,
       "cache_write_usd_1m": 10.0,
-      "context_window": "1,050,000 Tokens"
+      "context_tokens": 1050000
     },
     {
       "id": "~openai/gpt-sol-latest",
-      "slug": "openai-gpt-sol-latest",
       "name": "OpenAI: GPT Sol Latest",
       "provider": "~openai",
       "release_date": "2026-09-11",
@@ -781,11 +1211,10 @@
       "output_usd_1m": 10.0,
       "cache_read_usd_1m": 0.1,
       "cache_write_usd_1m": 2.5,
-      "context_window": "1,050,000 Tokens"
+      "context_tokens": 1050000
     },
     {
       "id": "~openai/gpt-terra-latest",
-      "slug": "openai-gpt-terra-latest",
       "name": "OpenAI: GPT Terra Latest",
       "provider": "~openai",
       "release_date": "2026-09-11",
@@ -793,11 +1222,10 @@
       "output_usd_1m": 5.0,
       "cache_read_usd_1m": 0.05,
       "cache_write_usd_1m": 1.25,
-      "context_window": "1,050,000 Tokens"
+      "context_tokens": 1050000
     },
     {
       "id": "~openai/gpt-luna-latest",
-      "slug": "openai-gpt-luna-latest",
       "name": "OpenAI: GPT Luna Latest",
       "provider": "~openai",
       "release_date": "2026-09-11",
@@ -805,11 +1233,10 @@
       "output_usd_1m": 0.5,
       "cache_read_usd_1m": 0.01,
       "cache_write_usd_1m": 0.125,
-      "context_window": "1,050,000 Tokens"
+      "context_tokens": 1050000
     },
     {
       "id": "sakana/fugu-ultra-v2",
-      "slug": "sakana-fugu-ultra-v2",
       "name": "Sakana: Fugu Ultra v2",
       "provider": "Sakana",
       "release_date": "2026-09-11",
@@ -817,11 +1244,10 @@
       "output_usd_1m": 30.0,
       "cache_read_usd_1m": 0.5,
       "cache_write_usd_1m": 5.0,
-      "context_window": "1,000,000 Tokens"
+      "context_tokens": 1000000
     },
     {
       "id": "sakana/fugu-max",
-      "slug": "sakana-fugu-max",
       "name": "Sakana: Fugu Max",
       "provider": "Sakana",
       "release_date": "2026-09-11",
@@ -829,11 +1255,10 @@
       "output_usd_1m": 6.0,
       "cache_read_usd_1m": 0.25,
       "cache_write_usd_1m": 2.0,
-      "context_window": "1,000,000 Tokens"
+      "context_tokens": 1000000
     },
     {
       "id": "inclusionai/ling-3.0-flash-vl",
-      "slug": "inclusionai-ling-3-0-flash-vl",
       "name": "inclusionAI: Ling 3.0 Flash VL",
       "provider": "Inclusionai",
       "release_date": "2026-09-10",
@@ -841,11 +1266,32 @@
       "output_usd_1m": 0.18,
       "cache_read_usd_1m": 0.012,
       "cache_write_usd_1m": 0.06,
-      "context_window": "131,072 Tokens"
+      "context_tokens": 131072
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash",
+      "name": "DeepSeek: DeepSeek V4.1 Flash",
+      "provider": "Deepseek",
+      "release_date": "2026-09-10",
+      "input_usd_1m": 0.14,
+      "output_usd_1m": 0.42,
+      "cache_read_usd_1m": 0.0042,
+      "cache_write_usd_1m": 0.14,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash:batch",
+      "name": "DeepSeek: DeepSeek V4.1 Flash (batch)",
+      "provider": "Deepseek",
+      "release_date": "2026-09-10",
+      "input_usd_1m": 0.05,
+      "output_usd_1m": 0.15,
+      "cache_read_usd_1m": 0.004,
+      "cache_write_usd_1m": 0.05,
+      "context_tokens": 1048576
     },
     {
       "id": "nex-agi/nex-n2.5-mini",
-      "slug": "nex-agi-nex-n2-5-mini",
       "name": "Nex AGI: Nex-N2.5-Mini",
       "provider": "Nex-agi",
       "release_date": "2026-09-08",
@@ -853,11 +1299,10 @@
       "output_usd_1m": 0.1,
       "cache_read_usd_1m": 0.0025,
       "cache_write_usd_1m": 0.025,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
     },
     {
       "id": "nex-agi/nex-n2.5-pro",
-      "slug": "nex-agi-nex-n2-5-pro",
       "name": "Nex AGI: Nex-N2.5-Pro",
       "provider": "Nex-agi",
       "release_date": "2026-09-08",
@@ -865,11 +1310,76 @@
       "output_usd_1m": 0.25,
       "cache_read_usd_1m": 0.015,
       "cache_write_usd_1m": 0.075,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
+    },
+    {
+      "id": "openai/gpt-6-astra",
+      "name": "OpenAI: GPT-6 Astra",
+      "provider": "Openai",
+      "release_date": "2026-09-04",
+      "input_usd_1m": 10.0,
+      "output_usd_1m": 50.0,
+      "cache_read_usd_1m": 1.0,
+      "cache_write_usd_1m": 12.5,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6-astra:batch",
+      "name": "OpenAI: GPT-6 Astra (batch)",
+      "provider": "Openai",
+      "release_date": "2026-09-04",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 25.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 6.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6-astra-pro",
+      "name": "OpenAI: GPT-6 Astra Pro",
+      "provider": "Openai",
+      "release_date": "2026-09-04",
+      "input_usd_1m": 10.0,
+      "output_usd_1m": 50.0,
+      "cache_read_usd_1m": 1.0,
+      "cache_write_usd_1m": 12.5,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-6-astra-pro:batch",
+      "name": "OpenAI: GPT-6 Astra Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-09-04",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 25.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 6.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "qwen/qwen3.8-max-0902",
+      "name": "Qwen: Qwen3.8 Max (0902)",
+      "provider": "Qwen",
+      "release_date": "2026-09-03",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 6.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "qwen/qwen3.8-max-0902:batch",
+      "name": "Qwen: Qwen3.8 Max (0902) (batch)",
+      "provider": "Qwen",
+      "release_date": "2026-09-03",
+      "input_usd_1m": 1.15,
+      "output_usd_1m": 3.45,
+      "cache_read_usd_1m": 0.2875,
+      "cache_write_usd_1m": 1.15,
+      "context_tokens": 262144
     },
     {
       "id": "meta/muse-spark-1.3-contributor",
-      "slug": "meta-muse-spark-1-3-contributor",
       "name": "Meta: Muse Spark 1.3 Contributor",
       "provider": "Meta",
       "release_date": "2026-09-02",
@@ -877,11 +1387,10 @@
       "output_usd_1m": 0.2,
       "cache_read_usd_1m": 0.002,
       "cache_write_usd_1m": 0.1,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "meta/muse-spark-1.3",
-      "slug": "meta-muse-spark-1-3",
       "name": "Meta: Muse Spark 1.3",
       "provider": "Meta",
       "release_date": "2026-09-02",
@@ -889,11 +1398,54 @@
       "output_usd_1m": 4.25,
       "cache_read_usd_1m": 0.15,
       "cache_write_usd_1m": 1.25,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
+    },
+    {
+      "id": "google/gemini-3.8-flash",
+      "name": "Google: Gemini 3.8 Flash",
+      "provider": "Google",
+      "release_date": "2026-09-02",
+      "input_usd_1m": 0.825,
+      "output_usd_1m": 4.125,
+      "cache_read_usd_1m": 0.0825,
+      "cache_write_usd_1m": 0.0417,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "google/gemini-3.8-flash:batch",
+      "name": "Google: Gemini 3.8 Flash (batch)",
+      "provider": "Google",
+      "release_date": "2026-09-02",
+      "input_usd_1m": 0.375,
+      "output_usd_1m": 1.875,
+      "cache_read_usd_1m": 0.0375,
+      "cache_write_usd_1m": 0.0417,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "anthropic/claude-fable-5.1",
+      "name": "Anthropic: Claude Fable 5.1",
+      "provider": "Anthropic",
+      "release_date": "2026-09-01",
+      "input_usd_1m": 10.0,
+      "output_usd_1m": 50.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 12.5,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-fable-5.1:batch",
+      "name": "Anthropic: Claude Fable 5.1 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-09-01",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 25.0,
+      "cache_read_usd_1m": 0.125,
+      "cache_write_usd_1m": 6.25,
+      "context_tokens": 1000000
     },
     {
       "id": "ibm-granite/granite-4.2-8b",
-      "slug": "ibm-granite-granite-4-2-8b",
       "name": "IBM: Granite 4.2 8B",
       "provider": "Ibm-granite",
       "release_date": "2026-08-31",
@@ -901,23 +1453,21 @@
       "output_usd_1m": 0.15,
       "cache_read_usd_1m": 0.015,
       "cache_write_usd_1m": 0.06,
-      "context_window": "131,072 Tokens"
+      "context_tokens": 131072
     },
     {
       "id": "tencent/hy4-preview",
-      "slug": "tencent-hy4-preview",
       "name": "Tencent: Hy4 preview",
       "provider": "Tencent",
       "release_date": "2026-08-28",
-      "input_usd_1m": 0.417,
-      "output_usd_1m": 1.2505,
+      "input_usd_1m": 0.834,
+      "output_usd_1m": 2.501,
       "cache_read_usd_1m": 0.042,
-      "cache_write_usd_1m": 0.417,
-      "context_window": "1,048,576 Tokens"
+      "cache_write_usd_1m": 0.834,
+      "context_tokens": 1048576
     },
     {
       "id": "~z-ai/glm-flash-latest",
-      "slug": "z-ai-glm-flash-latest",
       "name": "Z.ai: GLM Flash Latest",
       "provider": "~z-ai",
       "release_date": "2026-08-27",
@@ -925,11 +1475,32 @@
       "output_usd_1m": 0.0815,
       "cache_read_usd_1m": 0.03,
       "cache_write_usd_1m": 0.0356,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
+    },
+    {
+      "id": "qwen/qwen3.8-flash",
+      "name": "Qwen: Qwen3.8 Flash",
+      "provider": "Qwen",
+      "release_date": "2026-08-26",
+      "input_usd_1m": 0.15,
+      "output_usd_1m": 0.47,
+      "cache_read_usd_1m": 0.016,
+      "cache_write_usd_1m": 0.15,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "z-ai/glm-5.3-flash:batch",
+      "name": "Z.ai: GLM 5.3 Flash (batch)",
+      "provider": "Z-ai",
+      "release_date": "2026-08-26",
+      "input_usd_1m": 0.023,
+      "output_usd_1m": 0.068,
+      "cache_read_usd_1m": 0.009,
+      "cache_write_usd_1m": 0.023,
+      "context_tokens": 1048576
     },
     {
       "id": "meta/muse-spark-1.2-contributor",
-      "slug": "meta-muse-spark-1-2-contributor",
       "name": "Meta: Muse Spark 1.2 Contributor",
       "provider": "Meta",
       "release_date": "2026-08-21",
@@ -937,11 +1508,21 @@
       "output_usd_1m": 0.2,
       "cache_read_usd_1m": 0.002,
       "cache_write_usd_1m": 0.1,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash-vision-exp",
+      "name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
+      "provider": "Deepseek",
+      "release_date": "2026-08-21",
+      "input_usd_1m": 0.44,
+      "output_usd_1m": 1.32,
+      "cache_read_usd_1m": 0.028,
+      "cache_write_usd_1m": 0.44,
+      "context_tokens": 1048576
     },
     {
       "id": "tencent/hy-mt2-1.8b",
-      "slug": "tencent-hy-mt2-1-8b",
       "name": "Tencent: Hy-MT2-1.8B",
       "provider": "Tencent",
       "release_date": "2026-08-20",
@@ -949,11 +1530,10 @@
       "output_usd_1m": 0.177,
       "cache_read_usd_1m": 0.011,
       "cache_write_usd_1m": 0.044,
-      "context_window": "8,192 Tokens"
+      "context_tokens": 8192
     },
     {
       "id": "tencent/hy-mt2-30b-a3b",
-      "slug": "tencent-hy-mt2-30b-a3b",
       "name": "Tencent: Hy-MT2-30B-A3B",
       "provider": "Tencent",
       "release_date": "2026-08-20",
@@ -961,11 +1541,10 @@
       "output_usd_1m": 0.295,
       "cache_read_usd_1m": 0.0185,
       "cache_write_usd_1m": 0.074,
-      "context_window": "8,192 Tokens"
+      "context_tokens": 8192
     },
     {
       "id": "~z-ai/glm-latest",
-      "slug": "z-ai-glm-latest",
       "name": "Z.ai: GLM Latest",
       "provider": "~z-ai",
       "release_date": "2026-08-19",
@@ -973,11 +1552,10 @@
       "output_usd_1m": 1.4,
       "cache_read_usd_1m": 0.0689,
       "cache_write_usd_1m": 0.0699,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "tencent/hy-mt2-7b",
-      "slug": "tencent-hy-mt2-7b",
       "name": "Tencent: Hy-MT2-7B",
       "provider": "Tencent",
       "release_date": "2026-08-19",
@@ -985,11 +1563,54 @@
       "output_usd_1m": 0.295,
       "cache_read_usd_1m": 0.0185,
       "cache_write_usd_1m": 0.074,
-      "context_window": "8,192 Tokens"
+      "context_tokens": 8192
+    },
+    {
+      "id": "z-ai/glm-5.3",
+      "name": "Z.ai: GLM 5.3",
+      "provider": "Z-ai",
+      "release_date": "2026-08-18",
+      "input_usd_1m": 0.0699,
+      "output_usd_1m": 1.4,
+      "cache_read_usd_1m": 0.0689,
+      "cache_write_usd_1m": 0.0699,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "z-ai/glm-5.3:batch",
+      "name": "Z.ai: GLM 5.3 (batch)",
+      "provider": "Z-ai",
+      "release_date": "2026-08-18",
+      "input_usd_1m": 0.28,
+      "output_usd_1m": 1.249,
+      "cache_read_usd_1m": 0.061,
+      "cache_write_usd_1m": 0.28,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "qwen/qwen3.8-27b",
+      "name": "Qwen: Qwen3.8 27B",
+      "provider": "Qwen",
+      "release_date": "2026-08-14",
+      "input_usd_1m": 0.035,
+      "output_usd_1m": 1.5,
+      "cache_read_usd_1m": 0.0175,
+      "cache_write_usd_1m": 0.035,
+      "context_tokens": 1024000
+    },
+    {
+      "id": "qwen/qwen3.8-27b:batch",
+      "name": "Qwen: Qwen3.8 27B (batch)",
+      "provider": "Qwen",
+      "release_date": "2026-08-14",
+      "input_usd_1m": 0.16,
+      "output_usd_1m": 2.0,
+      "cache_read_usd_1m": 0.04,
+      "cache_write_usd_1m": 0.16,
+      "context_tokens": 262144
     },
     {
       "id": "google/gemini-3.7-flash",
-      "slug": "google-gemini-3-7-flash",
       "name": "Google: Gemini 3.7 Flash",
       "provider": "Google",
       "release_date": "2026-08-13",
@@ -997,11 +1618,10 @@
       "output_usd_1m": 3.75,
       "cache_read_usd_1m": 0.075,
       "cache_write_usd_1m": 0.0417,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "google/gemini-3.7-flash:batch",
-      "slug": "google-gemini-3-7-flash-batch",
       "name": "Google: Gemini 3.7 Flash (batch)",
       "provider": "Google",
       "release_date": "2026-08-13",
@@ -1009,11 +1629,10 @@
       "output_usd_1m": 1.875,
       "cache_read_usd_1m": 0.0375,
       "cache_write_usd_1m": 0.0417,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "bytedance-seed/seed-2-1-turbo",
-      "slug": "bytedance-seed-seed-2-1-turbo",
       "name": "ByteDance Seed: Seed 2.1 Turbo",
       "provider": "Bytedance-seed",
       "release_date": "2026-08-12",
@@ -1021,35 +1640,54 @@
       "output_usd_1m": 2.5,
       "cache_read_usd_1m": 0.125,
       "cache_write_usd_1m": 0.5,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
+    },
+    {
+      "id": "qwen/qwen3.8-2.4t-a95b",
+      "name": "Qwen: Qwen3.8 2.4T A95B",
+      "provider": "Qwen",
+      "release_date": "2026-08-12",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 6.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro-0813",
+      "name": "DeepSeek: DeepSeek V4 Pro 0813",
+      "provider": "Deepseek",
+      "release_date": "2026-08-12",
+      "input_usd_1m": 0.111,
+      "output_usd_1m": 4.44,
+      "cache_read_usd_1m": 0.097,
+      "cache_write_usd_1m": 0.111,
+      "context_tokens": 1048576
     },
     {
       "id": "x-ai/grok-4.6",
-      "slug": "x-ai-grok-4-6",
       "name": "SpaceXSI: Grok 4.6",
-      "provider": "xAI",
+      "provider": "X-ai",
       "release_date": "2026-08-12",
       "input_usd_1m": 2.0,
       "output_usd_1m": 6.0,
       "cache_read_usd_1m": 0.5,
       "cache_write_usd_1m": 2.0,
-      "context_window": "500,000 Tokens"
+      "context_tokens": 500000
     },
     {
       "id": "x-ai/grok-4.6:batch",
-      "slug": "x-ai-grok-4-6-batch",
       "name": "SpaceXSI: Grok 4.6 (batch)",
-      "provider": "xAI",
+      "provider": "X-ai",
       "release_date": "2026-08-12",
       "input_usd_1m": 1.6,
       "output_usd_1m": 4.8,
       "cache_read_usd_1m": 0.4,
       "cache_write_usd_1m": 1.6,
-      "context_window": "500,000 Tokens"
+      "context_tokens": 500000
     },
     {
       "id": "nvidia/nemotron-3.5-lightning",
-      "slug": "nvidia-nemotron-3-5-lightning",
       "name": "NVIDIA: Nemotron 3.5 Lightning",
       "provider": "Nvidia",
       "release_date": "2026-08-11",
@@ -1057,11 +1695,10 @@
       "output_usd_1m": 0.2,
       "cache_read_usd_1m": 0.01,
       "cache_write_usd_1m": 0.05,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "sakana/sakana-namazu",
-      "slug": "sakana-sakana-namazu",
       "name": "Sakana: Sakana Namazu",
       "provider": "Sakana",
       "release_date": "2026-08-11",
@@ -1069,11 +1706,10 @@
       "output_usd_1m": 4.0,
       "cache_read_usd_1m": 0.15,
       "cache_write_usd_1m": 0.95,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
     },
     {
       "id": "upstage/solar-pro4",
-      "slug": "upstage-solar-pro4",
       "name": "Upstage: Solar Pro 4",
       "provider": "Upstage",
       "release_date": "2026-08-10",
@@ -1081,11 +1717,10 @@
       "output_usd_1m": 0.6,
       "cache_read_usd_1m": 0.03,
       "cache_write_usd_1m": 0.15,
-      "context_window": "524,288 Tokens"
+      "context_tokens": 524288
     },
     {
       "id": "meta/muse-glimmer-30b",
-      "slug": "meta-muse-glimmer-30b",
       "name": "Meta: Muse Glimmer 30B",
       "provider": "Meta",
       "release_date": "2026-08-09",
@@ -1093,11 +1728,10 @@
       "output_usd_1m": 1.5,
       "cache_read_usd_1m": 0.04,
       "cache_write_usd_1m": 0.35,
-      "context_window": "131,072 Tokens"
+      "context_tokens": 131072
     },
     {
       "id": "meta/muse-glimmer-30b:batch",
-      "slug": "meta-muse-glimmer-30b-batch",
       "name": "Meta: Muse Glimmer 30B (batch)",
       "provider": "Meta",
       "release_date": "2026-08-09",
@@ -1105,11 +1739,10 @@
       "output_usd_1m": 0.96,
       "cache_read_usd_1m": 0.032,
       "cache_write_usd_1m": 0.24,
-      "context_window": "131,072 Tokens"
+      "context_tokens": 131072
     },
     {
       "id": "inclusionai/ling-3.0-tiny",
-      "slug": "inclusionai-ling-3-0-tiny",
       "name": "inclusionAI: Ling 3.0 Tiny",
       "provider": "Inclusionai",
       "release_date": "2026-08-06",
@@ -1117,11 +1750,10 @@
       "output_usd_1m": 0.045,
       "cache_read_usd_1m": 0.003,
       "cache_write_usd_1m": 0.015,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
     },
     {
       "id": "meta/muse-spark-1.2",
-      "slug": "meta-muse-spark-1-2",
       "name": "Meta: Muse Spark 1.2",
       "provider": "Meta",
       "release_date": "2026-08-05",
@@ -1129,11 +1761,43 @@
       "output_usd_1m": 4.25,
       "cache_read_usd_1m": 0.15,
       "cache_write_usd_1m": 1.25,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
+    },
+    {
+      "id": "~deepseek/deepseek-v4-flash-latest",
+      "name": "DeepSeek: DeepSeek V4 Flash Latest",
+      "provider": "~deepseek",
+      "release_date": "2026-08-01",
+      "input_usd_1m": 0.047,
+      "output_usd_1m": 0.3,
+      "cache_read_usd_1m": 0.035,
+      "cache_write_usd_1m": 0.047,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash-0731",
+      "name": "DeepSeek: DeepSeek V4 Flash 0731",
+      "provider": "Deepseek",
+      "release_date": "2026-07-31",
+      "input_usd_1m": 0.047,
+      "output_usd_1m": 0.3,
+      "cache_read_usd_1m": 0.035,
+      "cache_write_usd_1m": 0.047,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash-0731:batch",
+      "name": "DeepSeek: DeepSeek V4 Flash 0731 (batch)",
+      "provider": "Deepseek",
+      "release_date": "2026-07-31",
+      "input_usd_1m": 0.048,
+      "output_usd_1m": 0.144,
+      "cache_read_usd_1m": 0.012,
+      "cache_write_usd_1m": 0.048,
+      "context_tokens": 1048576
     },
     {
       "id": "thinkingmachines/inkling-small",
-      "slug": "thinkingmachines-inkling-small",
       "name": "Thinking Machines: Inkling Small",
       "provider": "Thinkingmachines",
       "release_date": "2026-07-30",
@@ -1141,11 +1805,10 @@
       "output_usd_1m": 1.2,
       "cache_read_usd_1m": 0.1,
       "cache_write_usd_1m": 0.45,
-      "context_window": "524,288 Tokens"
+      "context_tokens": 524288
     },
     {
       "id": "thinkingmachines/inkling-small:batch",
-      "slug": "thinkingmachines-inkling-small-batch",
       "name": "Thinking Machines: Inkling Small (batch)",
       "provider": "Thinkingmachines",
       "release_date": "2026-07-30",
@@ -1153,23 +1816,43 @@
       "output_usd_1m": 0.96,
       "cache_read_usd_1m": 0.08,
       "cache_write_usd_1m": 0.36,
-      "context_window": "524,288 Tokens"
+      "context_tokens": 524288
     },
     {
       "id": "qwen/qwen3.7-flash",
-      "slug": "qwen-qwen3-7-flash",
       "name": "Qwen: Qwen3.7 Flash",
-      "provider": "Alibaba Qwen",
+      "provider": "Qwen",
       "release_date": "2026-07-27",
       "input_usd_1m": 0.03,
       "output_usd_1m": 0.13,
       "cache_read_usd_1m": 0.006,
       "cache_write_usd_1m": 0.038,
-      "context_window": "1,000,000 Tokens"
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-opus-5",
+      "name": "Anthropic: Claude Opus 5",
+      "provider": "Anthropic",
+      "release_date": "2026-07-24",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 25.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 6.25,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-opus-5:batch",
+      "name": "Anthropic: Claude Opus 5 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-07-24",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 12.5,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 3.125,
+      "context_tokens": 1000000
     },
     {
       "id": "inclusionai/ling-3.0-flash",
-      "slug": "inclusionai-ling-3-0-flash",
       "name": "inclusionAI: Ling 3.0 Flash",
       "provider": "Inclusionai",
       "release_date": "2026-07-23",
@@ -1177,11 +1860,10 @@
       "output_usd_1m": 0.063,
       "cache_read_usd_1m": 0.0042,
       "cache_write_usd_1m": 0.021,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
     },
     {
       "id": "google/gemini-3.6-flash",
-      "slug": "google-gemini-3-6-flash",
       "name": "Google: Gemini 3.6 Flash",
       "provider": "Google",
       "release_date": "2026-07-21",
@@ -1189,11 +1871,10 @@
       "output_usd_1m": 3.75,
       "cache_read_usd_1m": 0.075,
       "cache_write_usd_1m": 0.0417,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "google/gemini-3.6-flash:batch",
-      "slug": "google-gemini-3-6-flash-batch",
       "name": "Google: Gemini 3.6 Flash (batch)",
       "provider": "Google",
       "release_date": "2026-07-21",
@@ -1201,11 +1882,10 @@
       "output_usd_1m": 1.875,
       "cache_read_usd_1m": 0.0375,
       "cache_write_usd_1m": 0.0417,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "google/gemini-3.5-flash-lite",
-      "slug": "google-gemini-3-5-flash-lite",
       "name": "Google: Gemini 3.5 Flash Lite",
       "provider": "Google",
       "release_date": "2026-07-21",
@@ -1213,11 +1893,10 @@
       "output_usd_1m": 2.5,
       "cache_read_usd_1m": 0.03,
       "cache_write_usd_1m": 0.0833,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "google/gemini-3.5-flash-lite:batch",
-      "slug": "google-gemini-3-5-flash-lite-batch",
       "name": "Google: Gemini 3.5 Flash Lite (batch)",
       "provider": "Google",
       "release_date": "2026-07-21",
@@ -1225,11 +1904,10 @@
       "output_usd_1m": 1.25,
       "cache_read_usd_1m": 0.015,
       "cache_write_usd_1m": 0.15,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
     },
     {
       "id": "thinkingmachines/inkling",
-      "slug": "thinkingmachines-inkling",
       "name": "Thinking Machines: Inkling",
       "provider": "Thinkingmachines",
       "release_date": "2026-07-17",
@@ -1237,11 +1915,32 @@
       "output_usd_1m": 4.05,
       "cache_read_usd_1m": 0.17,
       "cache_write_usd_1m": 1.0,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
+    },
+    {
+      "id": "moonshotai/kimi-k3",
+      "name": "MoonshotAI: Kimi K3",
+      "provider": "Moonshotai",
+      "release_date": "2026-07-16",
+      "input_usd_1m": 0.192,
+      "output_usd_1m": 16.0,
+      "cache_read_usd_1m": 0.182,
+      "cache_write_usd_1m": 0.192,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "moonshotai/kimi-k3:batch",
+      "name": "MoonshotAI: Kimi K3 (batch)",
+      "provider": "Moonshotai",
+      "release_date": "2026-07-16",
+      "input_usd_1m": 2.28,
+      "output_usd_1m": 11.4,
+      "cache_read_usd_1m": 0.228,
+      "cache_write_usd_1m": 2.28,
+      "context_tokens": 1048576
     },
     {
       "id": "meta/muse-spark-1.1",
-      "slug": "meta-muse-spark-1-1",
       "name": "Meta: Muse Spark 1.1",
       "provider": "Meta",
       "release_date": "2026-07-16",
@@ -1249,35 +1948,164 @@
       "output_usd_1m": 4.25,
       "cache_read_usd_1m": 0.15,
       "cache_write_usd_1m": 1.25,
-      "context_window": "1,048,576 Tokens"
+      "context_tokens": 1048576
+    },
+    {
+      "id": "openai/gpt-5.6-luna-pro",
+      "name": "OpenAI: GPT-5.6 Luna Pro",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 0.2,
+      "output_usd_1m": 1.2,
+      "cache_read_usd_1m": 0.02,
+      "cache_write_usd_1m": 0.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.6-luna-pro:batch",
+      "name": "OpenAI: GPT-5.6 Luna Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.6,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.6-luna",
+      "name": "OpenAI: GPT-5.6 Luna",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 0.2,
+      "output_usd_1m": 1.2,
+      "cache_read_usd_1m": 0.02,
+      "cache_write_usd_1m": 0.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.6-luna:batch",
+      "name": "OpenAI: GPT-5.6 Luna (batch)",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.6,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.6-terra-pro",
+      "name": "OpenAI: GPT-5.6 Terra Pro",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 12.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.6-terra-pro:batch",
+      "name": "OpenAI: GPT-5.6 Terra Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 6.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.6-terra",
+      "name": "OpenAI: GPT-5.6 Terra",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 12.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.6-terra:batch",
+      "name": "OpenAI: GPT-5.6 Terra (batch)",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 6.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.6-sol-pro",
+      "name": "OpenAI: GPT-5.6 Sol Pro",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 4.0,
+      "output_usd_1m": 20.0,
+      "cache_read_usd_1m": 0.4,
+      "cache_write_usd_1m": 5.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.6-sol-pro:batch",
+      "name": "OpenAI: GPT-5.6 Sol Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.6-sol",
+      "name": "OpenAI: GPT-5.6 Sol",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 4.0,
+      "output_usd_1m": 20.0,
+      "cache_read_usd_1m": 0.4,
+      "cache_write_usd_1m": 5.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.6-sol:batch",
+      "name": "OpenAI: GPT-5.6 Sol (batch)",
+      "provider": "Openai",
+      "release_date": "2026-07-09",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1050000
     },
     {
       "id": "x-ai/grok-4.5",
-      "slug": "x-ai-grok-4-5",
       "name": "SpaceXSI: Grok 4.5",
-      "provider": "xAI",
+      "provider": "X-ai",
       "release_date": "2026-07-08",
       "input_usd_1m": 2.0,
       "output_usd_1m": 6.0,
       "cache_read_usd_1m": 0.3,
       "cache_write_usd_1m": 2.0,
-      "context_window": "500,000 Tokens"
+      "context_tokens": 500000
     },
     {
       "id": "~x-ai/grok-latest",
-      "slug": "x-ai-grok-latest",
       "name": "xAI: Grok Latest",
-      "provider": "xAI",
+      "provider": "~x-ai",
       "release_date": "2026-07-08",
       "input_usd_1m": 2.0,
       "output_usd_1m": 6.0,
       "cache_read_usd_1m": 0.5,
       "cache_write_usd_1m": 2.0,
-      "context_window": "500,000 Tokens"
+      "context_tokens": 500000
     },
     {
       "id": "aion-labs/aion-3.0-mini",
-      "slug": "aion-labs-aion-3-0-mini",
       "name": "AionLabs: Aion-3.0-Mini",
       "provider": "Aion-labs",
       "release_date": "2026-07-07",
@@ -1285,11 +2113,10 @@
       "output_usd_1m": 1.4,
       "cache_read_usd_1m": 0.18,
       "cache_write_usd_1m": 0.7,
-      "context_window": "131,072 Tokens"
+      "context_tokens": 131072
     },
     {
       "id": "aion-labs/aion-3.0",
-      "slug": "aion-labs-aion-3-0",
       "name": "AionLabs: Aion-3.0",
       "provider": "Aion-labs",
       "release_date": "2026-07-07",
@@ -1297,11 +2124,10 @@
       "output_usd_1m": 6.0,
       "cache_read_usd_1m": 0.75,
       "cache_write_usd_1m": 3.0,
-      "context_window": "131,072 Tokens"
+      "context_tokens": 131072
     },
     {
       "id": "tencent/hy3",
-      "slug": "tencent-hy3",
       "name": "Tencent: Hy3",
       "provider": "Tencent",
       "release_date": "2026-07-06",
@@ -1309,11 +2135,32 @@
       "output_usd_1m": 0.528,
       "cache_read_usd_1m": 0.033,
       "cache_write_usd_1m": 0.132,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
+    },
+    {
+      "id": "anthropic/claude-sonnet-5",
+      "name": "Anthropic: Claude Sonnet 5",
+      "provider": "Anthropic",
+      "release_date": "2026-06-30",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-sonnet-5:batch",
+      "name": "Anthropic: Claude Sonnet 5 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-06-30",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 1000000
     },
     {
       "id": "google/gemini-3.1-flash-lite-image",
-      "slug": "google-gemini-3-1-flash-lite-image",
       "name": "Google: Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image)",
       "provider": "Google",
       "release_date": "2026-06-30",
@@ -1321,11 +2168,10 @@
       "output_usd_1m": 1.5,
       "cache_read_usd_1m": 0.0625,
       "cache_write_usd_1m": 0.25,
-      "context_window": "65,536 Tokens"
+      "context_tokens": 65536
     },
     {
       "id": "sakana/fugu-ultra",
-      "slug": "sakana-fugu-ultra",
       "name": "Sakana: Fugu Ultra",
       "provider": "Sakana",
       "release_date": "2026-06-24",
@@ -1333,11 +2179,10 @@
       "output_usd_1m": 30.0,
       "cache_read_usd_1m": 0.5,
       "cache_write_usd_1m": 5.0,
-      "context_window": "1,000,000 Tokens"
+      "context_tokens": 1000000
     },
     {
       "id": "google/gemini-3.1-flash-image",
-      "slug": "google-gemini-3-1-flash-image",
       "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image)",
       "provider": "Google",
       "release_date": "2026-06-18",
@@ -1345,11 +2190,10 @@
       "output_usd_1m": 3.0,
       "cache_read_usd_1m": 0.125,
       "cache_write_usd_1m": 0.5,
-      "context_window": "131,072 Tokens"
+      "context_tokens": 131072
     },
     {
       "id": "google/gemini-3-pro-image",
-      "slug": "google-gemini-3-pro-image",
       "name": "Google: Nano Banana Pro (Gemini 3 Pro Image)",
       "provider": "Google",
       "release_date": "2026-06-18",
@@ -1357,19 +2201,2779 @@
       "output_usd_1m": 12.0,
       "cache_read_usd_1m": 0.2,
       "cache_write_usd_1m": 0.375,
-      "context_window": "131,072 Tokens"
+      "context_tokens": 131072
+    },
+    {
+      "id": "z-ai/glm-5.2",
+      "name": "Z.ai: GLM 5.2",
+      "provider": "Z-ai",
+      "release_date": "2026-06-16",
+      "input_usd_1m": 0.62,
+      "output_usd_1m": 2.42,
+      "cache_read_usd_1m": 0.14,
+      "cache_write_usd_1m": 0.62,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "z-ai/glm-5.2:batch",
+      "name": "Z.ai: GLM 5.2 (batch)",
+      "provider": "Z-ai",
+      "release_date": "2026-06-16",
+      "input_usd_1m": 0.322,
+      "output_usd_1m": 0.989,
+      "cache_read_usd_1m": 0.109,
+      "cache_write_usd_1m": 0.322,
+      "context_tokens": 1048576
     },
     {
       "id": "moonshotai/kimi-k2.7-code",
-      "slug": "moonshotai-kimi-k2-7-code",
       "name": "MoonshotAI: Kimi K2.7 Code",
-      "provider": "Moonshot AI",
+      "provider": "Moonshotai",
       "release_date": "2026-06-12",
       "input_usd_1m": 0.6,
       "output_usd_1m": 3.0,
       "cache_read_usd_1m": 0.12,
       "cache_write_usd_1m": 0.6,
-      "context_window": "262,144 Tokens"
+      "context_tokens": 262144
+    },
+    {
+      "id": "~anthropic/claude-fable-latest",
+      "name": "Anthropic: Claude Fable Latest",
+      "provider": "~anthropic",
+      "release_date": "2026-06-09",
+      "input_usd_1m": 8.0,
+      "output_usd_1m": 40.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 10.0,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-fable-5",
+      "name": "Anthropic: Claude Fable 5",
+      "provider": "Anthropic",
+      "release_date": "2026-06-09",
+      "input_usd_1m": 10.0,
+      "output_usd_1m": 50.0,
+      "cache_read_usd_1m": 1.0,
+      "cache_write_usd_1m": 12.5,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-fable-5:batch",
+      "name": "Anthropic: Claude Fable 5 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-06-09",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 25.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 6.25,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "nvidia/nemotron-3.5-content-safety",
+      "name": "NVIDIA: Nemotron 3.5 Content Safety",
+      "provider": "Nvidia",
+      "release_date": "2026-06-04",
+      "input_usd_1m": 0.2,
+      "output_usd_1m": 0.2,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.2,
+      "context_tokens": 131072
+    },
+    {
+      "id": "nvidia/nemotron-3-ultra-550b-a55b",
+      "name": "NVIDIA: Nemotron 3 Ultra",
+      "provider": "Nvidia",
+      "release_date": "2026-06-04",
+      "input_usd_1m": 0.5,
+      "output_usd_1m": 2.2,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 0.5,
+      "context_tokens": 262144
+    },
+    {
+      "id": "qwen/qwen3.7-plus",
+      "name": "Qwen: Qwen3.7 Plus",
+      "provider": "Qwen",
+      "release_date": "2026-06-03",
+      "input_usd_1m": 0.32,
+      "output_usd_1m": 1.28,
+      "cache_read_usd_1m": 0.064,
+      "cache_write_usd_1m": 0.4,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "qwen/qwen3.7-plus:batch",
+      "name": "Qwen: Qwen3.7 Plus (batch)",
+      "provider": "Qwen",
+      "release_date": "2026-06-03",
+      "input_usd_1m": 0.23,
+      "output_usd_1m": 0.92,
+      "cache_read_usd_1m": 0.0575,
+      "cache_write_usd_1m": 0.23,
+      "context_tokens": 262144
+    },
+    {
+      "id": "minimax/minimax-m3",
+      "name": "MiniMax: MiniMax M3",
+      "provider": "Minimax",
+      "release_date": "2026-05-31",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 1.2,
+      "cache_read_usd_1m": 0.06,
+      "cache_write_usd_1m": 0.3,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "minimax/minimax-m3:batch",
+      "name": "MiniMax: MiniMax M3 (batch)",
+      "provider": "Minimax",
+      "release_date": "2026-05-31",
+      "input_usd_1m": 0.224,
+      "output_usd_1m": 0.88,
+      "cache_read_usd_1m": 0.0448,
+      "cache_write_usd_1m": 0.224,
+      "context_tokens": 524288
+    },
+    {
+      "id": "stepfun/step-3.7-flash",
+      "name": "StepFun: Step 3.7 Flash",
+      "provider": "Stepfun",
+      "release_date": "2026-05-28",
+      "input_usd_1m": 0.2,
+      "output_usd_1m": 1.15,
+      "cache_read_usd_1m": 0.04,
+      "cache_write_usd_1m": 0.2,
+      "context_tokens": 256000
+    },
+    {
+      "id": "anthropic/claude-opus-4.8",
+      "name": "Anthropic: Claude Opus 4.8",
+      "provider": "Anthropic",
+      "release_date": "2026-05-27",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 25.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 6.25,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-opus-4.8:batch",
+      "name": "Anthropic: Claude Opus 4.8 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-05-27",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 12.5,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 3.125,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "qwen/qwen3.7-max",
+      "name": "Qwen: Qwen3.7 Max",
+      "provider": "Qwen",
+      "release_date": "2026-05-21",
+      "input_usd_1m": 1.475,
+      "output_usd_1m": 4.425,
+      "cache_read_usd_1m": 0.295,
+      "cache_write_usd_1m": 1.8438,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "google/gemini-3.5-flash",
+      "name": "Google: Gemini 3.5 Flash",
+      "provider": "Google",
+      "release_date": "2026-05-19",
+      "input_usd_1m": 1.5,
+      "output_usd_1m": 9.0,
+      "cache_read_usd_1m": 0.15,
+      "cache_write_usd_1m": 0.0833,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "google/gemini-3.5-flash:batch",
+      "name": "Google: Gemini 3.5 Flash (batch)",
+      "provider": "Google",
+      "release_date": "2026-05-19",
+      "input_usd_1m": 0.75,
+      "output_usd_1m": 4.5,
+      "cache_read_usd_1m": 0.075,
+      "cache_write_usd_1m": 0.75,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "perceptron/perceptron-mk1",
+      "name": "Perceptron: Perceptron Mk1",
+      "provider": "Perceptron",
+      "release_date": "2026-05-12",
+      "input_usd_1m": 0.15,
+      "output_usd_1m": 1.5,
+      "cache_read_usd_1m": 0.0375,
+      "cache_write_usd_1m": 0.15,
+      "context_tokens": 32768
+    },
+    {
+      "id": "google/gemini-3.1-flash-lite",
+      "name": "Google: Gemini 3.1 Flash Lite",
+      "provider": "Google",
+      "release_date": "2026-05-07",
+      "input_usd_1m": 0.25,
+      "output_usd_1m": 1.5,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.0833,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "google/gemini-3.1-flash-lite:batch",
+      "name": "Google: Gemini 3.1 Flash Lite (batch)",
+      "provider": "Google",
+      "release_date": "2026-05-07",
+      "input_usd_1m": 0.125,
+      "output_usd_1m": 0.75,
+      "cache_read_usd_1m": 0.0125,
+      "cache_write_usd_1m": 0.125,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "openai/gpt-chat-latest",
+      "name": "OpenAI: GPT Chat Latest",
+      "provider": "Openai",
+      "release_date": "2026-05-05",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 30.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 5.0,
+      "context_tokens": 400000
+    },
+    {
+      "id": "x-ai/grok-4.3",
+      "name": "SpaceXSI: Grok 4.3",
+      "provider": "X-ai",
+      "release_date": "2026-04-30",
+      "input_usd_1m": 1.25,
+      "output_usd_1m": 2.5,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "x-ai/grok-4.3:batch",
+      "name": "SpaceXSI: Grok 4.3 (batch)",
+      "provider": "X-ai",
+      "release_date": "2026-04-30",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 2.0,
+      "cache_read_usd_1m": 0.16,
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "mistralai/mistral-medium-3-5",
+      "name": "Mistral: Mistral Medium 3.5",
+      "provider": "Mistralai",
+      "release_date": "2026-04-30",
+      "input_usd_1m": 1.5,
+      "output_usd_1m": 7.5,
+      "cache_read_usd_1m": 0.375,
+      "cache_write_usd_1m": 1.5,
+      "context_tokens": 262144
+    },
+    {
+      "id": "mistralai/mistral-medium-3-5:batch",
+      "name": "Mistral: Mistral Medium 3.5 (batch)",
+      "provider": "Mistralai",
+      "release_date": "2026-04-30",
+      "input_usd_1m": 0.75,
+      "output_usd_1m": 3.75,
+      "cache_read_usd_1m": 0.1875,
+      "cache_write_usd_1m": 0.75,
+      "context_tokens": 262144
+    },
+    {
+      "id": "~anthropic/claude-haiku-latest",
+      "name": "Anthropic: Claude Haiku Latest",
+      "provider": "~anthropic",
+      "release_date": "2026-04-27",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.5,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.125,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "~openai/gpt-mini-latest",
+      "name": "OpenAI: GPT Mini Latest",
+      "provider": "~openai",
+      "release_date": "2026-04-27",
+      "input_usd_1m": 0.75,
+      "output_usd_1m": 4.5,
+      "cache_read_usd_1m": 0.075,
+      "cache_write_usd_1m": 0.75,
+      "context_tokens": 400000
+    },
+    {
+      "id": "~google/gemini-pro-latest",
+      "name": "Google: Gemini Pro Latest",
+      "provider": "~google",
+      "release_date": "2026-04-27",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 0.1875,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "~moonshotai/kimi-latest",
+      "name": "MoonshotAI: Kimi Latest",
+      "provider": "~moonshotai",
+      "release_date": "2026-04-27",
+      "input_usd_1m": 0.1824,
+      "output_usd_1m": 11.0055,
+      "cache_read_usd_1m": 0.18,
+      "cache_write_usd_1m": 0.1824,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "~google/gemini-flash-latest",
+      "name": "Google: Gemini Flash Latest",
+      "provider": "~google",
+      "release_date": "2026-04-27",
+      "input_usd_1m": 1.5,
+      "output_usd_1m": 7.5,
+      "cache_read_usd_1m": 0.075,
+      "cache_write_usd_1m": 0.0833,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "~anthropic/claude-sonnet-latest",
+      "name": "Anthropic: Claude Sonnet Latest",
+      "provider": "~anthropic",
+      "release_date": "2026-04-27",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "qwen/qwen3.5-plus-20260420",
+      "name": "Qwen: Qwen3.5 Plus 2026-04-20",
+      "provider": "Qwen",
+      "release_date": "2026-04-27",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 1.8,
+      "cache_read_usd_1m": 0.075,
+      "cache_write_usd_1m": 0.375,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "qwen/qwen3.6-flash",
+      "name": "Qwen: Qwen3.6 Flash",
+      "provider": "Qwen",
+      "release_date": "2026-04-27",
+      "input_usd_1m": 0.1875,
+      "output_usd_1m": 1.125,
+      "cache_read_usd_1m": 0.0469,
+      "cache_write_usd_1m": 0.2344,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "qwen/qwen3.6-35b-a3b",
+      "name": "Qwen: Qwen3.6 35B A3B",
+      "provider": "Qwen",
+      "release_date": "2026-04-27",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.89,
+      "cache_read_usd_1m": 0.035,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 262144
+    },
+    {
+      "id": "qwen/qwen3.6-27b",
+      "name": "Qwen: Qwen3.6 27B",
+      "provider": "Qwen",
+      "release_date": "2026-04-27",
+      "input_usd_1m": 0.32,
+      "output_usd_1m": 3.2,
+      "cache_read_usd_1m": 0.08,
+      "cache_write_usd_1m": 0.32,
+      "context_tokens": 262144
+    },
+    {
+      "id": "openai/gpt-5.5-pro",
+      "name": "OpenAI: GPT-5.5 Pro",
+      "provider": "Openai",
+      "release_date": "2026-04-24",
+      "input_usd_1m": 30.0,
+      "output_usd_1m": 180.0,
+      "cache_read_usd_1m": 7.5,
+      "cache_write_usd_1m": 30.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.5-pro:batch",
+      "name": "OpenAI: GPT-5.5 Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-04-24",
+      "input_usd_1m": 15.0,
+      "output_usd_1m": 90.0,
+      "cache_read_usd_1m": 3.75,
+      "cache_write_usd_1m": 15.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.5",
+      "name": "OpenAI: GPT-5.5",
+      "provider": "Openai",
+      "release_date": "2026-04-24",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 30.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 5.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.5:batch",
+      "name": "OpenAI: GPT-5.5 (batch)",
+      "provider": "Openai",
+      "release_date": "2026-04-24",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 15.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro",
+      "name": "DeepSeek: DeepSeek V4 Pro 0423",
+      "provider": "Deepseek",
+      "release_date": "2026-04-24",
+      "input_usd_1m": 1.28,
+      "output_usd_1m": 2.56,
+      "cache_read_usd_1m": 0.108,
+      "cache_write_usd_1m": 1.28,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash",
+      "name": "DeepSeek: DeepSeek V4 Flash 0423",
+      "provider": "Deepseek",
+      "release_date": "2026-04-24",
+      "input_usd_1m": 0.09,
+      "output_usd_1m": 0.18,
+      "cache_read_usd_1m": 0.018,
+      "cache_write_usd_1m": 0.09,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "openai/gpt-5.4-image-2",
+      "name": "OpenAI: GPT-5.4 Image 2",
+      "provider": "Openai",
+      "release_date": "2026-04-21",
+      "input_usd_1m": 8.0,
+      "output_usd_1m": 15.0,
+      "cache_read_usd_1m": 2.0,
+      "cache_write_usd_1m": 8.0,
+      "context_tokens": 272000
+    },
+    {
+      "id": "~anthropic/claude-opus-latest",
+      "name": "Anthropic: Claude Opus Latest",
+      "provider": "~anthropic",
+      "release_date": "2026-04-21",
+      "input_usd_1m": 4.0,
+      "output_usd_1m": 20.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 5.0,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "moonshotai/kimi-k2.6",
+      "name": "MoonshotAI: Kimi K2.6",
+      "provider": "Moonshotai",
+      "release_date": "2026-04-20",
+      "input_usd_1m": 0.65,
+      "output_usd_1m": 3.41,
+      "cache_read_usd_1m": 0.15,
+      "cache_write_usd_1m": 0.65,
+      "context_tokens": 262144
+    },
+    {
+      "id": "anthropic/claude-opus-4.7",
+      "name": "Anthropic: Claude Opus 4.7",
+      "provider": "Anthropic",
+      "release_date": "2026-04-16",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 25.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 6.25,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-opus-4.7:batch",
+      "name": "Anthropic: Claude Opus 4.7 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-04-16",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 12.5,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 3.125,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "z-ai/glm-5.1",
+      "name": "Z.ai: GLM 5.1",
+      "provider": "Z-ai",
+      "release_date": "2026-04-07",
+      "input_usd_1m": 1.4,
+      "output_usd_1m": 4.4,
+      "cache_read_usd_1m": 0.26,
+      "cache_write_usd_1m": 1.4,
+      "context_tokens": 204800
+    },
+    {
+      "id": "google/gemma-4-26b-a4b-it",
+      "name": "Google: Gemma 4 26B A4B ",
+      "provider": "Google",
+      "release_date": "2026-04-03",
+      "input_usd_1m": 0.0765,
+      "output_usd_1m": 0.255,
+      "cache_read_usd_1m": 0.0425,
+      "cache_write_usd_1m": 0.0765,
+      "context_tokens": 262144
+    },
+    {
+      "id": "google/gemma-4-31b-it",
+      "name": "Google: Gemma 4 31B",
+      "provider": "Google",
+      "release_date": "2026-04-02",
+      "input_usd_1m": 0.2,
+      "output_usd_1m": 0.4,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.2,
+      "context_tokens": 262144
+    },
+    {
+      "id": "qwen/qwen3.6-plus",
+      "name": "Qwen: Qwen3.6 Plus",
+      "provider": "Qwen",
+      "release_date": "2026-04-02",
+      "input_usd_1m": 0.325,
+      "output_usd_1m": 1.95,
+      "cache_read_usd_1m": 0.0813,
+      "cache_write_usd_1m": 0.4062,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "z-ai/glm-5v-turbo",
+      "name": "Z.ai: GLM 5V Turbo",
+      "provider": "Z-ai",
+      "release_date": "2026-04-01",
+      "input_usd_1m": 1.2,
+      "output_usd_1m": 4.0,
+      "cache_read_usd_1m": 0.24,
+      "cache_write_usd_1m": 1.2,
+      "context_tokens": 202752
+    },
+    {
+      "id": "x-ai/grok-4.20-multi-agent",
+      "name": "SpaceXSI: Grok 4.20 Multi-Agent",
+      "provider": "X-ai",
+      "release_date": "2026-03-31",
+      "input_usd_1m": 1.25,
+      "output_usd_1m": 2.5,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 2000000
+    },
+    {
+      "id": "x-ai/grok-4.20",
+      "name": "SpaceXSI: Grok 4.20",
+      "provider": "X-ai",
+      "release_date": "2026-03-31",
+      "input_usd_1m": 1.25,
+      "output_usd_1m": 2.5,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 2000000
+    },
+    {
+      "id": "rekaai/reka-edge",
+      "name": "Reka Edge",
+      "provider": "Rekaai",
+      "release_date": "2026-03-20",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.1,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 16384
+    },
+    {
+      "id": "minimax/minimax-m2.7",
+      "name": "MiniMax: MiniMax M2.7",
+      "provider": "Minimax",
+      "release_date": "2026-03-18",
+      "input_usd_1m": 0.6,
+      "output_usd_1m": 1.8,
+      "cache_read_usd_1m": 0.15,
+      "cache_write_usd_1m": 0.6,
+      "context_tokens": 196608
+    },
+    {
+      "id": "openai/gpt-5.4-nano",
+      "name": "OpenAI: GPT-5.4 Nano",
+      "provider": "Openai",
+      "release_date": "2026-03-17",
+      "input_usd_1m": 0.2,
+      "output_usd_1m": 1.25,
+      "cache_read_usd_1m": 0.02,
+      "cache_write_usd_1m": 0.2,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5.4-nano:batch",
+      "name": "OpenAI: GPT-5.4 Nano (batch)",
+      "provider": "Openai",
+      "release_date": "2026-03-17",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.625,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5.4-mini",
+      "name": "OpenAI: GPT-5.4 Mini",
+      "provider": "Openai",
+      "release_date": "2026-03-17",
+      "input_usd_1m": 0.75,
+      "output_usd_1m": 4.5,
+      "cache_read_usd_1m": 0.075,
+      "cache_write_usd_1m": 0.75,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5.4-mini:batch",
+      "name": "OpenAI: GPT-5.4 Mini (batch)",
+      "provider": "Openai",
+      "release_date": "2026-03-17",
+      "input_usd_1m": 0.375,
+      "output_usd_1m": 2.25,
+      "cache_read_usd_1m": 0.0375,
+      "cache_write_usd_1m": 0.375,
+      "context_tokens": 400000
+    },
+    {
+      "id": "mistralai/mistral-small-2603",
+      "name": "Mistral: Mistral Small 4",
+      "provider": "Mistralai",
+      "release_date": "2026-03-16",
+      "input_usd_1m": 0.15,
+      "output_usd_1m": 0.6,
+      "cache_read_usd_1m": 0.015,
+      "cache_write_usd_1m": 0.15,
+      "context_tokens": 262144
+    },
+    {
+      "id": "z-ai/glm-5-turbo",
+      "name": "Z.ai: GLM 5 Turbo",
+      "provider": "Z-ai",
+      "release_date": "2026-03-15",
+      "input_usd_1m": 1.2,
+      "output_usd_1m": 4.0,
+      "cache_read_usd_1m": 0.24,
+      "cache_write_usd_1m": 1.2,
+      "context_tokens": 202752
+    },
+    {
+      "id": "nvidia/nemotron-3-super-120b-a12b",
+      "name": "NVIDIA: Nemotron 3 Super",
+      "provider": "Nvidia",
+      "release_date": "2026-03-11",
+      "input_usd_1m": 0.075,
+      "output_usd_1m": 0.4,
+      "cache_read_usd_1m": 0.0187,
+      "cache_write_usd_1m": 0.075,
+      "context_tokens": 262144
+    },
+    {
+      "id": "bytedance-seed/seed-2.0-lite",
+      "name": "ByteDance Seed: Seed-2.0-Lite",
+      "provider": "Bytedance-seed",
+      "release_date": "2026-03-10",
+      "input_usd_1m": 0.25,
+      "output_usd_1m": 2.0,
+      "cache_read_usd_1m": 0.0625,
+      "cache_write_usd_1m": 0.25,
+      "context_tokens": 262144
+    },
+    {
+      "id": "qwen/qwen3.5-9b",
+      "name": "Qwen: Qwen3.5-9B",
+      "provider": "Qwen",
+      "release_date": "2026-03-10",
+      "input_usd_1m": 0.17,
+      "output_usd_1m": 0.25,
+      "cache_read_usd_1m": 0.0425,
+      "cache_write_usd_1m": 0.17,
+      "context_tokens": 262144
+    },
+    {
+      "id": "openai/gpt-5.4-pro",
+      "name": "OpenAI: GPT-5.4 Pro",
+      "provider": "Openai",
+      "release_date": "2026-03-05",
+      "input_usd_1m": 30.0,
+      "output_usd_1m": 180.0,
+      "cache_read_usd_1m": 7.5,
+      "cache_write_usd_1m": 30.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.4-pro:batch",
+      "name": "OpenAI: GPT-5.4 Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2026-03-05",
+      "input_usd_1m": 15.0,
+      "output_usd_1m": 90.0,
+      "cache_read_usd_1m": 3.75,
+      "cache_write_usd_1m": 15.0,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.4",
+      "name": "OpenAI: GPT-5.4",
+      "provider": "Openai",
+      "release_date": "2026-03-05",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 15.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "openai/gpt-5.4:batch",
+      "name": "OpenAI: GPT-5.4 (batch)",
+      "provider": "Openai",
+      "release_date": "2026-03-05",
+      "input_usd_1m": 1.25,
+      "output_usd_1m": 7.5,
+      "cache_read_usd_1m": 0.125,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 1050000
+    },
+    {
+      "id": "google/gemini-3.1-flash-lite-preview",
+      "name": "Google: Gemini 3.1 Flash Lite Preview",
+      "provider": "Google",
+      "release_date": "2026-03-03",
+      "input_usd_1m": 0.25,
+      "output_usd_1m": 1.5,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.0833,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "bytedance-seed/seed-2.0-mini",
+      "name": "ByteDance Seed: Seed-2.0-Mini",
+      "provider": "Bytedance-seed",
+      "release_date": "2026-02-26",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.4,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 262144
+    },
+    {
+      "id": "google/gemini-3.1-flash-image-preview",
+      "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image Preview)",
+      "provider": "Google",
+      "release_date": "2026-02-26",
+      "input_usd_1m": 0.5,
+      "output_usd_1m": 3.0,
+      "cache_read_usd_1m": 0.125,
+      "cache_write_usd_1m": 0.5,
+      "context_tokens": 65536
+    },
+    {
+      "id": "qwen/qwen3.5-35b-a3b",
+      "name": "Qwen: Qwen3.5-35B-A3B",
+      "provider": "Qwen",
+      "release_date": "2026-02-25",
+      "input_usd_1m": 0.14,
+      "output_usd_1m": 1.0,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.14,
+      "context_tokens": 262144
+    },
+    {
+      "id": "qwen/qwen3.5-27b",
+      "name": "Qwen: Qwen3.5-27B",
+      "provider": "Qwen",
+      "release_date": "2026-02-25",
+      "input_usd_1m": 0.26,
+      "output_usd_1m": 2.6,
+      "cache_read_usd_1m": 0.065,
+      "cache_write_usd_1m": 0.26,
+      "context_tokens": 262144
+    },
+    {
+      "id": "qwen/qwen3.5-122b-a10b",
+      "name": "Qwen: Qwen3.5-122B-A10B",
+      "provider": "Qwen",
+      "release_date": "2026-02-25",
+      "input_usd_1m": 0.26,
+      "output_usd_1m": 2.08,
+      "cache_read_usd_1m": 0.065,
+      "cache_write_usd_1m": 0.26,
+      "context_tokens": 262144
+    },
+    {
+      "id": "qwen/qwen3.5-flash-02-23",
+      "name": "Qwen: Qwen3.5-Flash",
+      "provider": "Qwen",
+      "release_date": "2026-02-25",
+      "input_usd_1m": 0.065,
+      "output_usd_1m": 0.26,
+      "cache_read_usd_1m": 0.0163,
+      "cache_write_usd_1m": 0.065,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "google/gemini-3.1-pro-preview-customtools",
+      "name": "Google: Gemini 3.1 Pro Preview Custom Tools",
+      "provider": "Google",
+      "release_date": "2026-02-25",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 12.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 0.375,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "openai/gpt-5.3-codex",
+      "name": "OpenAI: GPT-5.3-Codex",
+      "provider": "Openai",
+      "release_date": "2026-02-24",
+      "input_usd_1m": 1.75,
+      "output_usd_1m": 14.0,
+      "cache_read_usd_1m": 0.175,
+      "cache_write_usd_1m": 1.75,
+      "context_tokens": 400000
+    },
+    {
+      "id": "aion-labs/aion-2.0",
+      "name": "AionLabs: Aion-2.0",
+      "provider": "Aion-labs",
+      "release_date": "2026-02-23",
+      "input_usd_1m": 0.8,
+      "output_usd_1m": 1.6,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 0.8,
+      "context_tokens": 131072
+    },
+    {
+      "id": "google/gemini-3.1-pro-preview",
+      "name": "Google: Gemini 3.1 Pro Preview",
+      "provider": "Google",
+      "release_date": "2026-02-19",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 12.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 0.375,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "google/gemini-3.1-pro-preview:batch",
+      "name": "Google: Gemini 3.1 Pro Preview (batch)",
+      "provider": "Google",
+      "release_date": "2026-02-19",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 6.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.6",
+      "name": "Anthropic: Claude Sonnet 4.6",
+      "provider": "Anthropic",
+      "release_date": "2026-02-17",
+      "input_usd_1m": 3.0,
+      "output_usd_1m": 15.0,
+      "cache_read_usd_1m": 0.3,
+      "cache_write_usd_1m": 3.75,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.6:batch",
+      "name": "Anthropic: Claude Sonnet 4.6 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-02-17",
+      "input_usd_1m": 1.5,
+      "output_usd_1m": 7.5,
+      "cache_read_usd_1m": 0.15,
+      "cache_write_usd_1m": 1.875,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "qwen/qwen3.5-plus-02-15",
+      "name": "Qwen: Qwen3.5 Plus 2026-02-15",
+      "provider": "Qwen",
+      "release_date": "2026-02-16",
+      "input_usd_1m": 0.26,
+      "output_usd_1m": 1.56,
+      "cache_read_usd_1m": 0.065,
+      "cache_write_usd_1m": 0.26,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "qwen/qwen3.5-397b-a17b",
+      "name": "Qwen: Qwen3.5 397B A17B",
+      "provider": "Qwen",
+      "release_date": "2026-02-16",
+      "input_usd_1m": 0.45,
+      "output_usd_1m": 3.0,
+      "cache_read_usd_1m": 0.22,
+      "cache_write_usd_1m": 0.45,
+      "context_tokens": 262144
+    },
+    {
+      "id": "minimax/minimax-m2.5",
+      "name": "MiniMax: MiniMax M2.5",
+      "provider": "Minimax",
+      "release_date": "2026-02-12",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 1.2,
+      "cache_read_usd_1m": 0.06,
+      "cache_write_usd_1m": 0.3,
+      "context_tokens": 65536
+    },
+    {
+      "id": "z-ai/glm-5",
+      "name": "Z.ai: GLM 5",
+      "provider": "Z-ai",
+      "release_date": "2026-02-11",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 3.2,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 204800
+    },
+    {
+      "id": "anthropic/claude-opus-4.6",
+      "name": "Anthropic: Claude Opus 4.6",
+      "provider": "Anthropic",
+      "release_date": "2026-02-04",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 25.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 6.25,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-opus-4.6:batch",
+      "name": "Anthropic: Claude Opus 4.6 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2026-02-04",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 12.5,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 3.125,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "qwen/qwen3-coder-next",
+      "name": "Qwen: Qwen3 Coder Next",
+      "provider": "Qwen",
+      "release_date": "2026-02-04",
+      "input_usd_1m": 0.12,
+      "output_usd_1m": 0.8,
+      "cache_read_usd_1m": 0.07,
+      "cache_write_usd_1m": 0.12,
+      "context_tokens": 262144
+    },
+    {
+      "id": "moonshotai/kimi-k2.5",
+      "name": "MoonshotAI: Kimi K2.5",
+      "provider": "Moonshotai",
+      "release_date": "2026-01-27",
+      "input_usd_1m": 0.5,
+      "output_usd_1m": 2.5,
+      "cache_read_usd_1m": 0.15,
+      "cache_write_usd_1m": 0.5,
+      "context_tokens": 262144
+    },
+    {
+      "id": "writer/palmyra-x5",
+      "name": "Writer: Palmyra X5",
+      "provider": "Writer",
+      "release_date": "2026-01-21",
+      "input_usd_1m": 0.6,
+      "output_usd_1m": 6.0,
+      "cache_read_usd_1m": 0.15,
+      "cache_write_usd_1m": 0.6,
+      "context_tokens": 1040000
+    },
+    {
+      "id": "openai/gpt-audio",
+      "name": "OpenAI: GPT Audio",
+      "provider": "Openai",
+      "release_date": "2026-01-19",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.625,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 128000
+    },
+    {
+      "id": "openai/gpt-audio-mini",
+      "name": "OpenAI: GPT Audio Mini",
+      "provider": "Openai",
+      "release_date": "2026-01-19",
+      "input_usd_1m": 0.6,
+      "output_usd_1m": 2.4,
+      "cache_read_usd_1m": 0.15,
+      "cache_write_usd_1m": 0.6,
+      "context_tokens": 128000
+    },
+    {
+      "id": "z-ai/glm-4.7-flash",
+      "name": "Z.ai: GLM 4.7 Flash",
+      "provider": "Z-ai",
+      "release_date": "2026-01-19",
+      "input_usd_1m": 0.0605,
+      "output_usd_1m": 0.4,
+      "cache_read_usd_1m": 0.0151,
+      "cache_write_usd_1m": 0.0605,
+      "context_tokens": 200000
+    },
+    {
+      "id": "openai/gpt-5.2-codex",
+      "name": "OpenAI: GPT-5.2-Codex",
+      "provider": "Openai",
+      "release_date": "2026-01-14",
+      "input_usd_1m": 1.75,
+      "output_usd_1m": 14.0,
+      "cache_read_usd_1m": 0.175,
+      "cache_write_usd_1m": 1.75,
+      "context_tokens": 400000
+    },
+    {
+      "id": "z-ai/glm-4.7",
+      "name": "Z.ai: GLM 4.7",
+      "provider": "Z-ai",
+      "release_date": "2025-12-22",
+      "input_usd_1m": 0.6,
+      "output_usd_1m": 2.2,
+      "cache_read_usd_1m": 0.11,
+      "cache_write_usd_1m": 0.6,
+      "context_tokens": 204800
+    },
+    {
+      "id": "google/gemini-3-flash-preview",
+      "name": "Google: Gemini 3 Flash Preview",
+      "provider": "Google",
+      "release_date": "2025-12-17",
+      "input_usd_1m": 0.5,
+      "output_usd_1m": 3.0,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.0833,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "google/gemini-3-flash-preview:batch",
+      "name": "Google: Gemini 3 Flash Preview (batch)",
+      "provider": "Google",
+      "release_date": "2025-12-17",
+      "input_usd_1m": 0.25,
+      "output_usd_1m": 1.5,
+      "cache_read_usd_1m": 0.0625,
+      "cache_write_usd_1m": 0.25,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-30b-a3b",
+      "name": "NVIDIA: Nemotron 3 Nano 30B A3B",
+      "provider": "Nvidia",
+      "release_date": "2025-12-14",
+      "input_usd_1m": 0.06,
+      "output_usd_1m": 0.24,
+      "cache_read_usd_1m": 0.012,
+      "cache_write_usd_1m": 0.06,
+      "context_tokens": 262144
+    },
+    {
+      "id": "openai/gpt-5.2-chat",
+      "name": "OpenAI: GPT-5.2 Chat",
+      "provider": "Openai",
+      "release_date": "2025-12-10",
+      "input_usd_1m": 1.75,
+      "output_usd_1m": 14.0,
+      "cache_read_usd_1m": 0.175,
+      "cache_write_usd_1m": 1.75,
+      "context_tokens": 128000
+    },
+    {
+      "id": "openai/gpt-5.2-pro",
+      "name": "OpenAI: GPT-5.2 Pro",
+      "provider": "Openai",
+      "release_date": "2025-12-10",
+      "input_usd_1m": 21.0,
+      "output_usd_1m": 168.0,
+      "cache_read_usd_1m": 5.25,
+      "cache_write_usd_1m": 21.0,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5.2-pro:batch",
+      "name": "OpenAI: GPT-5.2 Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2025-12-10",
+      "input_usd_1m": 10.5,
+      "output_usd_1m": 84.0,
+      "cache_read_usd_1m": 2.625,
+      "cache_write_usd_1m": 10.5,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5.2",
+      "name": "OpenAI: GPT-5.2",
+      "provider": "Openai",
+      "release_date": "2025-12-10",
+      "input_usd_1m": 1.75,
+      "output_usd_1m": 14.0,
+      "cache_read_usd_1m": 0.175,
+      "cache_write_usd_1m": 1.75,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5.2:batch",
+      "name": "OpenAI: GPT-5.2 (batch)",
+      "provider": "Openai",
+      "release_date": "2025-12-10",
+      "input_usd_1m": 0.875,
+      "output_usd_1m": 7.0,
+      "cache_read_usd_1m": 0.0875,
+      "cache_write_usd_1m": 0.875,
+      "context_tokens": 400000
+    },
+    {
+      "id": "mistralai/devstral-2512",
+      "name": "Mistral: Devstral 2 2512",
+      "provider": "Mistralai",
+      "release_date": "2025-12-09",
+      "input_usd_1m": 0.4,
+      "output_usd_1m": 2.0,
+      "cache_read_usd_1m": 0.04,
+      "cache_write_usd_1m": 0.4,
+      "context_tokens": 262144
+    },
+    {
+      "id": "relace/relace-search",
+      "name": "Relace: Relace Search",
+      "provider": "Relace",
+      "release_date": "2025-12-08",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 3.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 256000
+    },
+    {
+      "id": "z-ai/glm-4.6v",
+      "name": "Z.ai: GLM 4.6V",
+      "provider": "Z-ai",
+      "release_date": "2025-12-08",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 0.9,
+      "cache_read_usd_1m": 0.055,
+      "cache_write_usd_1m": 0.3,
+      "context_tokens": 131072
+    },
+    {
+      "id": "openai/gpt-5.1-codex-max",
+      "name": "OpenAI: GPT-5.1-Codex-Max",
+      "provider": "Openai",
+      "release_date": "2025-12-04",
+      "input_usd_1m": 1.25,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.125,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 400000
+    },
+    {
+      "id": "amazon/nova-2-lite-v1",
+      "name": "Amazon: Nova 2 Lite",
+      "provider": "Amazon",
+      "release_date": "2025-12-02",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 2.5,
+      "cache_read_usd_1m": 0.075,
+      "cache_write_usd_1m": 0.3,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "mistralai/ministral-14b-2512",
+      "name": "Mistral: Ministral 3 14B 2512",
+      "provider": "Mistralai",
+      "release_date": "2025-12-02",
+      "input_usd_1m": 0.2,
+      "output_usd_1m": 0.2,
+      "cache_read_usd_1m": 0.02,
+      "cache_write_usd_1m": 0.2,
+      "context_tokens": 262144
+    },
+    {
+      "id": "mistralai/ministral-8b-2512",
+      "name": "Mistral: Ministral 3 8B 2512",
+      "provider": "Mistralai",
+      "release_date": "2025-12-02",
+      "input_usd_1m": 0.15,
+      "output_usd_1m": 0.15,
+      "cache_read_usd_1m": 0.015,
+      "cache_write_usd_1m": 0.15,
+      "context_tokens": 262144
+    },
+    {
+      "id": "mistralai/ministral-3b-2512",
+      "name": "Mistral: Ministral 3 3B 2512",
+      "provider": "Mistralai",
+      "release_date": "2025-12-02",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.1,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 131072
+    },
+    {
+      "id": "mistralai/mistral-large-2512",
+      "name": "Mistral: Mistral Large 3 2512",
+      "provider": "Mistralai",
+      "release_date": "2025-12-01",
+      "input_usd_1m": 0.5,
+      "output_usd_1m": 1.5,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.5,
+      "context_tokens": 262144
+    },
+    {
+      "id": "deepseek/deepseek-v3.2",
+      "name": "DeepSeek: DeepSeek V3.2",
+      "provider": "Deepseek",
+      "release_date": "2025-12-01",
+      "input_usd_1m": 0.26,
+      "output_usd_1m": 0.38,
+      "cache_read_usd_1m": 0.13,
+      "cache_write_usd_1m": 0.26,
+      "context_tokens": 163840
+    },
+    {
+      "id": "anthropic/claude-opus-4.5",
+      "name": "Anthropic: Claude Opus 4.5",
+      "provider": "Anthropic",
+      "release_date": "2025-11-24",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 25.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 6.25,
+      "context_tokens": 200000
+    },
+    {
+      "id": "anthropic/claude-opus-4.5:batch",
+      "name": "Anthropic: Claude Opus 4.5 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2025-11-24",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 12.5,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 3.125,
+      "context_tokens": 200000
+    },
+    {
+      "id": "google/gemini-3-pro-image-preview",
+      "name": "Google: Nano Banana Pro (Gemini 3 Pro Image Preview)",
+      "provider": "Google",
+      "release_date": "2025-11-20",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 12.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 0.375,
+      "context_tokens": 65536
+    },
+    {
+      "id": "openai/gpt-5.1",
+      "name": "OpenAI: GPT-5.1",
+      "provider": "Openai",
+      "release_date": "2025-11-13",
+      "input_usd_1m": 1.25,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.125,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5.1:batch",
+      "name": "OpenAI: GPT-5.1 (batch)",
+      "provider": "Openai",
+      "release_date": "2025-11-13",
+      "input_usd_1m": 0.625,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.0625,
+      "cache_write_usd_1m": 0.625,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5.1-codex",
+      "name": "OpenAI: GPT-5.1-Codex",
+      "provider": "Openai",
+      "release_date": "2025-11-13",
+      "input_usd_1m": 1.25,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.13,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5.1-codex-mini",
+      "name": "OpenAI: GPT-5.1-Codex-Mini",
+      "provider": "Openai",
+      "release_date": "2025-11-13",
+      "input_usd_1m": 0.25,
+      "output_usd_1m": 2.0,
+      "cache_read_usd_1m": 0.03,
+      "cache_write_usd_1m": 0.25,
+      "context_tokens": 400000
+    },
+    {
+      "id": "amazon/nova-premier-v1",
+      "name": "Amazon: Nova Premier 1.0",
+      "provider": "Amazon",
+      "release_date": "2025-10-31",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 12.5,
+      "cache_read_usd_1m": 0.625,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "perplexity/sonar-pro-search",
+      "name": "Perplexity: Sonar Pro Search",
+      "provider": "Perplexity",
+      "release_date": "2025-10-30",
+      "input_usd_1m": 3.0,
+      "output_usd_1m": 15.0,
+      "cache_read_usd_1m": 0.75,
+      "cache_write_usd_1m": 3.0,
+      "context_tokens": 200000
+    },
+    {
+      "id": "mistralai/voxtral-small-24b-2507",
+      "name": "Mistral: Voxtral Small 24B 2507",
+      "provider": "Mistralai",
+      "release_date": "2025-10-30",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.3,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 32768
+    },
+    {
+      "id": "openai/gpt-oss-safeguard-20b",
+      "name": "OpenAI: gpt-oss-safeguard-20b",
+      "provider": "Openai",
+      "release_date": "2025-10-29",
+      "input_usd_1m": 0.075,
+      "output_usd_1m": 0.3,
+      "cache_read_usd_1m": 0.0375,
+      "cache_write_usd_1m": 0.075,
+      "context_tokens": 131072
+    },
+    {
+      "id": "openai/gpt-5-image-mini",
+      "name": "OpenAI: GPT-5 Image Mini",
+      "provider": "Openai",
+      "release_date": "2025-10-16",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 2.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 400000
+    },
+    {
+      "id": "anthropic/claude-haiku-4.5",
+      "name": "Anthropic: Claude Haiku 4.5",
+      "provider": "Anthropic",
+      "release_date": "2025-10-15",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 200000
+    },
+    {
+      "id": "anthropic/claude-haiku-4.5:batch",
+      "name": "Anthropic: Claude Haiku 4.5 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2025-10-15",
+      "input_usd_1m": 0.5,
+      "output_usd_1m": 2.5,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.625,
+      "context_tokens": 200000
+    },
+    {
+      "id": "qwen/qwen3-vl-8b-instruct",
+      "name": "Qwen: Qwen3 VL 8B Instruct",
+      "provider": "Qwen",
+      "release_date": "2025-10-14",
+      "input_usd_1m": 0.25,
+      "output_usd_1m": 0.75,
+      "cache_read_usd_1m": 0.12,
+      "cache_write_usd_1m": 0.25,
+      "context_tokens": 262144
+    },
+    {
+      "id": "openai/gpt-5-image",
+      "name": "OpenAI: GPT-5 Image",
+      "provider": "Openai",
+      "release_date": "2025-10-14",
+      "input_usd_1m": 10.0,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 1.25,
+      "cache_write_usd_1m": 10.0,
+      "context_tokens": 400000
+    },
+    {
+      "id": "google/gemini-2.5-flash-image",
+      "name": "Google: Nano Banana (Gemini 2.5 Flash Image)",
+      "provider": "Google",
+      "release_date": "2025-10-07",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 2.5,
+      "cache_read_usd_1m": 0.03,
+      "cache_write_usd_1m": 0.0833,
+      "context_tokens": 32768
+    },
+    {
+      "id": "qwen/qwen3-vl-30b-a3b-instruct",
+      "name": "Qwen: Qwen3 VL 30B A3B Instruct",
+      "provider": "Qwen",
+      "release_date": "2025-10-06",
+      "input_usd_1m": 0.15,
+      "output_usd_1m": 0.6,
+      "cache_read_usd_1m": 0.0375,
+      "cache_write_usd_1m": 0.15,
+      "context_tokens": 262144
+    },
+    {
+      "id": "openai/gpt-5-pro",
+      "name": "OpenAI: GPT-5 Pro",
+      "provider": "Openai",
+      "release_date": "2025-10-06",
+      "input_usd_1m": 15.0,
+      "output_usd_1m": 120.0,
+      "cache_read_usd_1m": 3.75,
+      "cache_write_usd_1m": 15.0,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5-pro:batch",
+      "name": "OpenAI: GPT-5 Pro (batch)",
+      "provider": "Openai",
+      "release_date": "2025-10-06",
+      "input_usd_1m": 7.5,
+      "output_usd_1m": 60.0,
+      "cache_read_usd_1m": 1.875,
+      "cache_write_usd_1m": 7.5,
+      "context_tokens": 400000
+    },
+    {
+      "id": "z-ai/glm-4.6",
+      "name": "Z.ai: GLM 4.6",
+      "provider": "Z-ai",
+      "release_date": "2025-09-30",
+      "input_usd_1m": 0.5,
+      "output_usd_1m": 2.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 0.5,
+      "context_tokens": 204800
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.5",
+      "name": "Anthropic: Claude Sonnet 4.5",
+      "provider": "Anthropic",
+      "release_date": "2025-09-29",
+      "input_usd_1m": 3.0,
+      "output_usd_1m": 15.0,
+      "cache_read_usd_1m": 0.3,
+      "cache_write_usd_1m": 3.75,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.5:batch",
+      "name": "Anthropic: Claude Sonnet 4.5 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2025-09-29",
+      "input_usd_1m": 1.5,
+      "output_usd_1m": 7.5,
+      "cache_read_usd_1m": 0.15,
+      "cache_write_usd_1m": 1.875,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "deepseek/deepseek-v3.2-exp",
+      "name": "DeepSeek: DeepSeek V3.2 Exp",
+      "provider": "Deepseek",
+      "release_date": "2025-09-29",
+      "input_usd_1m": 0.27,
+      "output_usd_1m": 0.41,
+      "cache_read_usd_1m": 0.027,
+      "cache_write_usd_1m": 0.27,
+      "context_tokens": 163840
+    },
+    {
+      "id": "thedrummer/cydonia-24b-v4.1",
+      "name": "TheDrummer: Cydonia 24B V4.1",
+      "provider": "Thedrummer",
+      "release_date": "2025-09-27",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 0.5,
+      "cache_read_usd_1m": 0.15,
+      "cache_write_usd_1m": 0.3,
+      "context_tokens": 131072
+    },
+    {
+      "id": "relace/relace-apply-3",
+      "name": "Relace: Relace Apply 3",
+      "provider": "Relace",
+      "release_date": "2025-09-26",
+      "input_usd_1m": 0.85,
+      "output_usd_1m": 1.25,
+      "cache_read_usd_1m": 0.2125,
+      "cache_write_usd_1m": 0.85,
+      "context_tokens": 256000
+    },
+    {
+      "id": "qwen/qwen3-vl-235b-a22b-instruct",
+      "name": "Qwen: Qwen3 VL 235B A22B Instruct",
+      "provider": "Qwen",
+      "release_date": "2025-09-23",
+      "input_usd_1m": 0.21,
+      "output_usd_1m": 1.9,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 0.21,
+      "context_tokens": 262144
+    },
+    {
+      "id": "deepseek/deepseek-v3.1-terminus",
+      "name": "DeepSeek: DeepSeek V3.1 Terminus",
+      "provider": "Deepseek",
+      "release_date": "2025-09-22",
+      "input_usd_1m": 0.27,
+      "output_usd_1m": 1.0,
+      "cache_read_usd_1m": 0.027,
+      "cache_write_usd_1m": 0.27,
+      "context_tokens": 163840
+    },
+    {
+      "id": "qwen/qwen3-coder-flash",
+      "name": "Qwen: Qwen3 Coder Flash",
+      "provider": "Qwen",
+      "release_date": "2025-09-17",
+      "input_usd_1m": 0.195,
+      "output_usd_1m": 0.975,
+      "cache_read_usd_1m": 0.039,
+      "cache_write_usd_1m": 0.2437,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "qwen/qwen3-next-80b-a3b-instruct",
+      "name": "Qwen: Qwen3 Next 80B A3B Instruct",
+      "provider": "Qwen",
+      "release_date": "2025-09-11",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 1.1,
+      "cache_read_usd_1m": 0.07,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 262144
+    },
+    {
+      "id": "nousresearch/hermes-4-405b",
+      "name": "Nous: Hermes 4 405B",
+      "provider": "Nousresearch",
+      "release_date": "2025-08-26",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 3.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 131072
+    },
+    {
+      "id": "deepseek/deepseek-chat-v3.1",
+      "name": "DeepSeek: DeepSeek V3.1",
+      "provider": "Deepseek",
+      "release_date": "2025-08-21",
+      "input_usd_1m": 0.25,
+      "output_usd_1m": 0.95,
+      "cache_read_usd_1m": 0.13,
+      "cache_write_usd_1m": 0.25,
+      "context_tokens": 163840
+    },
+    {
+      "id": "z-ai/glm-4.5v",
+      "name": "Z.ai: GLM 4.5V",
+      "provider": "Z-ai",
+      "release_date": "2025-08-11",
+      "input_usd_1m": 0.6,
+      "output_usd_1m": 1.8,
+      "cache_read_usd_1m": 0.11,
+      "cache_write_usd_1m": 0.6,
+      "context_tokens": 65536
+    },
+    {
+      "id": "openai/gpt-5",
+      "name": "OpenAI: GPT-5",
+      "provider": "Openai",
+      "release_date": "2025-08-07",
+      "input_usd_1m": 1.25,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.125,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5:batch",
+      "name": "OpenAI: GPT-5 (batch)",
+      "provider": "Openai",
+      "release_date": "2025-08-07",
+      "input_usd_1m": 0.625,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.0625,
+      "cache_write_usd_1m": 0.625,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5-mini",
+      "name": "OpenAI: GPT-5 Mini",
+      "provider": "Openai",
+      "release_date": "2025-08-07",
+      "input_usd_1m": 0.25,
+      "output_usd_1m": 2.0,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.25,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5-mini:batch",
+      "name": "OpenAI: GPT-5 Mini (batch)",
+      "provider": "Openai",
+      "release_date": "2025-08-07",
+      "input_usd_1m": 0.125,
+      "output_usd_1m": 1.0,
+      "cache_read_usd_1m": 0.0125,
+      "cache_write_usd_1m": 0.125,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5-nano",
+      "name": "OpenAI: GPT-5 Nano",
+      "provider": "Openai",
+      "release_date": "2025-08-07",
+      "input_usd_1m": 0.05,
+      "output_usd_1m": 0.4,
+      "cache_read_usd_1m": 0.005,
+      "cache_write_usd_1m": 0.05,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-5-nano:batch",
+      "name": "OpenAI: GPT-5 Nano (batch)",
+      "provider": "Openai",
+      "release_date": "2025-08-07",
+      "input_usd_1m": 0.025,
+      "output_usd_1m": 0.2,
+      "cache_read_usd_1m": 0.0025,
+      "cache_write_usd_1m": 0.025,
+      "context_tokens": 400000
+    },
+    {
+      "id": "openai/gpt-oss-120b",
+      "name": "OpenAI: gpt-oss-120b",
+      "provider": "Openai",
+      "release_date": "2025-08-05",
+      "input_usd_1m": 0.05,
+      "output_usd_1m": 0.25,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.05,
+      "context_tokens": 131072
+    },
+    {
+      "id": "openai/gpt-oss-120b:batch",
+      "name": "OpenAI: gpt-oss-120b (batch)",
+      "provider": "Openai",
+      "release_date": "2025-08-05",
+      "input_usd_1m": 0.0296,
+      "output_usd_1m": 0.136,
+      "cache_read_usd_1m": 0.0074,
+      "cache_write_usd_1m": 0.0296,
+      "context_tokens": 131072
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "name": "OpenAI: gpt-oss-20b",
+      "provider": "Openai",
+      "release_date": "2025-08-05",
+      "input_usd_1m": 0.03,
+      "output_usd_1m": 0.13,
+      "cache_read_usd_1m": 0.03,
+      "cache_write_usd_1m": 0.03,
+      "context_tokens": 131072
+    },
+    {
+      "id": "openai/gpt-oss-20b:batch",
+      "name": "OpenAI: gpt-oss-20b (batch)",
+      "provider": "Openai",
+      "release_date": "2025-08-05",
+      "input_usd_1m": 0.024,
+      "output_usd_1m": 0.112,
+      "cache_read_usd_1m": 0.006,
+      "cache_write_usd_1m": 0.024,
+      "context_tokens": 131072
+    },
+    {
+      "id": "anthropic/claude-opus-4.1",
+      "name": "Anthropic: Claude Opus 4.1",
+      "provider": "Anthropic",
+      "release_date": "2025-08-05",
+      "input_usd_1m": 15.0,
+      "output_usd_1m": 75.0,
+      "cache_read_usd_1m": 1.5,
+      "cache_write_usd_1m": 18.75,
+      "context_tokens": 200000
+    },
+    {
+      "id": "anthropic/claude-opus-4.1:batch",
+      "name": "Anthropic: Claude Opus 4.1 (batch)",
+      "provider": "Anthropic",
+      "release_date": "2025-08-05",
+      "input_usd_1m": 7.5,
+      "output_usd_1m": 37.5,
+      "cache_read_usd_1m": 0.75,
+      "cache_write_usd_1m": 9.375,
+      "context_tokens": 200000
+    },
+    {
+      "id": "mistralai/codestral-2508",
+      "name": "Mistral: Codestral 2508",
+      "provider": "Mistralai",
+      "release_date": "2025-08-01",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 0.9,
+      "cache_read_usd_1m": 0.03,
+      "cache_write_usd_1m": 0.3,
+      "context_tokens": 256000
+    },
+    {
+      "id": "qwen/qwen3-coder-30b-a3b-instruct",
+      "name": "Qwen: Qwen3 Coder 30B A3B Instruct",
+      "provider": "Qwen",
+      "release_date": "2025-07-31",
+      "input_usd_1m": 0.07,
+      "output_usd_1m": 0.28,
+      "cache_read_usd_1m": 0.0175,
+      "cache_write_usd_1m": 0.07,
+      "context_tokens": 262144
+    },
+    {
+      "id": "qwen/qwen3-30b-a3b-instruct-2507",
+      "name": "Qwen: Qwen3 30B A3B Instruct 2507",
+      "provider": "Qwen",
+      "release_date": "2025-07-29",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.3,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 262144
+    },
+    {
+      "id": "z-ai/glm-4.5",
+      "name": "Z.ai: GLM 4.5",
+      "provider": "Z-ai",
+      "release_date": "2025-07-25",
+      "input_usd_1m": 0.6,
+      "output_usd_1m": 2.2,
+      "cache_read_usd_1m": 0.11,
+      "cache_write_usd_1m": 0.6,
+      "context_tokens": 131072
+    },
+    {
+      "id": "z-ai/glm-4.5-air",
+      "name": "Z.ai: GLM 4.5 Air",
+      "provider": "Z-ai",
+      "release_date": "2025-07-25",
+      "input_usd_1m": 0.13,
+      "output_usd_1m": 0.85,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.13,
+      "context_tokens": 131072
+    },
+    {
+      "id": "qwen/qwen3-235b-a22b-thinking-2507",
+      "name": "Qwen: Qwen3 235B A22B Thinking 2507",
+      "provider": "Qwen",
+      "release_date": "2025-07-25",
+      "input_usd_1m": 0.45,
+      "output_usd_1m": 3.5,
+      "cache_read_usd_1m": 0.1125,
+      "cache_write_usd_1m": 0.45,
+      "context_tokens": 128000
+    },
+    {
+      "id": "qwen/qwen3-coder",
+      "name": "Qwen: Qwen3 Coder 480B A35B",
+      "provider": "Qwen",
+      "release_date": "2025-07-23",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 1.0,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 0.3,
+      "context_tokens": 262144
+    },
+    {
+      "id": "bytedance/ui-tars-1.5-7b",
+      "name": "ByteDance: UI-TARS 7B ",
+      "provider": "Bytedance",
+      "release_date": "2025-07-22",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.2,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 128000
+    },
+    {
+      "id": "google/gemini-2.5-flash-lite",
+      "name": "Google: Gemini 2.5 Flash Lite",
+      "provider": "Google",
+      "release_date": "2025-07-22",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.4,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.0833,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "qwen/qwen3-235b-a22b-2507",
+      "name": "Qwen: Qwen3 235B A22B Instruct 2507",
+      "provider": "Qwen",
+      "release_date": "2025-07-21",
+      "input_usd_1m": 0.14,
+      "output_usd_1m": 0.8,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.14,
+      "context_tokens": 262144
+    },
+    {
+      "id": "cognitivecomputations/dolphin-mistral-24b-venice-edition",
+      "name": "Venice: Uncensored",
+      "provider": "Cognitivecomputations",
+      "release_date": "2025-07-09",
+      "input_usd_1m": 0.2,
+      "output_usd_1m": 0.9,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.2,
+      "context_tokens": 128000
+    },
+    {
+      "id": "morph/morph-v3-large",
+      "name": "Morph: Morph V3 Large",
+      "provider": "Morph",
+      "release_date": "2025-07-07",
+      "input_usd_1m": 0.9,
+      "output_usd_1m": 1.9,
+      "cache_read_usd_1m": 0.225,
+      "cache_write_usd_1m": 0.9,
+      "context_tokens": 262144
+    },
+    {
+      "id": "morph/morph-v3-large:batch",
+      "name": "Morph: Morph V3 Large (batch)",
+      "provider": "Morph",
+      "release_date": "2025-07-07",
+      "input_usd_1m": 0.45,
+      "output_usd_1m": 0.95,
+      "cache_read_usd_1m": 0.1125,
+      "cache_write_usd_1m": 0.45,
+      "context_tokens": 262144
+    },
+    {
+      "id": "morph/morph-v3-fast",
+      "name": "Morph: Morph V3 Fast",
+      "provider": "Morph",
+      "release_date": "2025-07-07",
+      "input_usd_1m": 0.8,
+      "output_usd_1m": 1.2,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 0.8,
+      "context_tokens": 262144
+    },
+    {
+      "id": "morph/morph-v3-fast:batch",
+      "name": "Morph: Morph V3 Fast (batch)",
+      "provider": "Morph",
+      "release_date": "2025-07-07",
+      "input_usd_1m": 0.4,
+      "output_usd_1m": 0.6,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 0.4,
+      "context_tokens": 81920
+    },
+    {
+      "id": "mistralai/mistral-small-3.2-24b-instruct",
+      "name": "Mistral: Mistral Small 3.2 24B",
+      "provider": "Mistralai",
+      "release_date": "2025-06-20",
+      "input_usd_1m": 0.075,
+      "output_usd_1m": 0.2,
+      "cache_read_usd_1m": 0.0187,
+      "cache_write_usd_1m": 0.075,
+      "context_tokens": 256000
+    },
+    {
+      "id": "google/gemini-2.5-flash",
+      "name": "Google: Gemini 2.5 Flash",
+      "provider": "Google",
+      "release_date": "2025-06-17",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 2.5,
+      "cache_read_usd_1m": 0.03,
+      "cache_write_usd_1m": 0.0833,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "google/gemini-2.5-pro",
+      "name": "Google: Gemini 2.5 Pro",
+      "provider": "Google",
+      "release_date": "2025-06-17",
+      "input_usd_1m": 1.25,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.125,
+      "cache_write_usd_1m": 0.375,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "openai/o3-pro",
+      "name": "OpenAI: o3 Pro",
+      "provider": "Openai",
+      "release_date": "2025-06-10",
+      "input_usd_1m": 20.0,
+      "output_usd_1m": 80.0,
+      "cache_read_usd_1m": 5.0,
+      "cache_write_usd_1m": 20.0,
+      "context_tokens": 200000
+    },
+    {
+      "id": "google/gemini-2.5-pro-preview",
+      "name": "Google: Gemini 2.5 Pro Preview 06-05",
+      "provider": "Google",
+      "release_date": "2025-06-05",
+      "input_usd_1m": 1.25,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.125,
+      "cache_write_usd_1m": 0.375,
+      "context_tokens": 1048576
+    },
+    {
+      "id": "deepseek/deepseek-r1-0528",
+      "name": "DeepSeek: R1 0528",
+      "provider": "Deepseek",
+      "release_date": "2025-05-28",
+      "input_usd_1m": 0.571,
+      "output_usd_1m": 2.286,
+      "cache_read_usd_1m": 0.0571,
+      "cache_write_usd_1m": 0.571,
+      "context_tokens": 163840
+    },
+    {
+      "id": "meta-llama/llama-guard-4-12b",
+      "name": "Meta: Llama Guard 4 12B",
+      "provider": "Meta-llama",
+      "release_date": "2025-04-30",
+      "input_usd_1m": 0.18,
+      "output_usd_1m": 0.18,
+      "cache_read_usd_1m": 0.045,
+      "cache_write_usd_1m": 0.18,
+      "context_tokens": 163840
+    },
+    {
+      "id": "qwen/qwen3-30b-a3b",
+      "name": "Qwen: Qwen3 30B A3B",
+      "provider": "Qwen",
+      "release_date": "2025-04-28",
+      "input_usd_1m": 0.12,
+      "output_usd_1m": 0.5,
+      "cache_read_usd_1m": 0.03,
+      "cache_write_usd_1m": 0.12,
+      "context_tokens": 40960
+    },
+    {
+      "id": "qwen/qwen3-14b",
+      "name": "Qwen: Qwen3 14B",
+      "provider": "Qwen",
+      "release_date": "2025-04-28",
+      "input_usd_1m": 0.12,
+      "output_usd_1m": 0.24,
+      "cache_read_usd_1m": 0.03,
+      "cache_write_usd_1m": 0.12,
+      "context_tokens": 40960
+    },
+    {
+      "id": "qwen/qwen3-32b",
+      "name": "Qwen: Qwen3 32B",
+      "provider": "Qwen",
+      "release_date": "2025-04-28",
+      "input_usd_1m": 0.08,
+      "output_usd_1m": 0.28,
+      "cache_read_usd_1m": 0.02,
+      "cache_write_usd_1m": 0.08,
+      "context_tokens": 131072
+    },
+    {
+      "id": "openai/o3",
+      "name": "OpenAI: o3",
+      "provider": "Openai",
+      "release_date": "2025-04-16",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 8.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 200000
+    },
+    {
+      "id": "openai/o3:batch",
+      "name": "OpenAI: o3 (batch)",
+      "provider": "Openai",
+      "release_date": "2025-04-16",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 4.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 200000
+    },
+    {
+      "id": "openai/o4-mini:batch",
+      "name": "OpenAI: o4 Mini (batch)",
+      "provider": "Openai",
+      "release_date": "2025-04-16",
+      "input_usd_1m": 0.55,
+      "output_usd_1m": 2.2,
+      "cache_read_usd_1m": 0.1375,
+      "cache_write_usd_1m": 0.55,
+      "context_tokens": 200000
+    },
+    {
+      "id": "openai/gpt-4.1",
+      "name": "OpenAI: GPT-4.1",
+      "provider": "Openai",
+      "release_date": "2025-04-14",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 8.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 1047576
+    },
+    {
+      "id": "openai/gpt-4.1:batch",
+      "name": "OpenAI: GPT-4.1 (batch)",
+      "provider": "Openai",
+      "release_date": "2025-04-14",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 4.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 1047576
+    },
+    {
+      "id": "openai/gpt-4.1-mini",
+      "name": "OpenAI: GPT-4.1 Mini",
+      "provider": "Openai",
+      "release_date": "2025-04-14",
+      "input_usd_1m": 0.4,
+      "output_usd_1m": 1.6,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 0.4,
+      "context_tokens": 1047576
+    },
+    {
+      "id": "openai/gpt-4.1-mini:batch",
+      "name": "OpenAI: GPT-4.1 Mini (batch)",
+      "provider": "Openai",
+      "release_date": "2025-04-14",
+      "input_usd_1m": 0.2,
+      "output_usd_1m": 0.8,
+      "cache_read_usd_1m": 0.05,
+      "cache_write_usd_1m": 0.2,
+      "context_tokens": 1047576
+    },
+    {
+      "id": "openai/gpt-4.1-nano",
+      "name": "OpenAI: GPT-4.1 Nano",
+      "provider": "Openai",
+      "release_date": "2025-04-14",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.4,
+      "cache_read_usd_1m": 0.03,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 1047576
+    },
+    {
+      "id": "openai/gpt-4.1-nano:batch",
+      "name": "OpenAI: GPT-4.1 Nano (batch)",
+      "provider": "Openai",
+      "release_date": "2025-04-14",
+      "input_usd_1m": 0.05,
+      "output_usd_1m": 0.2,
+      "cache_read_usd_1m": 0.0125,
+      "cache_write_usd_1m": 0.05,
+      "context_tokens": 1047576
+    },
+    {
+      "id": "meta-llama/llama-4-maverick",
+      "name": "Meta: Llama 4 Maverick",
+      "provider": "Meta-llama",
+      "release_date": "2025-04-05",
+      "input_usd_1m": 0.35,
+      "output_usd_1m": 1.0,
+      "cache_read_usd_1m": 0.17,
+      "cache_write_usd_1m": 0.35,
+      "context_tokens": 524288
+    },
+    {
+      "id": "meta-llama/llama-4-scout",
+      "name": "Meta: Llama 4 Scout",
+      "provider": "Meta-llama",
+      "release_date": "2025-04-05",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.3,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 1310720
+    },
+    {
+      "id": "deepseek/deepseek-chat-v3-0324",
+      "name": "DeepSeek: DeepSeek V3 0324",
+      "provider": "Deepseek",
+      "release_date": "2025-03-24",
+      "input_usd_1m": 0.25,
+      "output_usd_1m": 1.0,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.25,
+      "context_tokens": 163840
+    },
+    {
+      "id": "mistralai/mistral-small-3.1-24b-instruct",
+      "name": "Mistral: Mistral Small 3.1 24B",
+      "provider": "Mistralai",
+      "release_date": "2025-03-17",
+      "input_usd_1m": 0.351,
+      "output_usd_1m": 0.555,
+      "cache_read_usd_1m": 0.0877,
+      "cache_write_usd_1m": 0.351,
+      "context_tokens": 128000
+    },
+    {
+      "id": "google/gemma-3-4b-it",
+      "name": "Google: Gemma 3 4B",
+      "provider": "Google",
+      "release_date": "2025-03-13",
+      "input_usd_1m": 0.04,
+      "output_usd_1m": 0.05,
+      "cache_read_usd_1m": 0.02,
+      "cache_write_usd_1m": 0.04,
+      "context_tokens": 131072
+    },
+    {
+      "id": "google/gemma-3-12b-it",
+      "name": "Google: Gemma 3 12B",
+      "provider": "Google",
+      "release_date": "2025-03-13",
+      "input_usd_1m": 0.05,
+      "output_usd_1m": 0.15,
+      "cache_read_usd_1m": 0.0125,
+      "cache_write_usd_1m": 0.05,
+      "context_tokens": 131072
+    },
+    {
+      "id": "cohere/command-a",
+      "name": "Cohere: Command A",
+      "provider": "Cohere",
+      "release_date": "2025-03-13",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.625,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 256000
+    },
+    {
+      "id": "rekaai/reka-flash-3",
+      "name": "Reka Flash 3",
+      "provider": "Rekaai",
+      "release_date": "2025-03-12",
+      "input_usd_1m": 0.1,
+      "output_usd_1m": 0.2,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.1,
+      "context_tokens": 65536
+    },
+    {
+      "id": "google/gemma-3-27b-it",
+      "name": "Google: Gemma 3 27B",
+      "provider": "Google",
+      "release_date": "2025-03-12",
+      "input_usd_1m": 0.08,
+      "output_usd_1m": 0.16,
+      "cache_read_usd_1m": 0.02,
+      "cache_write_usd_1m": 0.08,
+      "context_tokens": 131072
+    },
+    {
+      "id": "thedrummer/skyfall-36b-v2",
+      "name": "TheDrummer: Skyfall 36B V2",
+      "provider": "Thedrummer",
+      "release_date": "2025-03-10",
+      "input_usd_1m": 0.55,
+      "output_usd_1m": 0.8,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 0.55,
+      "context_tokens": 32768
+    },
+    {
+      "id": "perplexity/sonar-reasoning-pro",
+      "name": "Perplexity: Sonar Reasoning Pro",
+      "provider": "Perplexity",
+      "release_date": "2025-03-07",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 8.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 128000
+    },
+    {
+      "id": "perplexity/sonar-pro",
+      "name": "Perplexity: Sonar Pro",
+      "provider": "Perplexity",
+      "release_date": "2025-03-07",
+      "input_usd_1m": 3.0,
+      "output_usd_1m": 15.0,
+      "cache_read_usd_1m": 0.75,
+      "cache_write_usd_1m": 3.0,
+      "context_tokens": 200000
+    },
+    {
+      "id": "perplexity/sonar-deep-research",
+      "name": "Perplexity: Sonar Deep Research",
+      "provider": "Perplexity",
+      "release_date": "2025-03-07",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 8.0,
+      "cache_read_usd_1m": 0.5,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 128000
+    },
+    {
+      "id": "mistralai/mistral-saba",
+      "name": "Mistral: Saba",
+      "provider": "Mistralai",
+      "release_date": "2025-02-17",
+      "input_usd_1m": 0.2,
+      "output_usd_1m": 0.6,
+      "cache_read_usd_1m": 0.02,
+      "cache_write_usd_1m": 0.2,
+      "context_tokens": 32768
+    },
+    {
+      "id": "aion-labs/aion-rp-llama-3.1-8b",
+      "name": "AionLabs: Aion-RP 1.0 (8B)",
+      "provider": "Aion-labs",
+      "release_date": "2025-02-04",
+      "input_usd_1m": 0.8,
+      "output_usd_1m": 1.6,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 0.8,
+      "context_tokens": 32768
+    },
+    {
+      "id": "qwen/qwen2.5-vl-72b-instruct",
+      "name": "Qwen: Qwen2.5 VL 72B Instruct",
+      "provider": "Qwen",
+      "release_date": "2025-02-01",
+      "input_usd_1m": 0.8,
+      "output_usd_1m": 1.0,
+      "cache_read_usd_1m": 0.4,
+      "cache_write_usd_1m": 0.8,
+      "context_tokens": 128000
+    },
+    {
+      "id": "qwen/qwen-plus",
+      "name": "Qwen: Qwen-Plus",
+      "provider": "Qwen",
+      "release_date": "2025-02-01",
+      "input_usd_1m": 0.26,
+      "output_usd_1m": 0.78,
+      "cache_read_usd_1m": 0.052,
+      "cache_write_usd_1m": 0.325,
+      "context_tokens": 1000000
+    },
+    {
+      "id": "openai/o3-mini:batch",
+      "name": "OpenAI: o3 Mini (batch)",
+      "provider": "Openai",
+      "release_date": "2025-01-31",
+      "input_usd_1m": 0.55,
+      "output_usd_1m": 2.2,
+      "cache_read_usd_1m": 0.275,
+      "cache_write_usd_1m": 0.55,
+      "context_tokens": 200000
+    },
+    {
+      "id": "mistralai/mistral-small-24b-instruct-2501",
+      "name": "Mistral: Mistral Small 3",
+      "provider": "Mistralai",
+      "release_date": "2025-01-30",
+      "input_usd_1m": 0.05,
+      "output_usd_1m": 0.08,
+      "cache_read_usd_1m": 0.0125,
+      "cache_write_usd_1m": 0.05,
+      "context_tokens": 32768
+    },
+    {
+      "id": "perplexity/sonar",
+      "name": "Perplexity: Sonar",
+      "provider": "Perplexity",
+      "release_date": "2025-01-27",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 1.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 127072
+    },
+    {
+      "id": "microsoft/phi-4",
+      "name": "Microsoft: Phi 4",
+      "provider": "Microsoft",
+      "release_date": "2025-01-10",
+      "input_usd_1m": 0.07,
+      "output_usd_1m": 0.14,
+      "cache_read_usd_1m": 0.0175,
+      "cache_write_usd_1m": 0.07,
+      "context_tokens": 16384
+    },
+    {
+      "id": "deepseek/deepseek-chat",
+      "name": "DeepSeek: DeepSeek V3",
+      "provider": "Deepseek",
+      "release_date": "2024-12-26",
+      "input_usd_1m": 0.2574,
+      "output_usd_1m": 1.0287,
+      "cache_read_usd_1m": 0.0257,
+      "cache_write_usd_1m": 0.2574,
+      "context_tokens": 163840
+    },
+    {
+      "id": "cohere/command-r7b-12-2024",
+      "name": "Cohere: Command R7B (12-2024)",
+      "provider": "Cohere",
+      "release_date": "2024-12-14",
+      "input_usd_1m": 0.0375,
+      "output_usd_1m": 0.15,
+      "cache_read_usd_1m": 0.0094,
+      "cache_write_usd_1m": 0.0375,
+      "context_tokens": 128000
+    },
+    {
+      "id": "meta-llama/llama-3.3-70b-instruct",
+      "name": "Meta: Llama 3.3 70B Instruct",
+      "provider": "Meta-llama",
+      "release_date": "2024-12-06",
+      "input_usd_1m": 0.71,
+      "output_usd_1m": 0.71,
+      "cache_read_usd_1m": 0.71,
+      "cache_write_usd_1m": 0.71,
+      "context_tokens": 131072
+    },
+    {
+      "id": "amazon/nova-lite-v1",
+      "name": "Amazon: Nova Lite 1.0",
+      "provider": "Amazon",
+      "release_date": "2024-12-05",
+      "input_usd_1m": 0.06,
+      "output_usd_1m": 0.24,
+      "cache_read_usd_1m": 0.015,
+      "cache_write_usd_1m": 0.06,
+      "context_tokens": 300000
+    },
+    {
+      "id": "amazon/nova-micro-v1",
+      "name": "Amazon: Nova Micro 1.0",
+      "provider": "Amazon",
+      "release_date": "2024-12-05",
+      "input_usd_1m": 0.035,
+      "output_usd_1m": 0.14,
+      "cache_read_usd_1m": 0.0088,
+      "cache_write_usd_1m": 0.035,
+      "context_tokens": 128000
+    },
+    {
+      "id": "amazon/nova-pro-v1",
+      "name": "Amazon: Nova Pro 1.0",
+      "provider": "Amazon",
+      "release_date": "2024-12-05",
+      "input_usd_1m": 0.8,
+      "output_usd_1m": 3.2,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 0.8,
+      "context_tokens": 300000
+    },
+    {
+      "id": "openai/gpt-4o-2024-11-20",
+      "name": "OpenAI: GPT-4o (2024-11-20)",
+      "provider": "Openai",
+      "release_date": "2024-11-20",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 1.25,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 128000
+    },
+    {
+      "id": "mistralai/mistral-large-2407",
+      "name": "Mistral Large 2407",
+      "provider": "Mistralai",
+      "release_date": "2024-11-19",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 6.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 131072
+    },
+    {
+      "id": "qwen/qwen-2.5-coder-32b-instruct",
+      "name": "Qwen2.5 Coder 32B Instruct",
+      "provider": "Qwen",
+      "release_date": "2024-11-11",
+      "input_usd_1m": 0.66,
+      "output_usd_1m": 1.0,
+      "cache_read_usd_1m": 0.165,
+      "cache_write_usd_1m": 0.66,
+      "context_tokens": 32768
+    },
+    {
+      "id": "thedrummer/unslopnemo-12b",
+      "name": "TheDrummer: UnslopNemo 12B",
+      "provider": "Thedrummer",
+      "release_date": "2024-11-08",
+      "input_usd_1m": 0.4,
+      "output_usd_1m": 0.4,
+      "cache_read_usd_1m": 0.1,
+      "cache_write_usd_1m": 0.4,
+      "context_tokens": 1024000
+    },
+    {
+      "id": "anthracite-org/magnum-v4-72b",
+      "name": "Magnum v4 72B",
+      "provider": "Anthracite-org",
+      "release_date": "2024-10-22",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 2.5,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 32768
+    },
+    {
+      "id": "meta-llama/llama-3.2-3b-instruct",
+      "name": "Meta: Llama 3.2 3B Instruct",
+      "provider": "Meta-llama",
+      "release_date": "2024-09-25",
+      "input_usd_1m": 0.05,
+      "output_usd_1m": 0.33,
+      "cache_read_usd_1m": 0.0125,
+      "cache_write_usd_1m": 0.05,
+      "context_tokens": 131072
+    },
+    {
+      "id": "qwen/qwen-2.5-72b-instruct",
+      "name": "Qwen2.5 72B Instruct",
+      "provider": "Qwen",
+      "release_date": "2024-09-19",
+      "input_usd_1m": 0.36,
+      "output_usd_1m": 0.4,
+      "cache_read_usd_1m": 0.09,
+      "cache_write_usd_1m": 0.36,
+      "context_tokens": 32768
+    },
+    {
+      "id": "cohere/command-r-08-2024",
+      "name": "Cohere: Command R (08-2024)",
+      "provider": "Cohere",
+      "release_date": "2024-08-30",
+      "input_usd_1m": 0.15,
+      "output_usd_1m": 0.6,
+      "cache_read_usd_1m": 0.0375,
+      "cache_write_usd_1m": 0.15,
+      "context_tokens": 128000
+    },
+    {
+      "id": "cohere/command-r-plus-08-2024",
+      "name": "Cohere: Command R+ (08-2024)",
+      "provider": "Cohere",
+      "release_date": "2024-08-30",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 0.625,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 128000
+    },
+    {
+      "id": "sao10k/l3.1-euryale-70b",
+      "name": "Sao10K: Llama 3.1 Euryale 70B v2.2",
+      "provider": "Sao10k",
+      "release_date": "2024-08-28",
+      "input_usd_1m": 0.85,
+      "output_usd_1m": 0.85,
+      "cache_read_usd_1m": 0.2125,
+      "cache_write_usd_1m": 0.85,
+      "context_tokens": 131072
+    },
+    {
+      "id": "sao10k/l3-lunaris-8b",
+      "name": "Sao10K: Llama 3 8B Lunaris",
+      "provider": "Sao10k",
+      "release_date": "2024-08-13",
+      "input_usd_1m": 0.04,
+      "output_usd_1m": 0.05,
+      "cache_read_usd_1m": 0.01,
+      "cache_write_usd_1m": 0.04,
+      "context_tokens": 8192
+    },
+    {
+      "id": "openai/gpt-4o-2024-08-06",
+      "name": "OpenAI: GPT-4o (2024-08-06)",
+      "provider": "Openai",
+      "release_date": "2024-08-06",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 1.25,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 128000
+    },
+    {
+      "id": "meta-llama/llama-3.1-70b-instruct",
+      "name": "Meta: Llama 3.1 70B Instruct",
+      "provider": "Meta-llama",
+      "release_date": "2024-07-23",
+      "input_usd_1m": 0.72,
+      "output_usd_1m": 0.72,
+      "cache_read_usd_1m": 0.18,
+      "cache_write_usd_1m": 0.72,
+      "context_tokens": 131072
+    },
+    {
+      "id": "meta-llama/llama-3.1-8b-instruct",
+      "name": "Meta: Llama 3.1 8B Instruct",
+      "provider": "Meta-llama",
+      "release_date": "2024-07-23",
+      "input_usd_1m": 0.05,
+      "output_usd_1m": 0.08,
+      "cache_read_usd_1m": 0.025,
+      "cache_write_usd_1m": 0.05,
+      "context_tokens": 131072
+    },
+    {
+      "id": "mistralai/mistral-nemo",
+      "name": "Mistral: Mistral Nemo",
+      "provider": "Mistralai",
+      "release_date": "2024-07-19",
+      "input_usd_1m": 0.029,
+      "output_usd_1m": 0.03,
+      "cache_read_usd_1m": 0.0073,
+      "cache_write_usd_1m": 0.029,
+      "context_tokens": 131072
+    },
+    {
+      "id": "openai/gpt-4o-mini",
+      "name": "OpenAI: GPT-4o-mini",
+      "provider": "Openai",
+      "release_date": "2024-07-18",
+      "input_usd_1m": 0.15,
+      "output_usd_1m": 0.6,
+      "cache_read_usd_1m": 0.075,
+      "cache_write_usd_1m": 0.15,
+      "context_tokens": 128000
+    },
+    {
+      "id": "openai/gpt-4o-mini-2024-07-18",
+      "name": "OpenAI: GPT-4o-mini (2024-07-18)",
+      "provider": "Openai",
+      "release_date": "2024-07-18",
+      "input_usd_1m": 0.15,
+      "output_usd_1m": 0.6,
+      "cache_read_usd_1m": 0.075,
+      "cache_write_usd_1m": 0.15,
+      "context_tokens": 128000
+    },
+    {
+      "id": "openai/gpt-4o-mini:batch",
+      "name": "OpenAI: GPT-4o-mini (batch)",
+      "provider": "Openai",
+      "release_date": "2024-07-18",
+      "input_usd_1m": 0.075,
+      "output_usd_1m": 0.3,
+      "cache_read_usd_1m": 0.0375,
+      "cache_write_usd_1m": 0.075,
+      "context_tokens": 128000
+    },
+    {
+      "id": "google/gemma-2-27b-it",
+      "name": "Google: Gemma 2 27B",
+      "provider": "Google",
+      "release_date": "2024-07-13",
+      "input_usd_1m": 0.65,
+      "output_usd_1m": 0.65,
+      "cache_read_usd_1m": 0.1625,
+      "cache_write_usd_1m": 0.65,
+      "context_tokens": 8192
+    },
+    {
+      "id": "openai/gpt-4o",
+      "name": "OpenAI: GPT-4o",
+      "provider": "Openai",
+      "release_date": "2024-05-13",
+      "input_usd_1m": 2.5,
+      "output_usd_1m": 10.0,
+      "cache_read_usd_1m": 1.25,
+      "cache_write_usd_1m": 2.5,
+      "context_tokens": 128000
+    },
+    {
+      "id": "openai/gpt-4o-2024-05-13",
+      "name": "OpenAI: GPT-4o (2024-05-13)",
+      "provider": "Openai",
+      "release_date": "2024-05-13",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 15.0,
+      "cache_read_usd_1m": 1.25,
+      "cache_write_usd_1m": 5.0,
+      "context_tokens": 128000
+    },
+    {
+      "id": "openai/gpt-4o:batch",
+      "name": "OpenAI: GPT-4o (batch)",
+      "provider": "Openai",
+      "release_date": "2024-05-13",
+      "input_usd_1m": 1.25,
+      "output_usd_1m": 5.0,
+      "cache_read_usd_1m": 0.625,
+      "cache_write_usd_1m": 1.25,
+      "context_tokens": 128000
+    },
+    {
+      "id": "mistralai/mixtral-8x22b-instruct",
+      "name": "Mistral: Mixtral 8x22B Instruct",
+      "provider": "Mistralai",
+      "release_date": "2024-04-17",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 6.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 65536
+    },
+    {
+      "id": "openai/gpt-4-turbo:batch",
+      "name": "OpenAI: GPT-4 Turbo (batch)",
+      "provider": "Openai",
+      "release_date": "2024-04-09",
+      "input_usd_1m": 5.0,
+      "output_usd_1m": 15.0,
+      "cache_read_usd_1m": 1.25,
+      "cache_write_usd_1m": 5.0,
+      "context_tokens": 128000
+    },
+    {
+      "id": "mistralai/mistral-large",
+      "name": "Mistral Large",
+      "provider": "Mistralai",
+      "release_date": "2024-02-26",
+      "input_usd_1m": 2.0,
+      "output_usd_1m": 6.0,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 2.0,
+      "context_tokens": 128000
+    },
+    {
+      "id": "openai/gpt-3.5-turbo-0613",
+      "name": "OpenAI: GPT-3.5 Turbo (older v0613)",
+      "provider": "Openai",
+      "release_date": "2024-01-25",
+      "input_usd_1m": 1.0,
+      "output_usd_1m": 2.0,
+      "cache_read_usd_1m": 0.25,
+      "cache_write_usd_1m": 1.0,
+      "context_tokens": 4095
+    },
+    {
+      "id": "openai/gpt-3.5-turbo-16k",
+      "name": "OpenAI: GPT-3.5 Turbo 16k",
+      "provider": "Openai",
+      "release_date": "2023-08-28",
+      "input_usd_1m": 3.0,
+      "output_usd_1m": 4.0,
+      "cache_read_usd_1m": 0.75,
+      "cache_write_usd_1m": 3.0,
+      "context_tokens": 16385
+    },
+    {
+      "id": "mancer/weaver",
+      "name": "Mancer: Weaver (alpha)",
+      "provider": "Mancer",
+      "release_date": "2023-08-02",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 0.5,
+      "cache_read_usd_1m": 0.3,
+      "cache_write_usd_1m": 0.3,
+      "context_tokens": 8000
+    },
+    {
+      "id": "undi95/remm-slerp-l2-13b",
+      "name": "ReMM SLERP 13B",
+      "provider": "Undi95",
+      "release_date": "2023-07-22",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 0.5,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 0.3,
+      "context_tokens": 6144
+    },
+    {
+      "id": "gryphe/mythomax-l2-13b",
+      "name": "MythoMax 13B",
+      "provider": "Gryphe",
+      "release_date": "2023-07-02",
+      "input_usd_1m": 0.3,
+      "output_usd_1m": 0.5,
+      "cache_read_usd_1m": 0.2,
+      "cache_write_usd_1m": 0.3,
+      "context_tokens": 8192
+    },
+    {
+      "id": "openai/gpt-4",
+      "name": "OpenAI: GPT-4",
+      "provider": "Openai",
+      "release_date": "2023-05-28",
+      "input_usd_1m": 30.0,
+      "output_usd_1m": 60.0,
+      "cache_read_usd_1m": 7.5,
+      "cache_write_usd_1m": 30.0,
+      "context_tokens": 8191
     }
   ]
 }

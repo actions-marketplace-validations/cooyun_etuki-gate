@@ -9,8 +9,7 @@
   },
   "remotes": [
     {
-      "type": "streamable-http",
-      "url": ""
+      "type": "streamable-http"
     }
   ]
 }
