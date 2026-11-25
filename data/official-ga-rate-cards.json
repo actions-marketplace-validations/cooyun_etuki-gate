@@ -1,7 +1,7 @@
 {
   "catalog_type": "OPENROUTER_AND_LITELLM_VERIFIED_RATE_CARDS",
   "execution_mode": "100%_LOCAL_STDIO_NO_FORWARDING",
-  "models_count": 118,
+  "models_count": 114,
   "models": [
     {
       "id": "upstage/solar-mini-4-5",
@@ -254,30 +254,6 @@
       "cache_read_usd_1m": 0.04,
       "cache_write_usd_1m": 0.2,
       "context_window": "261,795 Tokens"
-    },
-    {
-      "id": "openrouter/auto",
-      "slug": "openrouter-auto",
-      "name": "Auto Router",
-      "provider": "Openrouter",
-      "release_date": "2026-11-05",
-      "input_usd_1m": -1000000.0,
-      "output_usd_1m": -1000000.0,
-      "cache_read_usd_1m": -100000.0,
-      "cache_write_usd_1m": null,
-      "context_window": "2,000,000 Tokens"
-    },
-    {
-      "id": "openrouter/auto-code",
-      "slug": "openrouter-auto-code",
-      "name": "Auto Code",
-      "provider": "Openrouter",
-      "release_date": "2026-11-05",
-      "input_usd_1m": -1000000.0,
-      "output_usd_1m": -1000000.0,
-      "cache_read_usd_1m": -100000.0,
-      "cache_write_usd_1m": null,
-      "context_window": "2,000,000 Tokens"
     },
     {
       "id": "google/gemini-omni-1.1-flash",
@@ -616,18 +592,6 @@
       "context_window": "1,048,576 Tokens"
     },
     {
-      "id": "typesafe/jev-router",
-      "slug": "typesafe-jev-router",
-      "name": "TypeSafe: Jev Router",
-      "provider": "Typesafe",
-      "release_date": "2026-09-25",
-      "input_usd_1m": -1000000.0,
-      "output_usd_1m": -1000000.0,
-      "cache_read_usd_1m": -100000.0,
-      "cache_write_usd_1m": null,
-      "context_window": "1,000,000 Tokens"
-    },
-    {
       "id": "perceptron/perceptron-mk1.5",
       "slug": "perceptron-perceptron-mk1-5",
       "name": "Perceptron: Perceptron Mk1.5",
@@ -698,18 +662,6 @@
       "cache_read_usd_1m": 0.15,
       "cache_write_usd_1m": 0.3,
       "context_window": "192,000 Tokens"
-    },
-    {
-      "id": "nvidia/switchyard",
-      "slug": "nvidia-switchyard",
-      "name": "NVIDIA: Switchyard",
-      "provider": "Nvidia",
-      "release_date": "2026-09-21",
-      "input_usd_1m": -1000000.0,
-      "output_usd_1m": -1000000.0,
-      "cache_read_usd_1m": -100000.0,
-      "cache_write_usd_1m": null,
-      "context_window": "1,000,000 Tokens"
     },
     {
       "id": "xiaomi/mimo-v2.6-pro-ultraspeed",

@@ -30,7 +30,7 @@ code --install-extension etuki.etuki-finops
 /plugin install etuki-finops@etuki-finops-marketplace
 ```
 
-**`etuki-finops-mcp`** is an official **Model Context Protocol (MCP) Server** built on the `@modelcontextprotocol/sdk` standard (supporting both **STDIO** and **Streamable HTTP / SSE** transports at `https://www.etuki.com/api/v1/mcp`).
+**`etuki-finops-mcp`** is an official **Model Context Protocol (MCP) Server** built on the `@modelcontextprotocol/sdk` standard (supporting both **STDIO** and **Streamable HTTP / SSE** transports at `local-stdio://etuki-finops-mcp`).
 
 It equips MCP clients (**Claude Desktop**, **Claude Code**, **Cursor**, **Windsurf**, **Cline**, **ZCode**, and **Gemini CLI**) with **9 deterministic MCP Tools**, **2 MCP Resources**, and **2 MCP Prompts** for real-time LLM API pricing lookup across 563+ models, 0.1x/0.025x prompt-cache breakpoint locking, relay downgrade detection, and SHA-256 billing receipt reconciliation.
 
@@ -43,7 +43,7 @@ It equips MCP clients (**Claude Desktop**, **Claude Code**, **Cursor**, **Windsu
 - **Glama Server Manifest**: [`./glama.json`](./glama.json)
 - **Official MCP Registry Manifest**: [`./server.json`](./server.json)
 - **Container Sandbox**: [`./Dockerfile`](./Dockerfile)
-- **Remote Streamable-HTTP MCP Endpoint**: `https://www.etuki.com/api/v1/mcp`
+- **Remote Streamable-HTTP MCP Endpoint**: `local-stdio://etuki-finops-mcp`
 
 ---
 
@@ -86,7 +86,7 @@ All 9 MCP tools implement strict JSON Schema `inputSchema`, `outputSchema`, and 
 {
   "mcpServers": {
     "etuki-finops-mcp": {
-      "url": "https://www.etuki.com/api/v1/mcp"
+      "url": "local-stdio://etuki-finops-mcp"
     }
   }
 }

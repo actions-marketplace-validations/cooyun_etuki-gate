@@ -13,7 +13,7 @@
     }
   ],
   "endpoints": {
-    "streamableHttp": "https://www.etuki.com/api/v1/mcp",
+    "streamableHttp": "local-stdio://etuki-finops-mcp",
     "umceCatalog": "https://www.etuki.com/api/v2/models/catalog",
     "sha256Ledger": "https://www.etuki.com/api/v1/ledger"
   }

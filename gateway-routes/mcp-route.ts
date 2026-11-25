@@ -577,9 +577,9 @@ export async function GET(req: NextRequest) {
     pricing_merkle_root: MERKLE_ROOT,
     evidence_manifest: EVIDENCE_MANIFEST,
     live_get_test_endpoints: {
-      positive_cliff_reroute_ci03: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=285000&completion_tokens=20000&v=40.7.7',
-      negative_invalid_token_count: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=12abc&completion_tokens=20000&v=40.7.7',
-      negative_privacy_prompt_rejected: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=15000&completion_tokens=2000&prompt_text=secret&v=40.7.7',
+      positive_cliff_reroute_ci03: 'local-stdio://etuki-finops-mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=285000&completion_tokens=20000&v=40.7.7',
+      negative_invalid_token_count: 'local-stdio://etuki-finops-mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=12abc&completion_tokens=20000&v=40.7.7',
+      negative_privacy_prompt_rejected: 'local-stdio://etuki-finops-mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=15000&completion_tokens=2000&prompt_text=secret&v=40.7.7',
     },
     tools: MCP_TOOLS,
   });
