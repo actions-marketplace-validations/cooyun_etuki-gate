@@ -9,7 +9,7 @@
 [![npm etuki-finops-mcp](https://img.shields.io/npm/v/etuki-finops-mcp?label=npm&color=cb3837)](https://www.npmjs.com/package/etuki-finops-mcp)
 [![PyPI etuki-cost-gate](https://img.shields.io/pypi/v/etuki-cost-gate?label=PyPI&color=3775A9)](https://pypi.org/project/etuki-cost-gate/)
 [![AI Cost Audited by Etuki](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fetuki-audited.json&style=flat)](https://www.etuki.com/badges)
-[![Live Claude Fable 5.2 Cost](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fclaude-fable-5-2.json&style=flat)](https://www.etuki.com/provider/claude-fable-5-2)
+[![Live Anthropic Claude 3.7 Sonnet Cost](https://img.shields.io/endpoint?url=https%3A%2F%2Fwww.etuki.com%2Fapi%2Foracle%2Fbadges%2Fanthropic-claude-3-7-sonnet.json&style=flat)](https://www.etuki.com/provider/anthropic-claude-3-7-sonnet)
 
 > **If your AI agent bill went up and nothing errored, a prompt cache broke.**  
 > Works on **Windows, macOS & Linux** (pure **MIT License**) — 100% browser-local `.jsonl` transcript & CSV bill auditor ([etuki.com/audit](https://www.etuki.com/audit)), live auto-calibrated pricing across 563+ models, pre-flight MCP router, and native Claude Code Plugin (`.claude-plugin/`).

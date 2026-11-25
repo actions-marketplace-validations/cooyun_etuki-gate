@@ -5,7 +5,7 @@ inputs:
   model:
     description: 'Model ID to evaluate'
     required: false
-    default: 'claude-fable-5-2'
+    default: 'anthropic-claude-3-7-sonnet'
   in_tokens:
     description: 'Input tokens'
     required: false
