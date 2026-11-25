@@ -420,13 +420,13 @@ const MCP_TOOLS = [
   },
   {
     name: 'list_supported_models',
-    description: 'Return the 5 deterministic cliff-engine models supported by check_context_cliff along with their input/output rates, cache rates, cliff token thresholds, soft-block thresholds, fallback targets, pricing_snapshot_id, and Merkle root.',
+    description: 'Return the 5 deterministic cliff-engine models supported by check_context_cliff along with their input/output rates, cache rates, cliff token thresholds, soft-block thresholds, fallback targets, pricing_snapshot_id, and  root.',
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     inputSchema: { type: 'object', properties: {}, additionalProperties: false },
   },
   {
     name: 'etuki_search_models',
-    description: 'Search and filter across all 563 Merkle-committed LLM API and cloud infrastructure entities in the Etuki catalog by keyword.',
+    description: 'Search and filter across all 563 -committed LLM API and cloud infrastructure entities in the Etuki catalog by keyword.',
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     inputSchema: {
       type: 'object',
@@ -436,7 +436,7 @@ const MCP_TOOLS = [
   },
   {
     name: 'etuki_get_audit_evidence',
-    description: 'Retrieve the cryptographic snapshot metadata (Merkle root, RS256 public key URL, snapshot date, and 12/12 CI self-test reference) for the current pricing snapshot.',
+    description: 'Retrieve the cryptographic snapshot metadata ( root, RS256 public key URL, snapshot date, and 12/12 CI self-test reference) for the current pricing snapshot.',
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     inputSchema: { type: 'object', properties: {}, additionalProperties: false },
   },
@@ -577,9 +577,9 @@ export async function GET(req: NextRequest) {
     pricing_merkle_root: MERKLE_ROOT,
     evidence_manifest: EVIDENCE_MANIFEST,
     live_get_test_endpoints: {
-      positive_cliff_reroute_ci03: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=285000&completion_tokens=20000&v=40.7.7',
-      negative_invalid_token_count: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=12abc&completion_tokens=20000&v=40.7.7',
-      negative_privacy_prompt_rejected: 'https://www.etuki.com/api/v1/mcp?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=15000&completion_tokens=2000&prompt_text=secret&v=40.7.7',
+      positive_cliff_reroute_ci03: '?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=285000&completion_tokens=20000&v=40.7.7',
+      negative_invalid_token_count: '?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=12abc&completion_tokens=20000&v=40.7.7',
+      negative_privacy_prompt_rejected: '?call=check_context_cliff&model=gpt-6-1-sol&prompt_tokens=15000&completion_tokens=2000&prompt_text=secret&v=40.7.7',
     },
     tools: MCP_TOOLS,
   });

@@ -9,8 +9,7 @@
   },
   "remotes": [
     {
-      "type": "streamable-http",
-      "url": "https://www.etuki.com/api/v1/mcp"
+      "type": "streamable-http"
     }
   ]
 }
