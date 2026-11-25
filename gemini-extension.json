@@ -4,7 +4,7 @@
   "description": "Etuki AI FinOps & LLM Pricing Oracle — Compare 563+ models, lock 0.1x/0.025x prompt cache breakpoints, and audit AI bills.",
   "mcpServers": {
     "etuki-finops": {
-      "httpUrl": "local-stdio://etuki-finops-mcp"
+      "httpUrl": ""
     }
   }
 }
